@@ -1,0 +1,80 @@
+footer {
+  background-color: #262b34;
+}
+
+.footer-logo {
+  width: 400px;
+}
+
+.follow-us-header {
+  letter-spacing: 5px;
+}
+
+.icon {
+  display: inline-flex;
+  width: 45px;
+  height: 45px;
+  text-decoration: none;
+  outline: 2px solid white;
+  border-radius: 50%;
+  transition-property: outline-offset, outline-color, background;
+  transition-duration: 0.25s;
+}
+
+.icon:hover {
+  outline-offset: 4px;
+}
+
+.icon > i {
+  margin: auto;
+}
+
+.icon:hover > i {
+  animation: shake 0.5s;
+}
+
+@keyframes shake {
+  10% {
+    transform: rotate(15deg);
+  }
+  20% {
+    transform: rotate(-15deg);
+  }
+  30% {
+    transform: rotate(15deg);
+  }
+  40% {
+    transform: rotate(-15deg);
+  }
+}
+
+.icon-instagram:hover {
+  background: radial-gradient(
+    circle at 30% 100%,
+    #feda75 10%,
+    #fa7e1e 30%,
+    #d62976 62%,
+    #962fbf 85%,
+    #4f5bd5
+  );
+  outline-color: #962fbf;
+}
+
+.icon-facebook:hover {
+  background-color: #3b5998;
+  outline-color: #3b5998;
+}
+
+.icon-twitter:hover {
+  background-color: #00acee;
+  outline-color: #00acee;
+}
+
+.icon-tiktok:hover {
+  background-color: black;
+  outline-color: white;
+}
+
+.icon-tiktok > i:hover {
+  filter: drop-shadow(2px 2px #f22d52);
+}

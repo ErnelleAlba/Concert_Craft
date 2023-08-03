@@ -7,6 +7,7 @@ import { Provider } from "react-redux"
 import store from "./store/store"
 import ContactUs from "./pages/ContactUs"
 import LoginModal from "./components/Modal/LoginModal"
+import Footer from "./components/Footer"
 
 function App() {
 
@@ -14,14 +15,15 @@ function App() {
     <>
       <Provider store={store}>
         <BrowserRouter>
-          <NavBar/>
+          <NavBar />
           <Routes>
-            <Route path="/" element={<Home/>}/>
-            <Route path="/meal-gallery" element={<MealGallery/>}/>
-            <Route path="/meal/:id" element={<MealInfo/>}/>
-            <Route path="/contact-us" element={<ContactUs/>}/>
-            <Route path="/login" element={<LoginModal/>}/>
+            <Route path="/" element={<Home />}/>
+            <Route path="/meal-gallery" element={<MealGallery />}/>
+            <Route path="/meal/:id" element={<MealInfo />}/>
+            <Route path="/contact-us" element={<ContactUs />}/>
+            <Route path="/login" element={<LoginModal />}/>
           </Routes>
+          <Footer />
         </BrowserRouter>
       </Provider>
 
