@@ -1,0 +1,95 @@
+/* header {
+  z-index: 1000;
+} */
+
+.navbar-brand {
+  height: 13em;
+  overflow: hidden;
+}
+
+.navbar-brand:before {
+  content: "";
+  display: block;
+  position: relative;
+  margin: 0 0;
+  top: -188%;
+  left: -18%;
+  height: 219%;
+  width: 200vw;
+  background: #6c4ebd;
+  box-shadow: 0px 8px 0px #262b34;
+  transform: rotateZ(-6deg) skew(-6deg);
+}
+
+.navbar-brand .logo {
+  position: absolute;
+  top: 30px;
+  left: 50px;
+  padding: 0;
+  margin: 0;
+}
+
+.navbar-brand .logo img {
+  width: 300px;
+}
+
+#navbarNav {
+  position: absolute;
+  right: 8%;
+  bottom: 10%;
+}
+
+.navbar-nav {
+  gap: 50px;
+}
+
+.navbar-toggler {
+  z-index: 10;
+  margin-top: -230px;
+  margin-left: 400px;
+  border: 3px solid #f2a7d1 !important;
+}
+
+.active {
+  background-color: #f2a7d1;
+  color: white !important;
+  padding: 8px 30px !important;
+  border-radius: 25px;
+}
+
+.nav-item > .nav-link {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+@media (max-width: 720px) {
+  .navbar-nav {
+    gap: 20px !important;
+  }
+  .navbar-brand {
+    height: 8em;
+    overflow: hidden;
+  }
+
+  .navbar-brand:before {
+    top: -165%;
+    left: -18%;
+  }
+  .navbar-brand .logo {
+    top: 10px;
+    left: 20px;
+    padding: 0;
+    margin: 0;
+  }
+
+  .navbar-brand .logo img {
+    width: 38%;
+  }
+
+  #navbarNav {
+    position: relative;
+    text-align: center;
+    right: 0;
+    bottom: 0;
+  }
+}
