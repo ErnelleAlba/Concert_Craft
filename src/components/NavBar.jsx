@@ -1,6 +1,7 @@
 import { Link, NavLink } from "react-router-dom"
 import LoginModal from "./Modal/LoginModal"
 import "./NavBar.css"
+import logo from "../images/Concert-Craft-Logo-Transparent.png"
 
 function NavBar() {
   return (
@@ -10,7 +11,7 @@ function NavBar() {
           <div className="container-fluid p-0">
             <div className="navbar-brand me-0">
               <Link to="./" className="logo">
-                  <img src="./images/Concert-Craft-Logo-Transparent.png" alt="Concert-Craft-Logo" />
+                  <img src={logo} alt="Concert-Craft-Logo" />
               </Link> 
             </div>
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
