@@ -13,6 +13,7 @@
   color: #262b34;
   text-align: left;
   padding: 0 0 10px 0;
+  font-weight: 600;
 }
 
 .concert-show-container > h3:after {
@@ -25,65 +26,26 @@
   bottom: -10px;
 }
 
-.concerts-container {
-  padding: 10px 0;
-}
-
-.concert-box {
-  position: relative;
-  margin: 10px 0px;
-  padding: 0 5px;
-}
-
-.concert-box img {
-  display: block;
-  height: 100%;
-  width: 100%;
-}
-
-.concert-box .concert-info {
-  padding: 50% 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  text-align: center;
-  height: 100%;
-  width: 100%;
-  opacity: 0;
-  transition: 0.7s ease;
-  background-color: #262b34;
-}
-
-.concert-box:hover .concert-info {
-  opacity: 0.9;
-}
-
-.concert-info > h3 {
-  padding: 10px 0;
-  color: #fff;
-}
-
-.concert-info > a {
-  display: inline-block;
-  padding: 0.35em 1.2em;
-  border: 0.1em solid #ffffff;
-  border-radius: 0.13em;
-  box-sizing: border-box;
+.view-more-btn {
   text-decoration: none;
-  font-weight: 600;
-  color: #ffffff;
-  text-align: center;
-  transition: all 0.2s;
-}
-
-.concert-info > a:hover {
   color: #262b34;
-  background-color: #ffffff;
+  font-weight: 700;
+  float: right;
+  padding: 5px 15px;
 }
 
-@media (max-width: 1000px) {
+.view-more-btn:hover {
+  color: white;
+  background-color: #f2a7d1;
+  border-radius: 25px;
+  outline: 3px solid #21c9e1;
+}
+
+.concerts-container {
+  margin: 20px 0;
+}
+
+@media (max-width: 720px) {
   .concert-show-container > h1 {
     font-size: 27px;
   }

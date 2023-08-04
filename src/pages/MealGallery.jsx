@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import ConcertCard from "../components/ConcertCard"
+import ConcertCard from "../components/MealCard"
 import axios from "axios"
 import { useDispatch, useSelector } from "react-redux"
 import { setMeals } from "../store/mealsReducers"

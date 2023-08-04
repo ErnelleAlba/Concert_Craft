@@ -7,7 +7,7 @@ function NavBar() {
   return (
     <>
       <header>
-        <nav className="navbar navbar-expand-lg bg-light pt-0">
+        <nav className="navbar navbar-expand-lg bg-light pt-0 mb-5">
           <div className="container-fluid p-0">
             <div className="navbar-brand me-0">
               <Link to="./" className="logo">

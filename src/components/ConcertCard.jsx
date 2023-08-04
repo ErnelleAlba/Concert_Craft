@@ -1,19 +1,20 @@
-import { Link } from "react-router-dom"
+import "./ConcertCard.css"
 
-function MealCard(props) {
-  const { id, title, thumbnail } = props
-
+function ConcertCard ({concertCard:{id, title, imageSource}} ) { //ConcertCard props
+  
   return (
     <>
-      <div className="card" style={{width: "18rem"}}>
-        <img src={thumbnail} className="card-img-top" alt="..." />
-        <div className="card-body">
-          <h4 className="card-title">{title}</h4>
-          <Link to={`/meal/${id}`} className="btn btn-primary">View Full Recipe</Link>
+      <div key={id} className="concert-box col-6 col-lg-2">
+        <img src={imageSource} alt={title} className="d-none d-md-block"/>
+        <a href=""><img src={imageSource} alt={title} className="d-block d-md-none"/></a>
+        <div className="concert-info d-none d-md-block">
+          <h3>{title}</h3>
+          <a href="">
+            <i className="fa-solid fa-ticket"></i> Book a seat</a>
         </div>
       </div>
     </>
   )
 }
 
-export default MealCard
+export default ConcertCard

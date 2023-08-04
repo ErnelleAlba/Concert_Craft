@@ -2,9 +2,14 @@
   z-index: 1000;
 } */
 
+.navbar {
+  padding-bottom: 0 !important;
+}
+
 .navbar-brand {
   height: 13em;
   overflow: hidden;
+  background-color: white;
 }
 
 .navbar-brand:before {
@@ -48,18 +53,20 @@
   margin-top: -230px;
   margin-left: 400px;
   border: 3px solid #f2a7d1 !important;
+  color: #21c9e1 !important;
 }
 
 .active {
   background-color: #f2a7d1;
   color: white !important;
-  padding: 8px 30px !important;
   border-radius: 25px;
+  outline: 3px solid #21c9e1;
 }
 
 .nav-item > .nav-link {
   font-weight: 700;
   font-size: 20px;
+  padding: 6px 25px !important;
 }
 
 .nav-item > #login-btn {
