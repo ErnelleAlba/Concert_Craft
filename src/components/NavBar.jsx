@@ -29,7 +29,7 @@ function NavBar() {
                   <NavLink className="nav-link" to="/contact-us">Contact Us</NavLink>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" data-bs-toggle="modal" data-bs-target="#loginModal">
+                  <a className="nav-link" data-bs-toggle="modal" data-bs-target="#loginModal" id="login-btn">
                     Login
                   </a>
                   <LoginModal/>

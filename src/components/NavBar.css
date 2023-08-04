@@ -62,6 +62,10 @@
   font-size: 20px;
 }
 
+.nav-item > #login-btn {
+  cursor: pointer;
+}
+
 @media (max-width: 720px) {
   .navbar-nav {
     gap: 20px !important;
