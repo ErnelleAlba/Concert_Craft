@@ -11,7 +11,8 @@ function ConcertShowHome() {
             <img src="https://www.philippineconcerts.com/wp-content/uploads/2023/03/the-corrs-live-in-manila-2023-3.jpg" alt=" "/>
             <div className="concert-info">
               <h3>Concert Title</h3>
-              <a href=""><i className="fa-solid fa-ticket"></i> Book a seat</a>
+              <a href="">
+                <i className="fa-solid fa-ticket"></i> Book a seat</a>
             </div>
           </div>
 

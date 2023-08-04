@@ -7,13 +7,13 @@
 }
 
 .services-section > h1 {
-  color: #6e5a11;
+  color: #f2a7d1;
   text-align: left;
   padding: 0 0 10px 0;
 }
 
 .services-section > h3 {
-  color: #969696;
+  color: #262b34;
   text-align: left;
   padding: 0 0 20px 0;
 }
@@ -23,7 +23,7 @@
   display: block;
   height: 3px;
   width: 610px;
-  background: #6e5a11;
+  background: #f2a7d1;
   position: relative;
   bottom: -10px;
 }
@@ -33,7 +33,7 @@
 }
 
 .service-item > h2 {
-  color: #6e5a11;
+  color: #f2a7d1;
   padding: 25px 0;
 }
 
@@ -52,6 +52,11 @@
 .service-item-icon i:hover {
   background-color: #c7c7c7;
   color: rgb(126, 126, 126);
+}
+
+.service-item > p {
+  color: #262b34;
+  font-weight: 600;
 }
 
 @media (max-width: 1000px) {

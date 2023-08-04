@@ -4,13 +4,13 @@
 }
 
 .concert-show-container > h1 {
-  color: #6e5a11;
+  color: #f2a7d1;
   text-align: left;
   padding: 0 0 10px 0;
 }
 
 .concert-show-container > h3 {
-  color: #969696;
+  color: #262b34;
   text-align: left;
   padding: 0 0 10px 0;
 }
@@ -20,7 +20,7 @@
   display: block;
   height: 3px;
   width: 285px;
-  background: #6e5a11;
+  background: #f2a7d1;
   position: relative;
   bottom: -10px;
 }
@@ -53,11 +53,11 @@
   width: 100%;
   opacity: 0;
   transition: 0.7s ease;
-  background-color: rgb(0, 0, 0);
+  background-color: #262b34;
 }
 
 .concert-box:hover .concert-info {
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 .concert-info > h3 {
@@ -72,14 +72,14 @@
   border-radius: 0.13em;
   box-sizing: border-box;
   text-decoration: none;
-  font-weight: 300;
+  font-weight: 600;
   color: #ffffff;
   text-align: center;
   transition: all 0.2s;
 }
 
 .concert-info > a:hover {
-  color: #000000;
+  color: #262b34;
   background-color: #ffffff;
 }
 
