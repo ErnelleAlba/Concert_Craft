@@ -5,3 +5,28 @@
   height: 100vh;
   background-color: white;
 }
+
+.admin-panel-header {
+  width: 100%;
+  height: 80px;
+  background-color: #262b34;
+  display: flex;
+  justify-content: space-between;
+  color: white;
+}
+
+.logo-container,
+.avatar-container {
+  display: flex;
+  align-items: center;
+}
+
+.avatar-container > img {
+  height: 100%;
+  margin-left: 20px;
+}
+
+.logo-container > img {
+  height: 100%;
+  margin: 0 20px;
+}
