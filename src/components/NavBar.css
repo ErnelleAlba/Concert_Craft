@@ -59,14 +59,23 @@
 .active {
   background-color: #f2a7d1;
   color: white !important;
-  border-radius: 25px;
   outline: 3px solid #21c9e1;
+  outline-offset: 4px;
 }
 
 .nav-item > .nav-link {
   font-weight: 700;
   font-size: 20px;
+  border-radius: 25px;
   padding: 6px 25px !important;
+  transition: all ease-in-out 300ms;
+}
+
+.nav-item > .nav-link:hover {
+  color: white;
+  background-color: #f2a7d1;
+  outline: 3px solid #21c9e1;
+  outline-offset: 4px;
 }
 
 .nav-item > #login-btn {

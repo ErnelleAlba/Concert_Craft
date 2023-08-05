@@ -34,7 +34,7 @@ function AdminLogin() {
       <div className="admin-login-container">
         <center>
           <div className="container-fluid">
-            <div className="card">
+            <div className="card admin-login">
               <img src={logo} alt="Concert-Craft-Logo" className="card-img-top" />
               <div className="card-body">
                 <h3 className="mb-4">Admin Login</h3>

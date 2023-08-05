@@ -32,13 +32,26 @@
   font-weight: 700;
   float: right;
   padding: 5px 15px;
+  border-radius: 25px;
+  outline: 3px solid white;
+  transition: all ease-in-out 300ms;
+}
+
+.view-more-btn::after {
+  content: "";
+  display: block;
+  height: 3px;
+  width: 100%;
+  background: #f2a7d1;
+  position: relative;
+  bottom: -2px;
 }
 
 .view-more-btn:hover {
   color: white;
   background-color: #f2a7d1;
-  border-radius: 25px;
   outline: 3px solid #21c9e1;
+  outline-offset: 3px;
 }
 
 .concerts-container {
