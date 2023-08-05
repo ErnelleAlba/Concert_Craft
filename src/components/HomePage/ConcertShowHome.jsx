@@ -36,7 +36,7 @@ function ConcertShowHome() {
   ]
 
   const concertCard = concertInfo.map(
-    (concertCard) => <ConcertCard concertCard={concertCard} /> //ConcertCard props
+    (concertCard, index) => <ConcertCard key={index} concertCard={concertCard} /> //ConcertCard props
   );
 
   return (

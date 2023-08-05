@@ -6,9 +6,9 @@ import NavBar from "./components/NavBar"
 import { Provider } from "react-redux"
 import store from "./store/store"
 import ContactUs from "./pages/ContactUs"
-// import LoginModal from "./components/Modal/LoginModal"
 import Footer from "./components/Footer"
 import AdminLogin from "./pages/admin/AdminLogin"
+import AdminPanel from "./pages/admin/AdminPanel"
 
 function App() {
 
@@ -17,7 +17,8 @@ function App() {
       <Provider store={store}>
         <BrowserRouter>
           <Routes>
-            <Route path="/concert-craft-admin" element={<AdminLogin/>}/>  
+            <Route path="/concert-craft-admin" element={<AdminLogin />}/>
+            <Route path="/admin-panel" element={<AdminPanel />}/>
           </Routes>
           <NavBar />
           <Routes>
@@ -25,12 +26,10 @@ function App() {
             <Route path="/meal-gallery" element={<MealGallery />}/>
             <Route path="/meal/:id" element={<MealInfo />}/>
             <Route path="/contact-us" element={<ContactUs />}/>
-            {/* <Route path="/login" element={<LoginModal />}/> */}
           </Routes>
           <Footer />
         </BrowserRouter>
       </Provider>
-
     </>
   )
 }
