@@ -24,7 +24,7 @@ function AdminLogin() {
   }
 
   useEffect(() =>{
-    document.title = "Admin | Concert Craft"
+    document.title = "Admin Login | Concert Craft"
     needValidation()
   }, [])
 

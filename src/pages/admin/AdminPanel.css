@@ -1,0 +1,7 @@
+.admin-panel-container {
+  position: absolute;
+  z-index: 9000;
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+}

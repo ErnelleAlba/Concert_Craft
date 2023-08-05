@@ -4,12 +4,14 @@ import "./AdminPanel.css"
 function AdminPanel() {
 
   useEffect(() =>{
-    document.title = "Admin | Concert Craft"
+    document.title = "Admin Dashboard | Concert Craft"
   }, [])
 
   return (
     <>
-      <h1>Admin Panel</h1>
+      <div className="admin-panel-container">
+        <h1>Admin Panel</h1>
+      </div>
     </>
   )
 }
