@@ -1,0 +1,7 @@
+@media (max-width: 580px) {
+  #loginModal {
+    width: 90vw;
+    padding-left: 7vw;
+    padding-right: 0;
+  }
+}

@@ -7,3 +7,11 @@ input[type="number"]::-webkit-outer-spin-button {
 input[type="checkbox"] {
   cursor: pointer;
 }
+
+@media (max-width: 580px) {
+  #registerModal {
+    width: 90vw !important;
+    padding-left: 7vw;
+    padding-right: 0;
+  }
+}

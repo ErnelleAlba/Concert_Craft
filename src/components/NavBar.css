@@ -22,7 +22,7 @@
   height: 219%;
   width: 200vw;
   background: #6c4ebd;
-  box-shadow: 0px 8px 0px rgb(38, 43, 52);
+  box-shadow: 0px 8px 0px #262b34;
   transform: rotateZ(-6deg) skew(-6deg);
 }
 
@@ -38,10 +38,12 @@
   width: 300px;
 }
 
-#navbarNav {
+#offcanvasNavbar {
   position: absolute;
-  right: 8%;
-  bottom: 10%;
+  margin-right: 8%;
+  margin-top: 200px;
+  margin-bottom: 0;
+  background-color: #262b34;
 }
 
 .navbar-nav {
@@ -50,10 +52,13 @@
 
 .navbar-toggler {
   z-index: 10;
-  margin-top: -230px;
-  margin-left: 400px;
+  padding: 8px 10px !important;
+  margin-top: -25vh;
+  margin-left: 80vw;
   border: 3px solid #f2a7d1 !important;
-  color: #21c9e1 !important;
+  outline: 3px solid #21c9e1 !important;
+  outline-offset: 3px !important;
+  color: #262b34 !important;
 }
 
 .active {
@@ -64,6 +69,7 @@
 }
 
 .nav-item > .nav-link {
+  text-transform: uppercase;
   font-weight: 700;
   font-size: 20px;
   border-radius: 25px;
@@ -82,10 +88,11 @@
   cursor: pointer;
 }
 
-@media (max-width: 720px) {
+@media (max-width: 700px) {
   .navbar-nav {
-    gap: 20px !important;
+    gap: 40px !important;
   }
+
   .navbar-brand {
     height: 8em;
     overflow: hidden;
@@ -95,6 +102,7 @@
     top: -165%;
     left: -18%;
   }
+
   .navbar-brand .logo {
     top: 10px;
     left: 20px;
@@ -106,10 +114,37 @@
     width: 38%;
   }
 
-  #navbarNav {
-    position: relative;
+  .nav-item > .nav-link {
+    color: white !important;
+  }
+
+  #offcanvasNavbar {
+    margin-top: 0px;
+    height: 100vh;
+    margin-right: 0;
     text-align: center;
-    right: 0;
-    bottom: 0;
+    align-self: self-end;
+  }
+
+  .close-btn {
+    color: white;
+    background-color: transparent;
+    border-radius: 5px;
+    border: 3px solid #f2a7d1;
+    outline: 3px solid #21c9e1;
+    outline-offset: 3px;
+    padding: 5px 5px;
+    margin-right: 5px;
+  }
+
+  .offcanvas-title {
+    text-transform: uppercase;
+    margin-left: 5.5vw;
+    margin-right: auto;
+    color: white;
+  }
+
+  .offcanvas-header > img {
+    height: 7vh;
   }
 }

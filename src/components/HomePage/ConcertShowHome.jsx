@@ -1,4 +1,5 @@
 import ConcertCard from "./ConcertCard"
+import { Link } from "react-router-dom"
 import "./ConcertShowHome.css"
 
 function ConcertShowHome() {
@@ -47,7 +48,7 @@ function ConcertShowHome() {
         <div className="concerts-container d-flex flex-wrap">
           {concertCard}
         </div>
-        <a href="" className="view-more-btn">View More<i className="fa-solid fa-angle-right ms-2"></i></a>
+        <Link to="./meal-gallery" className="view-more-btn">View More<i className="fa-solid fa-angle-right ms-2"></i></Link>
       </div>
     </>
   )
