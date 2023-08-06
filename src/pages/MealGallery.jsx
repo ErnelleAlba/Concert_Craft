@@ -1,9 +1,8 @@
 import { useEffect } from "react"
-import ConcertCard from "../components/MealCard"
 import axios from "axios"
 import { useDispatch, useSelector } from "react-redux"
 import { setMeals } from "../store/mealsReducers"
-import FilterPanel from "../components/FilterPanel"
+import ConcertSchedule from "../components/HomePage/ConcertSchedule"
 
 function MealGallery() {
   const dispatch = useDispatch()
@@ -24,17 +23,18 @@ function MealGallery() {
 
   return (
     <>
-      <h3>Meal Gallery</h3>
-      <main className="d-flex">
-        <FilterPanel />
-        <div className="d-flex flex-wrap w-75 m-3 gap-3">
-        {meals.map(meal => <ConcertCard 
-                              key={meal.idMeal} 
-                              id={meal.idMeal} 
-                              title={meal.strMeal} 
-                              thumbnail={meal.strMealThumb}/> )}
+     <div id="home-section-1" className="concert-show-container">
+        <h1>Scheduled Concerts</h1>
+        <h3>Upcoming Concerts</h3>
+        <div className="concerts-container d-flex">
+
         </div>
-      </main>
+      </div>
+      <ConcertSchedule />
+     
+             
+           
+    
     </>
   )
 }

@@ -11,6 +11,7 @@ function ConcertCard ({concertCard:{index, id, title, imageSource}} ) { //Concer
           <h3>{title}</h3>
           <a href="">
             <i className="fa-solid fa-ticket"></i> Book a seat</a>
+            
         </div>
       </div>
     </>
