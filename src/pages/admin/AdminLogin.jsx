@@ -1,5 +1,5 @@
 import "./AdminLogin.css"
-import logo from "../../images/Concert-Craft-Logo-Transparent.png"
+import logo from "/Concert-Craft-Logo-Transparent.png"
 import { useEffect } from "react"
 
 function AdminLogin() {

@@ -1,7 +1,12 @@
 import { useEffect } from "react"
 import "./AdminPanel.css"
-import avatar from "../../images/avatar.png"
-import logo from "../../images/Concert-Craft-Logo-Transparent.png"
+import avatar from "/avatar.png"
+import logo from "/Concert-Craft-Logo-Transparent.png"
+import AdminPanelSideNav from "../../components/AdminPanel/AdminPanelSideNav"
+import BookingTable from "../../components/AdminPanel/BookingTable"
+import ConcertTable from "../../components/AdminPanel/ConcertTable"
+import UsersTable from "../../components/AdminPanel/UsersTable"
+
 
 
 function AdminPanel() {
@@ -22,7 +27,13 @@ function AdminPanel() {
             <h4>Welcome Admin</h4>
             <img src={avatar} alt="admin-avatar"/>
           </div>
-          
+        </div>
+        <div className="admin-panel-body d-flex">
+          <AdminPanelSideNav />
+          <div className="col-6">
+          </div>
+
+            
         </div>
       </div>
     </>

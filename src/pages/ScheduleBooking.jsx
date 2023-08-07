@@ -2,7 +2,8 @@ import { useEffect } from "react"
 import axios from "axios"
 import { useDispatch, useSelector } from "react-redux"
 import ConcertSchedule from "../components/HomePage/ConcertSchedule"
-import FilterPanel from "../components/FilterPanel"
+import Footer from "../components/Footer"
+import NavBar from "../components/NavBar"
 
 function ScheduleBooking() {
   const dispatch = useDispatch()
@@ -42,7 +43,8 @@ function ScheduleBooking() {
 
   return (
     <>
-     <div id="home-section-1" className="concert-show-container">
+    <NavBar />
+      <div id="home-section-1" className="concert-show-container">
         <h1>Scheduled Concerts</h1>
         <h3>Upcoming Concerts</h3>
         <div className="concerts-container d-flex">
@@ -93,10 +95,7 @@ function ScheduleBooking() {
       </div>
       <br />
       <ConcertSchedule />
-     
-             
-           
-    
+    <Footer/>
     </>
   )
 }
