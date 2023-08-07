@@ -1,5 +1,5 @@
 import "./Footer.css"
-import logo from "../images/Concert-Craft-Logo-Transparent.png"
+import logo from "/Concert-Craft-Logo-Transparent.png"
 
 function Footer() {
   return (

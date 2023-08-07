@@ -1,7 +1,7 @@
 import { Link, NavLink } from "react-router-dom"
 import LoginModal from "./Modal/LoginModal"
 import "./NavBar.css"
-import logo from "../images/Concert-Craft-Logo-Transparent.png"
+import logo from "/Concert-Craft-Logo-Transparent.png"
 
 function NavBar() {
   return (
@@ -31,7 +31,7 @@ function NavBar() {
                     <NavLink className="nav-link" to="/">Home</NavLink>
                   </li>
                   <li className="nav-item" data-bs-dismiss="offcanvas">
-                    <NavLink className="nav-link" to="/schedule-booking">Concerts</NavLink>
+                    <NavLink className="nav-link" to="/schedule-booking">Schedules</NavLink>
                   </li>
                   <li className="nav-item" data-bs-dismiss="offcanvas">
                     <NavLink className="nav-link" to="/contact-us">Contact Us</NavLink>
