@@ -6,8 +6,6 @@ import store from "./store/store"
 import ContactUs from "./pages/ContactUs"
 import AdminLogin from "./pages/admin/AdminLogin"
 import AdminPanel from "./pages/admin/AdminPanel"
-import NavBar from "./components/NavBar"
-import Footer from "./components/Footer"
 
 
 function App() {

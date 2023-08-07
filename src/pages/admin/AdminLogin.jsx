@@ -1,13 +1,12 @@
-import "./AdminLogin.css"
-import logo from "/Concert-Craft-Logo-Transparent.png"
+
 import { useEffect } from "react"
 
-function AdminLogin() {
+function BookingPage() {
   const needValidation = () => {
     'use strict'
   
     // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    var forms = document.querySelectorAll('.needs-validation')
+    const forms = document.querySelectorAll('.needs-validation')
   
     // Loop over them and prevent submission
     Array.prototype.slice.call(forms)
@@ -24,66 +23,53 @@ function AdminLogin() {
   }
 
   useEffect(() =>{
-    document.title = "Admin Login | Concert Craft"
     needValidation()
   }, [])
 
   return (
     <>
-      <div className="admin-login-container">
-        <center>
-          <div className="container-fluid">
-            <div className="card admin-login">
-              <img src={logo} alt="Concert-Craft-Logo" className="card-img-top" />
-              <div className="card-body">
-                <h3 className="mb-4">Admin Login</h3>
-                <form autoComplete="off" className="form-group needs-validation" action="/admin-panel" noValidate>
-                  <div className="row">
-                    <div className="col-md-4">
-                      <label style={{color:"white"}}>Username: </label>
-                    </div>
-                    <div className="col-md-8">
-                      <input type="text" 
-                             name="username" 
-                             className="form-control" 
-                             placeholder="Enter Username" 
-                             required/>
-                      <div className="invalid-feedback">
-                        Invalid Username
-                      </div>
-                    </div>
-                    <br/><br/>
-                    <div className="col-md-4">
-                      <label style={{color:"white"}}>Password: </label>
-                    </div>
-                    <div className="col-md-8">
-                      <input type="password" 
-                             className="form-control" 
-                             name="password" 
-                             placeholder="Enter Password" 
-                             required/>
-                      <div className="invalid-feedback">
-                        Invalid Password
-                      </div>
-                    </div>
-                    <br/><br/><br/>
+      <div className="modal fade" id="loginModal" data-bs-keyboard="true" tabIndex="-1" aria-labelledby="loginModal" aria-hidden="true">
+        <div className="modal-dialog modal-dialog-centered" style={{width:"400px", padding:"30px"}}>
+          <div className="modal-content">
+            <div className="modal-header">
+              <h1 className="modal-title fs-5">Login Form</h1>
+              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div className="modal-body">
+              <form className="needs-validation" noValidate>
+                <div className="form-group mb-2">
+                  <label htmlFor="email" className="form-label">Email Address</label>
+                  <input type="email" 
+                         name="email-address" 
+                         className="form-control" 
+                         required/>
+                  <div className="invalid-feedback">
+                    Please Enter Your Email Address
                   </div>
-                  <center>
-                    <input type="submit" 
-                           id="inputbtn" 
-                           name="login_submit" 
-                           value="Login" 
-                           className="btn btn-primary w-100"/>
-                  </center>
-                </form>
-              </div>
+                </div>
+                <div className="form-group mb-2">
+                  <label htmlFor="password" className="form-label">Password</label>
+                  <input type="password" 
+                         name="password" 
+                         className="form-control" 
+                         required/>
+                  <div className="invalid-feedback">
+                    Please Enter Your Password
+                  </div>
+                </div>
+                <input type="submit" 
+                       id="loginbtn" 
+                       name="login_submit" 
+                       value="Login" 
+                       className="btn btn-primary w-100"/>
+                <button type="button" className="btn btn-success mt-2 w-100" data-bs-toggle="modal" data-bs-target="#registerModal">Create an Account</button>
+              </form>
             </div>
           </div>
-        </center>
+        </div>
       </div>
     </>
   )
 }
 
-export default AdminLogin
-
+export default BookingPage

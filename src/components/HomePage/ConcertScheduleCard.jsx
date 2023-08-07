@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom"
+import BookingPage from "../../pages/admin/BookingPage"
 
 function ConcertScheduleCard ({concertCord:{index, id, title, imageSource, details, tourdates, time, ticket}} ) { //ConcertCard props
   
@@ -16,9 +17,10 @@ function ConcertScheduleCard ({concertCord:{index, id, title, imageSource, detai
         <h5 className="card-title col-md-4">{title}</h5>
         <p className="card-text">{details}</p>
         <p className="card-text"><small class="text-muted">{tourdates}</small></p>
-        <p className="card-text">{time}</p>
-        <div className=""><p className="card-text">{ticket}
-        </p><a href="#" class="btn btn-dark d-flex justify-content-center">Book Now!</a></div>
+        <p className="card-text"><i class="fa-solid fa-timer"></i>{time}</p>
+        <div className="card-text text-danger"><i class="fa-solid fa-peso-sign"></i>{ticket}
+        <a className="view-more-btn align-content-end" href="#" data-bs-toggle="modal" data-bs-target="#bookingModal" id="booking-btn"><i class="fa-solid fa-ticket"></i>Book Now!</a></div>
+      <BookingPage />
       </div>
     </div>
   </div>
