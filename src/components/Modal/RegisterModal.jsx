@@ -118,7 +118,7 @@ function RegisterModal() {
                            value="" 
                            id="invalidCheck" 
                            required/>
-                    <label className="form-check-label" for="invalidCheck">
+                    <label className="form-check-label" htmlFor="invalidCheck">
                       Agree to terms and conditions
                     </label>
                     <div className="invalid-feedback">

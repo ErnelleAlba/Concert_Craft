@@ -1,5 +1,4 @@
 import ConcertScheduleCard from "./ConcertScheduleCard";
-import { Link } from "react-router-dom"
 import "./ConcertShowHome.css"
 
 function ConcertSchedule() {
@@ -26,7 +25,7 @@ function ConcertSchedule() {
       id: 3,
       title: "Anson Seabra The Neverland Tour",
       imageSource: "https://images1.smtickets.com/images/portrait_20072023131119.jpg",
-      details: "Los Angeles-based artist Anson Seabra has generated over 1 billion streams on Spotify alone. After a successful first headline US tour in the Spring of ‘22, Anson joined Dean Lewis across a 25+ show European tour later that fall. All the while, Anson has consistently been releasing singles including “Peter Pan Was Right,” which has amassed 45M Spotify streams (1M in the first week). Each of his latest few releases have all charted in the top 3 on Asian DSP Western charts, including Kryptonite and I Can Love Anyone (As Long As It's You). Just recently, Anson wrapped up his own 15 show headline tour across Europe, the UK, and Ireland and as summer approaches, he plans to release more singles which will lead into a full-length album.",
+      details: "Los Angeles-based artist Anson Seabra has generated over 1 billion streams on Spotify alone. After a successful first headline US tour in the Spring of ‘22, Anson joined Dean Lewis across a 25+ show European tour later that fall. All the while, Anson has consistently been releasing singles including “Peter Pan Was Right,” which has amassed 45M Spotify streams (1M in the first week).",
       tourdates: "September 11, 2023, The Filinvest Tent Manila",
       time: "Event Starts: 7:00 pm",
       ticket: "  P2,950",

@@ -8,6 +8,7 @@ import ContactUs from "./pages/ContactUs"
 import Footer from "./components/Footer"
 import AdminLogin from "./pages/admin/AdminLogin"
 import AdminPanel from "./pages/admin/AdminPanel"
+import BookingPage from "./components/HomePage/BookingPage"
 
 
 function App() {
@@ -24,6 +25,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />}/>
             <Route path="/schedule-booking" element={<ScheduleBooking />}/>
+            <Route path="/booking-page" element={<BookingPage />}/>
+
             <Route path="/contact-us" element={<ContactUs />}/>
           </Routes>
           <Footer />

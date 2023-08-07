@@ -1,7 +1,7 @@
 import "./ConcertCard.css"
 import "./ConcertShowHome.css"
 
-function BookingPage ({concertCord:{index, id, title, imageSource, details, tourdates, time, ticket}}) {
+function BookingPage () {
   
   return (
     <>
@@ -10,7 +10,7 @@ function BookingPage ({concertCord:{index, id, title, imageSource, details, tour
         <div class="booking-panel-section booking-panel-section1">
             <h1>Book a Ticket</h1>
         </div>
-        <div key={`concert-${index}`} class="booking-panel-section booking-panel-section2" onclick="window.history.go(-1); return false;">
+        <div className="booking-panel-section booking-panel-section2" onclick="window.history.go(-1); return false;">
             <i class="fas fa-2x fa-times"></i>
         </div>
         <div class="booking-panel-section booking-panel-section3">
