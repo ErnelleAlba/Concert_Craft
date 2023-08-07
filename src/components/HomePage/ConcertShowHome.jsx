@@ -71,7 +71,8 @@ function ConcertShowHome() {
         <div className="concerts-container d-flex flex-wrap">
           {concertCard}
         </div>
-        <Link to="./meal-gallery" className="view-more-btn">View More<i className="fa-solid fa-angle-right ms-2"></i></Link>
+        <Link to="./schedule-booking" className="view-more-btn">View More<i className="fa-solid fa-angle-right ms-2"></i></Link>
+      
       </div>
     </>
   )

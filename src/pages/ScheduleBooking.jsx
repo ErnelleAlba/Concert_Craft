@@ -1,17 +1,13 @@
 import { useEffect } from "react"
 import axios from "axios"
 import { useDispatch, useSelector } from "react-redux"
-import { setMeals } from "../store/mealsReducers"
 import ConcertSchedule from "../components/HomePage/ConcertSchedule"
 
-function MealGallery() {
+function ScheduleBooking() {
   const dispatch = useDispatch()
   const meals = useSelector(state => state.meals)
 
   const fetchMeals = async () => {
-    // same fetch result
-    // axios('https://www.themealdb.com/api/json/v1/1/search.php?s=')
-    //   .then(res => {console.log(res)})
 
     const res = await axios('https://www.themealdb.com/api/json/v1/1/search.php?s=')
     dispatch(setMeals(res.data.meals))
@@ -39,4 +35,4 @@ function MealGallery() {
   )
 }
 
-export default MealGallery
+export default ScheduleBooking

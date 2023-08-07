@@ -16,7 +16,7 @@ function ConcertScheduleCard ({concertCord:{index, id, title, imageSource, detai
         <div className="concert-info d-none d-md-block">
           <h3>{title}</h3>
           <a href="">
-            <i className="fa-solid fa-ticket"></i> Book a seat</a>
+          <i className="fa-solid fa-ticket"> Book a seat</i></a>
         </div>
         
       </div>
@@ -31,6 +31,7 @@ function ConcertScheduleCard ({concertCord:{index, id, title, imageSource, detai
           </div>
         </div>
       </div>
+
     
     </>
   )

@@ -31,7 +31,7 @@ function NavBar() {
                     <NavLink className="nav-link" to="/">Home</NavLink>
                   </li>
                   <li className="nav-item" data-bs-dismiss="offcanvas">
-                    <NavLink className="nav-link" to="/meal-gallery">Concerts</NavLink>
+                    <NavLink className="nav-link" to="/schedule-booking">Concerts</NavLink>
                   </li>
                   <li className="nav-item" data-bs-dismiss="offcanvas">
                     <NavLink className="nav-link" to="/contact-us">Contact Us</NavLink>
