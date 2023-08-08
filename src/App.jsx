@@ -5,7 +5,9 @@ import { Provider } from "react-redux"
 import store from "./store/store"
 import ContactUs from "./pages/ContactUs"
 import AdminLogin from "./pages/admin/AdminLogin"
-import AdminPanel from "./pages/admin/AdminPanel"
+import BookingsTable from "./pages/admin/BookingsTable"
+import ConcertsTable from "./pages/admin/ConcertsTable"
+import UsersTable from "./pages/admin/UsersTable"
 
 function App() {
 
@@ -13,15 +15,15 @@ function App() {
     <>
       <Provider store={store}>
         <BrowserRouter>
-
             <Routes>
               <Route path="/" element={<Home />}/>
               <Route path="/schedule-booking" element={<ScheduleBooking />}/>
               <Route path="/contact-us" element={<ContactUs />}/>
-              <Route path="/concert-craft-admin" element={<AdminLogin />}/>
-              <Route path="/admin-panel" element={<AdminPanel />}/>
+              <Route path="/admin" element={<AdminLogin />}/>
+              <Route path="/admin/dashboard/bookings" element={<BookingsTable />}/>
+              <Route path="/admin/dashboard/concerts" element={<ConcertsTable/>}/>
+              <Route path="/admin/dashboard/users" element={<UsersTable />}/>
             </Routes>
-
         </BrowserRouter>
       </Provider>
     </>

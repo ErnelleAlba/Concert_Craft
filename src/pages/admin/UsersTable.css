@@ -1,0 +1,12 @@
+.users-table-wrapper {
+  padding: 0 !important;
+}
+
+.users-table-container {
+  height: calc(100vh - 80px);
+  /* width: calc(100vw - ); */
+}
+
+.table-body {
+  max-height: calc(100vh - 20%);
+}

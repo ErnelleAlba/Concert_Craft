@@ -37,17 +37,18 @@ function AdminLogin() {
               <img src={logo} alt="Concert-Craft-Logo" className="card-img-top" />
               <div className="card-body">
                 <h3 className="mb-4">Admin Login</h3>
-                <form autoComplete="off" className="form-group needs-validation" action="/admin-panel" noValidate>
+                <form autoComplete="off" className="form-group needs-validation" action="/admin/dashboard/bookings" noValidate>
                   <div className="row">
                     <div className="col-md-4">
                       <label style={{color:"white"}}>Username: </label>
                     </div>
                     <div className="col-md-8">
-                      <input type="text" 
-                             name="username" 
-                             className="form-control" 
-                             placeholder="Enter Username" 
-                             required/>
+                      <input 
+                        type="text" 
+                        name="username" 
+                        className="form-control" 
+                        placeholder="Enter Username" 
+                        required/>
                       <div className="invalid-feedback">
                         Invalid Username
                       </div>
@@ -57,11 +58,12 @@ function AdminLogin() {
                       <label style={{color:"white"}}>Password: </label>
                     </div>
                     <div className="col-md-8">
-                      <input type="password" 
-                             className="form-control" 
-                             name="password" 
-                             placeholder="Enter Password" 
-                             required/>
+                      <input 
+                        type="password" 
+                        className="form-control" 
+                        name="password" 
+                        placeholder="Enter Password" 
+                        required/>
                       <div className="invalid-feedback">
                         Invalid Password
                       </div>
@@ -69,11 +71,12 @@ function AdminLogin() {
                     <br/><br/><br/>
                   </div>
                   <center>
-                    <input type="submit" 
-                           id="inputbtn" 
-                           name="login_submit" 
-                           value="Login" 
-                           className="btn btn-primary w-100"/>
+                    <input 
+                      type="submit" 
+                      id="inputbtn" 
+                      name="login_submit" 
+                      value="Login" 
+                      className="btn btn-primary w-100"/>
                   </center>
                 </form>
               </div>

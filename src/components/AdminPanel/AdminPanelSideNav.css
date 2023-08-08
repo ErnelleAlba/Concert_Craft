@@ -1,0 +1,25 @@
+#admin-nav {
+  color: white;
+}
+
+#admin-nav:hover {
+  background-color: #0d6efd !important;
+}
+
+#sidebar-container {
+  height: calc(100vh - 80px);
+}
+
+@media (max-width: 996px) {
+  .admin-sidebar {
+    width: 80px;
+  }
+
+  #admin-nav {
+    padding: 3px 10px !important;
+  }
+
+  #sidebar-container {
+    height: calc(100vh - 75px);
+  }
+}

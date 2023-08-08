@@ -40,30 +40,38 @@ function LoginModal() {
               <form className="needs-validation" noValidate>
                 <div className="form-group mb-2">
                   <label htmlFor="email" className="form-label">Email Address</label>
-                  <input type="email" 
-                         name="email-address" 
-                         className="form-control" 
-                         required/>
+                  <input 
+                    type="email" 
+                    name="email-address" 
+                    className="form-control" 
+                    required/>
                   <div className="invalid-feedback">
                     Please Enter Your Email Address
                   </div>
                 </div>
                 <div className="form-group mb-2">
                   <label htmlFor="password" className="form-label">Password</label>
-                  <input type="password" 
-                         name="password" 
-                         className="form-control" 
-                         required/>
+                  <input
+                    type="password" 
+                    name="password" 
+                    className="form-control" 
+                    required/>
                   <div className="invalid-feedback">
                     Please Enter Your Password
                   </div>
                 </div>
-                <input type="submit" 
-                       id="loginbtn" 
-                       name="login_submit" 
-                       value="Login" 
-                       className="btn btn-primary w-100"/>
-                <button type="button" className="btn btn-success mt-2 w-100" data-bs-toggle="modal" data-bs-target="#registerModal">Create an Account</button>
+                <input 
+                  type="submit" 
+                  id="loginbtn" 
+                  name="login_submit" 
+                  value="Login" 
+                  className="btn btn-primary w-100"/>
+                <button 
+                  type="button" 
+                  className="btn btn-success mt-2 w-100" 
+                  data-bs-toggle="modal" 
+                  data-bs-target="#registerModal"
+                    >Create an Account</button>
               </form>
             </div>
           </div>

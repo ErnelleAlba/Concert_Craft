@@ -1,11 +1,3 @@
-.admin-panel-container {
-  position: absolute;
-  z-index: 9000;
-  width: 100vw;
-  height: 100vh;
-  background-color: white;
-}
-
 .admin-panel-header {
   width: 100%;
   height: 80px;
@@ -29,4 +21,10 @@
 .logo-container > img {
   height: 100%;
   margin: 0 20px;
+}
+
+@media (max-width: 992px) {
+  .admin-panel-header {
+    height: 60px;
+  }
 }
