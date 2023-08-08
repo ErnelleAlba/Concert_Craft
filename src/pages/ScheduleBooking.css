@@ -1,0 +1,39 @@
+.filter-container {
+  background-color: rgba(38, 43, 52, 0.1);
+}
+
+.schedule-title-container {
+  margin-top: 0;
+  padding: 0 8%;
+}
+
+.schedule-title-container > h1 {
+  color: #f2a7d1;
+}
+
+.schedule-title-container > h3::after {
+  content: "";
+  display: block;
+  height: 3px;
+  width: 253px;
+  background: #f2a7d1;
+  position: relative;
+  bottom: -10px;
+}
+#filter-month > a {
+  color: black !important;
+}
+
+#filter-month > a:hover {
+  color: white !important;
+}
+
+@media (max-width: 700px) {
+  #filter-month > a {
+    color: black !important;
+  }
+
+  .schedule-title-container > h3::after {
+    width: 100%;
+  }
+}

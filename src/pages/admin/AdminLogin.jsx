@@ -36,7 +36,11 @@ function AdminLogin() {
               <img src={logo} alt="Concert-Craft-Logo" className="card-img-top" />
               <div className="card-body">
                 <h3 className="mb-4">Admin Login</h3>
-                <form autoComplete="off" className="form-group needs-validation" action="/admin/dashboard/bookings" noValidate>
+                <form 
+                  autoComplete="off" 
+                  className="form-group needs-validation" 
+                  action="/admin/dashboard/bookings" 
+                  noValidate>
                   <div className="row">
                     <div className="col-md-4">
                       <label style={{color:"white"}}>Username: </label>

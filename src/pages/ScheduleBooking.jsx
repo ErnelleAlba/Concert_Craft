@@ -1,22 +1,13 @@
 import { useEffect } from "react"
-import axios from "axios"
-import { useDispatch, useSelector } from "react-redux"
 import ConcertSchedule from "../components/HomePage/ConcertSchedule"
 import Footer from "../components/Footer"
 import NavBar from "../components/NavBar"
+import "./ScheduleBooking.css"
 
 function ScheduleBooking() {
-  const dispatch = useDispatch()
-  const meals = useSelector(state => state.meals)
-
-  const fetchMeals = async () => {
-
-    const res = await axios('https://www.themealdb.com/api/json/v1/1/search.php?s=')
-    dispatch(setMeals(res.data.meals))
-  }
 
   useEffect(() => {
-    fetchMeals()
+    document.title = "Schedules | Concert Craft"
   }, [])
 
   function categorizeMonth(month) {
@@ -44,54 +35,49 @@ function ScheduleBooking() {
   return (
     <>
     <NavBar />
-      <div id="home-section-1" className="concert-show-container">
+      <div id="home-section-1" className="schedule-title-container mb-5">
         <h1>Scheduled Concerts</h1>
         <h3>Upcoming Concerts</h3>
-        <div className="concerts-container d-flex">
-
-        </div>
       </div>
-      <div className="border">
-        
-      <ul class="nav justify-content-center bg-light text-dark">
-        <li class="navy-item">
-          <a class="nav-link" href="#">January</a>
-        </li>
-        <li class="navy-item">
-          <a class="nav-link" href="#">February</a>
-        </li>
-        <li class="navy-item">
-          <a class="nav-link" href="#">March</a>
-        </li>
-        <li class="navy-item">
-          <a class="nav-link" href="#">April</a>
-        </li>
-        <li class="navy-item">
-          <a class="nav-link" href="#">May</a>
-        </li>
-        <li class="navy-item">
-          <a class="nav-link" href="#">June</a>
-        </li>
-        <li class="navy-item">
-          <a class="nav-link" href="#">July</a>
-        </li>
-        <li class="navy-item">
-          <a class="nav-link" href="#">August</a>
-        </li>
-        <li class="navy-item">
-          <a class="nav-link" href="#">September</a>
-        </li>
-        <li class="navy-item">
-          <a class="nav-link" href="#">October</a>
-        </li>
-        <li class="navy-item">
-          <a class="nav-link" href="#">November</a>
-        </li>
-        <li class="navy-item">
-          <a class="nav-link" href="#">December</a>
-        </li>
-      </ul>
-          
+      <div className="border filter-container">
+        <ul className="nav justify-content-center py-3 py-lg-2 gap-2">
+          <li className="nav-item" id="filter-month">
+            <a className="nav-link" href="#">January</a>
+          </li>
+          <li className="nav-item" id="filter-month">
+            <a className="nav-link" href="#">February</a>
+          </li>
+          <li className="nav-item" id="filter-month">
+            <a className="nav-link" href="#">March</a>
+          </li>
+          <li className="nav-item" id="filter-month">
+            <a className="nav-link" href="#">April</a>
+          </li>
+          <li className="nav-item" id="filter-month">
+            <a className="nav-link" href="#">May</a>
+          </li>
+          <li className="nav-item" id="filter-month">
+            <a className="nav-link" href="#">June</a>
+          </li>
+          <li className="nav-item" id="filter-month">
+            <a className="nav-link" href="#">July</a>
+          </li>
+          <li className="nav-item" id="filter-month">
+            <a className="nav-link" href="#">August</a>
+          </li>
+          <li className="nav-item" id="filter-month">
+            <a className="nav-link" href="#">September</a>
+          </li>
+          <li className="nav-item" id="filter-month">
+            <a className="nav-link" href="#">October</a>
+          </li>
+          <li className="nav-item" id="filter-month">
+            <a className="nav-link" href="#">November</a>
+          </li>
+          <li className="nav-item" id="filter-month">
+            <a className="nav-link" href="#">December</a>
+          </li>
+        </ul>
       </div>
       <br />
       <ConcertSchedule />
