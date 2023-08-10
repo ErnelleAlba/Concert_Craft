@@ -1,7 +1,14 @@
+import { useEffect } from "react"
 import AdminPanelHeader from "../../components/AdminPanel/AdminPanelHeader"
 import AdminPanelSideNav from "../../components/AdminPanel/AdminPanelSideNav"
 
 function ConcertsTable() {
+
+
+  useEffect(() => {
+    document.title = "Concerts Table"
+}, [])
+
   return (
     <>
       <AdminPanelHeader />
