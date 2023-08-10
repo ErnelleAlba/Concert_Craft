@@ -4,9 +4,138 @@
 
 .users-table-container {
   height: calc(100vh - 80px);
-  /* width: calc(100vw - ); */
+  width: 83.3vw;
 }
 
 .table-body {
   max-height: calc(100vh - 20%);
+}
+
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+.dataTables_scrollBody {
+  scrollbar-width: auto;
+  scrollbar-color: #212529 rgba(255, 255, 255, 0.18);
+}
+
+/* Chrome, Edge, and Safari */
+.dataTables_scrollBody::-webkit-scrollbar {
+  width: 16px;
+}
+
+.dataTables_scrollBody::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.dataTables_scrollBody::-webkit-scrollbar-thumb {
+  background-color: #212529;
+  border-radius: 10px;
+  border: 3px double #ffffff;
+}
+
+.dropdown-menu {
+  width: 16.7vw !important;
+  top: -8vh !important;
+  left: -16.7vw !important;
+  background-color: #262b34 !important;
+  color: #ffffff !important;
+  max-height: fit-content;
+}
+
+.dropdown-item {
+  color: #ffffff !important;
+}
+
+.dropdown-item:hover {
+  color: #262b34 !important;
+  background-color: #ffffff !important;
+}
+
+div.dtsp-searchPane div.dataTables_wrapper div.dataTables_scrollBody {
+  max-height: 200px !important;
+  height: 200px !important;
+  width: 100%;
+}
+
+div.dtsp-searchPanes {
+  max-height: 83vh;
+  overflow: hidden;
+  overflow-y: scroll;
+  padding-right: 10px;
+  /* Firefox */
+  scrollbar-width: auto;
+  scrollbar-color: #212529 #ffffff;
+}
+
+/* Chrome, Edge, and Safari */
+div.dtsp-searchPanes::-webkit-scrollbar {
+  width: 14px;
+}
+
+div.dtsp-searchPanes::-webkit-scrollbar-track {
+  background: #ffffff;
+  border-radius: 10px;
+}
+
+div.dtsp-searchPanes::-webkit-scrollbar-thumb {
+  background-color: #212529;
+  border-radius: 10px;
+  border: 3px double #ffffff;
+}
+
+.btn.disabled,
+.btn:disabled,
+fieldset:disabled .btn {
+  color: black !important;
+}
+
+.btn-group > .btn-group:not(:last-child) > .btn,
+.btn-group > .btn.dropdown-toggle-split:first-child,
+.btn-group > .btn:not(:last-child):not(.dropdown-toggle),
+.btn-group > .btn-group:not(:first-child) > .btn,
+.btn-group > .btn:nth-child(n + 3),
+.btn-group > :not(.btn-check) + .btn {
+  border-radius: 10px !important;
+  margin: 5px 5px;
+  background-color: #262b34 !important;
+}
+
+div.dataTables_wrapper div.dataTables_filter label {
+  font-weight: bold !important;
+  background-color: #262b34;
+  color: #ffffff;
+  padding: 7px 10px;
+  border-radius: 10px;
+}
+
+div.dataTables_wrapper div.dataTables_filter label input {
+  margin-left: 10px;
+}
+
+@media (max-width: 1199px) {
+  .dropdown-menu {
+    width: 33vw !important;
+    left: -33vw !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .users-table-container {
+    max-width: 90vw;
+  }
+
+  .dataTables_scrollBody {
+    max-height: 49vh !important;
+  }
+
+  .dropdown-menu {
+    top: -7vh !important;
+    width: 65vw !important;
+    left: -12vw !important;
+  }
+
+  div.dataTables_wrapper div.dataTables_filter label input {
+    width: 63vw;
+    margin-left: 10px;
+  }
 }
