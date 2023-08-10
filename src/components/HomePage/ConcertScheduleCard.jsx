@@ -1,5 +1,6 @@
-import { Link } from "react-router-dom"
 import BookingPage from "../../pages/admin/BookingPage"
+import "./concertScheduleCardCSS.css"
+
 
 function ConcertScheduleCard ({concertCord:{index, id, title, imageSource, details, tourdates, time, ticket}} ) { //ConcertCard props
   
@@ -9,12 +10,12 @@ function ConcertScheduleCard ({concertCord:{index, id, title, imageSource, detai
     
 <div className="Schedcardpic card mb-3">
   <div className="row no-gutters">
-    <div className="col-md-4">
+    <div className="concert-box col-md-4">
       <img src={imageSource} class="card-img" alt="..." />
     </div>
     <div className="col-md-8">
       <div className="card-body">
-        <h5 className="card-title col-md-4">{title}</h5>
+        <h2 className="card-title col-md-12">{title}</h2>
         <p className="card-text">{details}</p>
         <p className="card-text"><small class="text-muted">{tourdates}</small></p>
         <p className="card-text"><i class="fa-solid fa-timer"></i>{time}</p>

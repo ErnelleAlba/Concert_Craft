@@ -61,7 +61,7 @@ function ConcertSchedule() {
   ]
 
   const concertCord = concertsched.map(
-    (concertCord, index) => <ConcertScheduleCard key={index} concertCord={concertCord} /> //ConcertCard props
+    (concertCord, index) => <ConcertScheduleCard key={index} concertCord={concertCord} /> 
   );
 
   return (
