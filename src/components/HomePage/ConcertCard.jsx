@@ -1,3 +1,4 @@
+import BookingPage from "../../pages/admin/BookingPage"
 import "./ConcertCard.css"
 
 function ConcertCard ({concertCard:{index, id, title, imageSource}} ) { //ConcertCard props
@@ -20,9 +21,10 @@ function ConcertCard ({concertCard:{index, id, title, imageSource}} ) { //Concer
         <div className="concert-info d-none d-md-block">
           <h3>{title}</h3>
           <a href="">
-            <i className="fa-solid fa-ticket"></i> 
+            <i className="fa-solid fa-ticket" data-bs-toggle="modal" data-bs-target="#bookingModal" id="booking-btn"></i> 
             Book a seat
           </a>
+          <BookingPage />
         </div>
       </div>
     </>
