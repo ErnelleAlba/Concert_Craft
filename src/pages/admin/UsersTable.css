@@ -87,6 +87,34 @@ div.dtsp-searchPanes::-webkit-scrollbar-thumb {
 .btn:disabled,
 fieldset:disabled .btn {
   color: black !important;
+  background-color: gray !important;
+}
+
+[type="button"]:not(:disabled),
+[type="reset"]:not(:disabled),
+[type="submit"]:not(:disabled),
+button:not(:disabled) {
+  background-color: white;
+}
+
+div.dtsp-panesContainer button.btn-subtle.disabled.clearButton {
+  background-color: gray !important;
+}
+
+div.dtsp-panesContainer button.btn-subtle.clearButton {
+  background: white !important;
+  color: #ffffff;
+}
+
+div.dtsp-panesContainer
+  div.dtsp-searchPane
+  div.dtsp-topRow
+  button.dtsp-nameButton,
+div.dtsp-panesContainer
+  div.dtsp-searchPane
+  div.dtsp-topRow
+  button.dtsp-countButton {
+  background-color: #ffffff !important;
 }
 
 .btn-group > .btn-group:not(:last-child) > .btn,
