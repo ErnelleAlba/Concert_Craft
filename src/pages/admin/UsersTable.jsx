@@ -2,7 +2,7 @@ import DataTable from "datatables.net-autofill-bs5"
 import jszip from 'jszip'
 DataTable.Buttons.jszip( jszip );
 import pdfMake from 'pdfmake/build/pdfmake.min.js'
-import pdfFonts from 'pdfmake/build/vfs_fonts'
+import pdfFonts from 'pdfmake/build/vfs_fonts.js'
 pdfMake.vfs = pdfFonts.pdfMake.vfs
 import 'datatables.net-responsive-bs5'
 import 'datatables.net-fixedheader-bs5'
