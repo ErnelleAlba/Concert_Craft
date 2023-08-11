@@ -43,13 +43,13 @@
   box-sizing: border-box;
   text-decoration: none;
   font-weight: 600;
-  color: #ffffff;
+  color: #ffffff !important;
   text-align: center;
   transition: all 0.2s;
 }
 
 .concert-info > a:hover {
-  color: #262b34;
+  color: #262b34 !important;
   background-color: #ffffff;
 }
 .Schedcardpic {

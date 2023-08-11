@@ -22,7 +22,7 @@ function BookingPage() {
 
   return (
     <>
-    <div className="modal fade bd-example-modal-xl" id="bookingModal" data-bs-keyboard="true" tabIndex="-1" aria-labelledby="loginModal" aria-hidden="true">
+    <div className="modal fade bd-example-modal-xl" id="bookingModal" data-bs-keyboard="true" tabIndex="-1" aria-labelledby="bookingModal" aria-hidden="true">
         <div className="modal-dialog modal-xl modal-dialog-centered">
           <div className="modal-content">
             <div className="modal-header bg-info text-light">
