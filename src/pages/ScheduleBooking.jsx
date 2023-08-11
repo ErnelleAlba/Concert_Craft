@@ -5,6 +5,10 @@ import "./ScheduleBooking.css"
 
 function ScheduleBooking() {
 
+  useEffect(() => {
+    document.title = "Schedules | Concert Craft"
+  }, [])
+
 
   return (
     <>

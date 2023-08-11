@@ -25,6 +25,7 @@ function AdminLogin() {
 
   useEffect(() =>{
     needValidation()
+      document.title = "Admin Login | Concert Craft"
   }, [])
 
   return (
