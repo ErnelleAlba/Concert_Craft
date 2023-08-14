@@ -3,8 +3,13 @@ import Footer from "../components/Footer"
 import NavBar from "../components/NavBar"
 import "./PageNotFound.css"
 import pageNotFoundLogo from "/ConcertCraft-404-error-logo-transparent.png"
+import { useEffect } from "react"
 
 function PageNotFound() {
+
+  useEffect(() => {
+    document.title = '404 Page Not Found'
+  }, [])
 
   return (
     <>
