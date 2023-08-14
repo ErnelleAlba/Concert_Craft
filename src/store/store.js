@@ -1,8 +1,10 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { mealsSlice } from "./mealsReducers";
+import { isLoadingSlice } from "./isLoadingReducers";
 
 const rootReducer = combineReducers({
-  meals: mealsSlice.reducer
+  meals: mealsSlice.reducer,
+  isLoading: isLoadingSlice.reducer
 })
 
 const store = configureStore({

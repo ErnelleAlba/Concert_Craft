@@ -1,6 +1,7 @@
 import ConcertCard from "./ConcertCard"
 import { Link } from "react-router-dom"
 import "./ConcertShowHome.css"
+import LoadingIcon from "../LoadingIcon";
 
 function ConcertShowHome() {
   const concertInfo = [
@@ -68,6 +69,7 @@ function ConcertShowHome() {
       <div id="home-section-1" className="concert-show-container">
         <h1>Upcoming Concert</h1>
         <h3>Book your tickets now</h3>
+        {/* <LoadingIcon /> */}
         <div className="concerts-container d-flex flex-wrap">
           {concertCard}
         </div>
