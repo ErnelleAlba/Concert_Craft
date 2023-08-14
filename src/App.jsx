@@ -8,6 +8,7 @@ import AdminLogin from "./pages/admin/AdminLogin"
 import BookingsTable from "./pages/admin/BookingsTable"
 import ConcertsTable from "./pages/admin/ConcertsTable"
 import UsersTable from "./pages/admin/UsersTable"
+import PageNotFound from "./pages/PageNotFound"
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
               <Route path="/admin/dashboard/bookings" element={<BookingsTable />}/>
               <Route path="/admin/dashboard/concerts" element={<ConcertsTable/>}/>
               <Route path="/admin/dashboard/users" element={<UsersTable />}/>
+              <Route path="*" element={<PageNotFound />} />
             </Routes>
         </BrowserRouter>
       </Provider>
