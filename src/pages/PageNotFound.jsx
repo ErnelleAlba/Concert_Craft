@@ -3,7 +3,6 @@ import Footer from "../components/Footer"
 import NavBar from "../components/NavBar"
 import "./PageNotFound.css"
 import pageNotFoundLogo from "/ConcertCraft-404-error-logo-transparent.png"
-import paper from "/white-ripped-paper-black-background.jpg"
 
 function PageNotFound() {
 
