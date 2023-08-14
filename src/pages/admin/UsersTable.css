@@ -90,12 +90,12 @@ fieldset:disabled .btn {
   background-color: gray !important;
 }
 
-[type="button"]:not(:disabled),
+/* [type="button"]:not(:disabled),
 [type="reset"]:not(:disabled),
 [type="submit"]:not(:disabled),
 button:not(:disabled) {
   background-color: white;
-}
+} */
 
 div.dtsp-panesContainer button.btn-subtle.disabled.clearButton {
   background-color: gray !important;

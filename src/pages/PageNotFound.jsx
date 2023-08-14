@@ -9,7 +9,7 @@ function PageNotFound() {
   return (
     <>
       <NavBar />
-      <section className="error-logo-wrapper">
+      <div className="error-logo-wrapper">
           <img src={pageNotFoundLogo} alt="page-not-found"  />
           <div className="msg-error-wrapper">
             <h4>Sorry! The page you are looking for go on a backstage tour and forget to come back.</h4>
@@ -19,9 +19,8 @@ function PageNotFound() {
               <h4>or</h4>
               <Link to='/schedule-booking' className="error-nav-btn"><h4>Go Concert Hunting !</h4></Link>
             </div>
-            
           </div>
-      </section>
+      </div>
       <Footer />
     </>
   )

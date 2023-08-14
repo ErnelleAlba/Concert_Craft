@@ -1,9 +1,16 @@
 .error-logo-wrapper {
   width: 100vw;
-  height: 40vh;
+  height: 100%;
   display: flex;
+  padding: 0 5vw;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.error-logo-wrapper > img {
+  width: 30vw;
 }
 
 .error-btn-wrapper {
@@ -41,4 +48,55 @@
   background: #f2a7d1;
   position: relative;
   bottom: 6px;
+}
+
+@media (max-width: 1100px) {
+  .error-logo-wrapper > img {
+    width: 50vw;
+  }
+
+  .error-nav-btn {
+    padding: 5px 10px 1px 10px;
+    margin-top: 10px;
+    color: white;
+    background-color: #f2a7d1;
+    outline: 2px solid #21c9e1;
+    outline-offset: 2px;
+  }
+
+  .error-nav-btn::after {
+    display: none;
+  }
+
+  .error-btn-wrapper > h4 {
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 670px) {
+  .error-logo-wrapper > img {
+    width: 70vw;
+  }
+
+  .error-nav-btn {
+    padding: 5px 7px 1px 7px;
+    margin: 10px 5px;
+  }
+
+  .error-nav-btn::after {
+    display: none;
+  }
+
+  .error-nav-btn > h4 {
+    font-size: 16px;
+  }
+
+  .msg-error-wrapper > h4,
+  .error-btn-wrapper > h4 {
+    font-size: 18px;
+  }
+
+  .error-btn-wrapper > h4 {
+    margin: 10px 5px;
+  }
 }

@@ -62,13 +62,14 @@ function LoginModal() {
                 </div>
                 <input 
                   type="submit" 
-                  id="loginbtn" 
+                  id="loginBtn" 
                   name="login_submit" 
                   value="Login" 
-                  className="btn btn-primary w-100"/>
+                  className="btn btn-primary w-100 "/>
                 <button 
                   type="button" 
-                  className="btn btn-success mt-2 w-100" 
+                  className="btn btn-success mt-2 w-100"
+                  id="registerBtn" 
                   data-bs-toggle="modal" 
                   data-bs-target="#registerModal"
                     >Create an Account</button>
