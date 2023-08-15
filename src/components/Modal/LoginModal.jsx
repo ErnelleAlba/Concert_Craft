@@ -1,6 +1,8 @@
 import RegisterModal from "./RegisterModal"
+import logo from "/Concert-Craft-Logo-Transparent.png"
 import { useEffect } from "react"
 import "./LoginModal.css"
+
 
 function LoginModal() {
   const needValidation = () => {
@@ -30,54 +32,76 @@ function LoginModal() {
   return (
     <>
       <div className="modal fade" id="loginModal" data-bs-keyboard="true" tabIndex="-1" aria-labelledby="loginModal" aria-hidden="true">
-        <div className="modal-dialog modal-dialog-centered" style={{width:"400px", padding:"30px"}}>
-          <div className="modal-content">
+        <div className="modal-dialog modal-dialog-centered">
+          <div className="modal-content bg-transparent">
             <div className="modal-header">
-              <h1 className="modal-title fs-5">Login Form</h1>
-              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div className="modal-body">
-              <form className="needs-validation" noValidate>
-                <div className="form-group mb-2">
-                  <label htmlFor="email" className="form-label">Email Address</label>
-                  <input 
-                    type="email" 
-                    name="email-address" 
-                    className="form-control" 
-                    required/>
-                  <div className="invalid-feedback">
-                    Please Enter Your Email Address
+              <h3 className="modal-title">Login</h3>
+              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+              <div className="kard user-login">
+              <img src={logo} alt="Concert-Craft-Logo" className="card-img-top" />
+              <div className="card-body">
+                <form 
+                  autoComplete="off" 
+                  className="form-group needs-validation" 
+                  action="/admin/dashboard/bookings" 
+                  noValidate>
+                  <div className="row">
+                    <div className="col-md-4">
+                      <label style={{color:"white"}}>Email: </label>
+                    </div>
+                    <div className="col-md-8">
+                      <input 
+                        type="text" 
+                        name="username" 
+                        className="form-control" 
+                        placeholder="Enter Username" 
+                        required/>
+                      <div className="invalid-feedback">
+                        Invalid Email
+                      </div>
+                    </div>
+                    <br/><br/>
+                    <div className="col-md-4">
+                      <label style={{color:"white"}}>Password: </label>
+                    </div>
+                    <div className="col-md-8">
+                      <input 
+                        type="password" 
+                        className="form-control" 
+                        name="password" 
+                        placeholder="Enter Password" 
+                        required/>
+                      <div className="invalid-feedback">
+                        Invalid Password
+                      </div>
+                    </div>
+                    <br/><br/><br/>
+                  </div>
+                  <center>
+                    <input 
+                      type="submit" 
+                      id="inputbtn" 
+                      name="login_submit" 
+                      value="Login" 
+                      className="btn btn-primary w-100"/>
+                      <br />
+                      <br />
+                  <button 
+                    className="btn btn-success w-100" 
+                    data-bs-toggle="modal" 
+                    data-bs-target="#registerModal"
+                    >Back to Login</button>
+                  </center>
+                </form>
+              </div>
                   </div>
                 </div>
-                <div className="form-group mb-2">
-                  <label htmlFor="password" className="form-label">Password</label>
-                  <input
-                    type="password" 
-                    name="password" 
-                    className="form-control" 
-                    required/>
-                  <div className="invalid-feedback">
-                    Please Enter Your Password
-                  </div>
-                </div>
-                <input 
-                  type="submit" 
-                  id="loginBtn" 
-                  name="login_submit" 
-                  value="Login" 
-                  className="btn btn-primary w-100 "/>
-                <button 
-                  type="button" 
-                  className="btn btn-success mt-2 w-100"
-                  id="registerBtn" 
-                  data-bs-toggle="modal" 
-                  data-bs-target="#registerModal"
-                    >Create an Account</button>
-              </form>
+              </div>
             </div>
-          </div>
-        </div>
-      </div>
+     
+          
+     
+
       <RegisterModal/>
     </>
   )

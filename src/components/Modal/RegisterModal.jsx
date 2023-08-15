@@ -1,5 +1,6 @@
 import "./RegisterModal.css"
 import { useEffect } from "react"
+import "./LoginModal.css"
 
 function RegisterModal() {
   const removeScroll = (e) => e.target.blur();
@@ -31,7 +32,7 @@ function RegisterModal() {
   return (
     <> <div className="modal fade" id="registerModal" data-bs-backdrop="static" tabIndex="-1" aria-labelledby="registerModal" aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered">
-          <div className="modal-content">
+          <div className="modal-content bg-transparent">
             <div className="modal-header">
               <h1 className="modal-title fs-5" id="registerModal">Register Form</h1>
               <button 
@@ -41,10 +42,10 @@ function RegisterModal() {
                 aria-label="Close">
               </button>
             </div>
-            <div className="modal-body">
+            <div className="kard user-login modal-body">
               <form className="row g-3 needs-validation" noValidate>
                 <div className="col-md-6">
-                  <label htmlFor="first-name" className="form-label">First name</label>
+                  <label htmlFor="first-name" className="form-label text-white">First name</label>
                   <input
                     type="text" 
                     className="form-control" 
@@ -55,7 +56,7 @@ function RegisterModal() {
                   </div>
                 </div>
                 <div className="col-md-6">
-                  <label htmlFor="last-name" className="form-label">Last name</label>
+                  <label htmlFor="last-name" className="form-label text-white">Last name</label>
                   <input
                     type="text" 
                     className="form-control" 
@@ -66,7 +67,7 @@ function RegisterModal() {
                   </div>
                 </div>
                 <div className="col-md-6">
-                  <label htmlFor="email-address" className="form-label">Email Address</label>
+                  <label htmlFor="email-address" className="form-label text-white">Email Address</label>
                   <input
                     type="email" 
                     className="form-control" 
@@ -80,7 +81,7 @@ function RegisterModal() {
                   </div>
                 </div>
                 <div className="col-md-6">
-                  <label htmlFor="phone-number" className="form-label">Phone No.</label>
+                  <label htmlFor="phone-number" className="form-label text-white">Phone No.</label>
                     <input 
                       type="number" 
                       className="form-control" 
@@ -95,7 +96,7 @@ function RegisterModal() {
                   </div>
                 </div>
                 <div className="col-md-12">
-                  <label htmlFor="password" className="form-label">Password</label>
+                  <label htmlFor="password" className="form-label text-white">Password</label>
                   <input 
                     type="password" 
                     className="form-control" 
@@ -109,7 +110,7 @@ function RegisterModal() {
                   </div>
                 </div>
                 <div className="col-md-12">
-                  <label htmlFor="address" className="form-label">Address</label>
+                  <label htmlFor="address" className="form-label text-white">Address</label>
                   <input 
                     type="text" 
                     className="form-control" 
@@ -130,7 +131,7 @@ function RegisterModal() {
                       value="" 
                       id="invalidCheck" 
                       required/>
-                    <label className="form-check-label" for="invalidCheck">
+                    <label className="form-check-label text-white" for="invalidCheck">
                       Agree to terms and conditions
                     </label>
                     <div className="invalid-feedback">

@@ -20,7 +20,7 @@ function ConcertCard ({concertCard:{index, id, title, imageSource}} ) { //Concer
         </a>
         <div className="concert-info d-none d-md-block">
           <h3>{title}</h3>
-          <a href="#" data-bs-toggle="modal" data-bs-target="#bookingModal">
+          <a href="#" data-bs-toggle="modal" data-bs-target="#bookingModal" id="booking-btn">
             <i className="fa-solid fa-ticket"></i> 
             Book a seat
           </a>
