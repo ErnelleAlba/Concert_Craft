@@ -20,3 +20,16 @@
     outline: 3px solid #21c9e1;
     outline-offset: 4px;
   }
+
+.navy-item {
+    outline: 3px solid #f2a7d1;
+    border-radius: 25px;
+    margin: 5px;
+    
+   
+}
+.nav {
+    padding: 10px;
+    align-items: stretch;
+    
+}
