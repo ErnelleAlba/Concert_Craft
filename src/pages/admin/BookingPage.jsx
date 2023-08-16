@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import BookingCard from './bookingcard';
 
 function BookingPage() {

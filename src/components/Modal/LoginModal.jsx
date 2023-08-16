@@ -2,6 +2,7 @@ import RegisterModal from "./RegisterModal"
 import logo from "/Concert-Craft-Logo-Transparent.png"
 import { useEffect } from "react"
 import "./LoginModal.css"
+import { useFormik } from "formik"
 
 
 function LoginModal() {
@@ -29,6 +30,16 @@ function LoginModal() {
     needValidation()
   }, [])
 
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: ''
+    },
+    onSubmit: (value) => {
+      console.log(value)
+    }
+  })
+
   return (
     <>
       <div className="modal fade" id="loginModal" data-bs-keyboard="true" tabIndex="-1" aria-labelledby="loginModal" aria-hidden="true">
@@ -36,14 +47,15 @@ function LoginModal() {
           <div className="modal-content bg-transparent">
             <div className="modal-header">
               <h3 className="modal-title">Login</h3>
-              <button type="button" className="btn-close text-white" data-bs-dismiss="modal" aria-label="Close"></button></div>
+              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
               <div className="kard user-login">
               <img src={logo} alt="Concert-Craft-Logo" className="card-img-top" />
+
               <div className="card-body">
                 <form 
                   autoComplete="off" 
                   className="form-group needs-validation" 
-                  action="/admin/dashboard/bookings" 
+                  onSubmit={formik.handleSubmit}
                   noValidate>
                   <div className="row">
                     <div className="col-md-4">
@@ -52,9 +64,11 @@ function LoginModal() {
                     <div className="col-md-8">
                       <input 
                         type="text" 
-                        name="username" 
+                        id="email" 
                         className="form-control" 
                         placeholder="Enter Username" 
+                        value={formik.values.email}
+                        onChange={formik.handleChange}
                         required/>
                       <div className="invalid-feedback">
                         Invalid Email
@@ -68,7 +82,9 @@ function LoginModal() {
                       <input 
                         type="password" 
                         className="form-control" 
-                        name="password" 
+                        id="password" 
+                        value={formik.values.password}
+                        onChange={formik.handleChange}
                         placeholder="Enter Password" 
                         required/>
                       <div className="invalid-feedback">
@@ -90,7 +106,7 @@ function LoginModal() {
                     className="btn btn-success w-100" 
                     data-bs-toggle="modal" 
                     data-bs-target="#registerModal"
-                    >Back to Login</button>
+                    >Register</button>
                   </center>
                 </form>
               </div>
