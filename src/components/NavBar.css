@@ -49,7 +49,7 @@
 .navbar-toggler {
   z-index: 10;
   padding: 8px 10px !important;
-  margin-top: -25vh;
+  margin-top: -240px;
   margin-left: 80vw;
   border: 3px solid #f2a7d1 !important;
   outline: 3px solid #21c9e1 !important;
@@ -98,7 +98,7 @@
 
 @media (max-width: 767px) {
   .navbar-nav {
-    gap: 40px !important;
+    gap: 30px !important;
   }
 
   .navbar-brand {
@@ -107,8 +107,8 @@
   }
 
   .navbar-brand:before {
-    top: -165%;
-    left: -18%;
+    height: 250%;
+    /* width: 100vw; */
   }
 
   .navbar-brand .logo {
@@ -119,7 +119,7 @@
   }
 
   .navbar-brand .logo img {
-    width: 30vw;
+    width: 40vw;
   }
 
   .nav-item > .nav-link {
@@ -127,11 +127,11 @@
   }
 
   #offcanvasNavbar {
+    position: fixed;
     margin-top: 0px;
     height: 100vh;
     margin-right: 0;
     text-align: center;
-    align-self: self-end;
   }
 
   .close-btn {
@@ -147,13 +147,13 @@
 
   .offcanvas-title {
     text-transform: uppercase;
-    margin-left: 5.5vw;
-    margin-right: auto;
+    margin-left: auto;
+    margin-right: 5.8rem;
     color: white;
   }
 
   .offcanvas-header > img {
-    height: 7vh;
+    height: 4rem;
   }
 }
 .nav-item {

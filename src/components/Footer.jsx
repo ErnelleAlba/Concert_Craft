@@ -60,9 +60,7 @@ function Footer() {
             alt="Concert-Craft-Logo" 
             className="footer-logo my-auto ms-0 ms-lg-5 ms-md-5" />
         </div>
-        <p 
-          className="mb-0 pb-3 d-flex justify-content-center" 
-          style={{color: "#ffffff", fontSize:"20px"}}>
+        <p className="mb-0 d-flex justify-content-center" id="footer-copyright">
             &copy; 2023 Concert Craft 
             <span className="mx-1 mx-lg-4 mx-md-4">|</span> 
             Created by Group 01

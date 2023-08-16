@@ -78,3 +78,16 @@ footer {
 .icon-tiktok > i:hover {
   filter: drop-shadow(2px 2px #f22d52);
 }
+
+#footer-copyright {
+  color: white;
+  font-size: 20px;
+  padding-bottom: 30px;
+}
+
+@media (max-width: 767px) {
+  #footer-copyright {
+    font-size: 16px;
+    padding-bottom: 40px;
+  }
+}
