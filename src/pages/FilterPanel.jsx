@@ -27,6 +27,9 @@ function FilterPanel() {
           <li class="navy-item">
             <a class="nav-link" href="#">July</a>
           </li>
+          </ul>
+          <ul class="nav justify-content-center bg-light text-dark">
+          
           <li class="navy-item">
             <a class="nav-link" href="#">August</a>
           </li>
@@ -42,7 +45,7 @@ function FilterPanel() {
           <li class="navy-item">
             <a class="nav-link" href="#">December</a>
           </li>
-        </ul>
+          </ul>
             
         </div>
     </>
