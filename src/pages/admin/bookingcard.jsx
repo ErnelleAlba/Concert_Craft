@@ -1,3 +1,4 @@
+import { useFormik } from 'formik';
 import React, { useState } from 'react';
 
 function BookingCard ({cardbook:{index, id, title, imageSource, details, tourdates, time, ticket}} ) { //ConcertCard props
@@ -12,7 +13,17 @@ function BookingCard ({cardbook:{index, id, title, imageSource, details, tourdat
     return selectedValue * 3000;
   };
   
+  const formik = useFormik({
+    initialValues: {
+      ticketitem: '',
+      seatvalue: ''
+    },
+    onSubmit: (value) => {
+      console.log(value)
+    }
+  })
   return (
+    
     <>
 
     
@@ -28,8 +39,9 @@ function BookingCard ({cardbook:{index, id, title, imageSource, details, tourdat
         <p className="card-text"><small className="text-muted">{tourdates}</small></p>
         <p className="card-text"><i className="fa-solid fa-timer"></i>{time}</p>
         <div className="card-text text-danger"><i className="fa-solid fa-peso-sign"></i>{ticket}</div>
+        <form onSubmit={formik.handleSubmit} />
         <div className="inputticket d-flex flex-wrap">
-                    <div className="p-2 flex-fill">How many Ticket?<select value={selectedValue} onChange={handleChange}>
+                    <div className="p-2 flex-fill" id="ticketitem" value={formik.values.ticketitem} onChange={formik.handleChange}>How many Ticket? <select>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -40,7 +52,7 @@ function BookingCard ({cardbook:{index, id, title, imageSource, details, tourdat
                         <option value="8">8</option>
                         </select></div>
                         <div className="p-2 flex-fill"></div>
-                      <div className="p-2 flex-fill"  style={{padding:"600px"}}><select ><p>            </p>
+                      <div className="p-2 flex-fill" id="seatvalue" style={{padding:"600px"}}><select ><p>            </p>
                           <option value="" disabled selected>Choose Seat</option>
                           <option value="">VIP Seat</option>
                           <option value="2">Premium Seat</option>
@@ -52,13 +64,13 @@ function BookingCard ({cardbook:{index, id, title, imageSource, details, tourdat
                         
                   <p className="">Total Amount: <i className="fa-solid fa-peso-sign text-danger">{calculateAmount()}</i></p>
 
-                  <div><button type="button" className="btn btn-dark btn-lg btn-block col-md-12 text-light"><i className="fa-solid fa-ticket"></i>    Book a Concert now!</button>
+                  <div><button type="submit" className="btn btn-dark btn-lg btn-block col-md-12 text-light"><i className="fa-solid fa-ticket"></i>    Book a Concert now!</button>
                   </div>
         
-        </div>
-      </div>
-    </div>
-  </div>
+                  </div>
+                  </div>
+                </div>
+              </div>
 
     
     

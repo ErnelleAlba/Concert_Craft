@@ -33,3 +33,9 @@
     align-items: stretch;
     
 }
+.active {
+    background-color: #f2a7d1;
+    color: white !important;
+    outline: 3px solid #21c9e1;
+    outline-offset: 4px;
+  }

@@ -24,8 +24,9 @@ function ConcertCard ({concertCard:{index, id, title, imageSource}} ) { //Concer
             <i className="fa-solid fa-ticket"></i> 
             Book a seat
           </a>
-          <BookingPage />
+          
         </div>
+        <BookingPage />
       </div>
     </>
   )
