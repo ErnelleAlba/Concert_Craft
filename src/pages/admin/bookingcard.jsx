@@ -27,9 +27,9 @@ function BookingCard ({cardbook:{index, id, title, imageSource, details, tourdat
         <p className="card-text">{details}</p>
         <p className="card-text"><small className="text-muted">{tourdates}</small></p>
         <p className="card-text"><i className="fa-solid fa-timer"></i>{time}</p>
-        <div className="card-text text-danger"><i className="fa-solid fa-peso-sign"></i>{ticket}
+        <div className="card-text text-danger"><i className="fa-solid fa-peso-sign"></i>{ticket}</div>
         <div className="inputticket d-flex flex-wrap">
-                    <div className="p-2 flex-fill"><select value={selectedValue} onChange={handleChange}>
+                    <div className="p-2 flex-fill">How many Ticket?<select value={selectedValue} onChange={handleChange}>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -59,7 +59,7 @@ function BookingCard ({cardbook:{index, id, title, imageSource, details, tourdat
       </div>
     </div>
   </div>
-</div>
+
     
     
     </>

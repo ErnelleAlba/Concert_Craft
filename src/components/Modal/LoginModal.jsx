@@ -36,7 +36,7 @@ function LoginModal() {
           <div className="modal-content bg-transparent">
             <div className="modal-header">
               <h3 className="modal-title">Login</h3>
-              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+              <button type="button" className="btn-close text-white" data-bs-dismiss="modal" aria-label="Close"></button></div>
               <div className="kard user-login">
               <img src={logo} alt="Concert-Craft-Logo" className="card-img-top" />
               <div className="card-body">

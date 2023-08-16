@@ -1,0 +1,22 @@
+.filter-container {
+    color: white;
+    background-color: #f2a7d1;
+    outline: 3px solid #21c9e1;
+    outline-offset: 4px;
+}
+
+.navy-item > .nav-link {
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 20px;
+    border-radius: 25px;
+    padding: 6px 25px !important;
+    transition: all ease-in-out 300ms;
+    color: black;
+  }
+  .navy-item > .nav-link:hover {
+    color: white;
+    background-color: #f2a7d1;
+    outline: 3px solid #21c9e1;
+    outline-offset: 4px;
+  }
