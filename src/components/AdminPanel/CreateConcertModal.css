@@ -1,0 +1,39 @@
+#add-concert-modal {
+  color: white;
+  width: 500px;
+  background: linear-gradient(
+    135deg,
+    rgba(38, 43, 52, 0.5),
+    rgba(38, 43, 52, 0.8)
+  ) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37) !important;
+}
+
+#modal-header {
+  color: rgb(255, 255, 255);
+  text-transform: uppercase;
+  font-weight: 700;
+  background: transparent !important;
+}
+
+.add-concert-modal-close-btn {
+  color: white;
+  background-color: transparent;
+  border: 2px solid transparent;
+  padding: 5px 5px;
+  margin: 0px 5px;
+}
+
+.add-concert-modal-close-btn:hover {
+  border: 2px solid white;
+}
+
+@media (max-width: 760px) {
+  #add-concert-modal {
+    width: 97vw;
+  }
+}
