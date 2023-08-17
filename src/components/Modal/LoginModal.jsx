@@ -19,8 +19,8 @@ function LoginModal() {
       password: ''
     },
     validationSchema: Yup.object({
-      email: Yup.string().required(),
-      password: Yup.string().required(),
+      email: Yup.string().required("Email is required"),
+      password: Yup.string().required("Password is required"),
     }),
 
     onSubmit: (value) => {
@@ -58,7 +58,10 @@ function LoginModal() {
                         value={formik.values.email}
                         onChange={formik.handleChange}
                         />
-                        <span className="text-danger">This field is required.</span>
+                        {
+                          formik.errors.email && <span className="text-danger">{formik.errors.email}</span>
+                        }
+                        
                     </div>
                     <br/><br/>
                     <div className="col-md-4">
@@ -72,11 +75,14 @@ function LoginModal() {
                         value={formik.values.password}
                         onChange={formik.handleChange}
                         placeholder="Enter Password" 
-                        required/>
-                      <span className="text-danger">This field is required.</span>
+                        />
+                        {
+                          formik.errors.password && <span className="text-danger">{formik.errors.password}</span>
+                        }
                     </div>
                     <br/><br/><br/>
                   </div>
+                  <div className="col-12">
                   <center>
                     <input 
                       type="submit" 
@@ -92,6 +98,7 @@ function LoginModal() {
                     data-bs-target="#registerModal"
                     >Register</button>
                   </center>
+                  </div>
                 </form>
               </div>
                   </div>

@@ -2,6 +2,7 @@ import "./RegisterModal.css"
 import { useEffect } from "react"
 import "./LoginModal.css"
 import { useFormik } from "formik";
+import * as Yup from "yup"
 
 function RegisterModal() {
   const removeScroll = (e) => e.target.blur();
@@ -18,9 +19,21 @@ function RegisterModal() {
       lastname: '',
       email: '',
       phone: '',
-      password: '',
+      confirmPass: '',
+      passwordreg: '',
       address: ''
     },
+
+    validationSchema: Yup.object({
+      firstname: Yup.string().required("This field is required"),
+      lastname: Yup.string().required("This field is required"),
+      email: Yup.string().required("Email is required"),
+      phone: Yup.string().required("This field is required"),
+      confirmPass: Yup.string().required("This field is required"),
+      passwordreg: Yup.string().required("This field is required"),
+      address: Yup.string().required("This field is required"),
+    }),
+
     onSubmit: (value) => {
       console.log(value)
     }
@@ -52,7 +65,9 @@ function RegisterModal() {
                     value={formik.values.firstname}
                     onChange={formik.handleChange}
                     />
-                
+                        {
+                          formik.errors.firstname && <span className="text-danger">{formik.errors.firstname}</span>
+                        }
                 </div>
                 <div className="col-md-6">
                   <label htmlFor="last-name" className="form-label text-white">Last name</label>
@@ -63,6 +78,9 @@ function RegisterModal() {
                     value={formik.values.lastname}
                     onChange={formik.handleChange}
                     />
+                        {
+                          formik.errors.lastname && <span className="text-danger">{formik.errors.lastname}</span>
+                        }
                 </div>
                 <div className="col-md-6">
                   <label htmlFor="email-address" className="form-label text-white">Email Address</label>
@@ -73,8 +91,9 @@ function RegisterModal() {
                     value={formik.values.email}
                     onChange={formik.handleChange}
                     />
-
-         
+                        {
+                          formik.errors.email && <span className="text-danger">{formik.errors.email}</span>
+                        }
                 </div>
                 <div className="col-md-6">
                   <label htmlFor="phone-number" className="form-label text-white">Phone No.</label>
@@ -86,17 +105,35 @@ function RegisterModal() {
                       onChange={formik.handleChange}
                       onWheel={removeScroll} 
                       />
-         
+                        {
+                          formik.errors.phone && <span className="text-danger">{formik.errors.phone}</span>
+                        }
                 </div>
                 <div className="col-md-12">
                   <label htmlFor="password" className="form-label text-white">Password</label>
                   <input 
-                    type="password" 
+                    type="passwordreg" 
                     className="form-control" 
-                    id="password" 
-                    value={formik.values.password}
+                    id="passwordreg" 
+                    value={formik.values.passwordreg}
                     onChange={formik.handleChange}
                     />
+                        {
+                          formik.errors.passwordreg && <span className="text-danger">{formik.errors.passwordreg}</span>
+                        }
+                </div>
+                <div className="col-md-12">
+                  <label htmlFor="password" className="form-label text-white">Confirm Password</label>
+                  <input 
+                    type="password" 
+                    className="form-control" 
+                    id="confirmPass" 
+                    value={formik.values.confirmPass}
+                    onChange={formik.handleChange}
+                    />
+                        {
+                          formik.errors.confirmPass && <span className="text-danger">{formik.errors.confirmPass}</span>
+                        }
                 </div>
                 <div className="col-md-12">
                   <label htmlFor="address" className="form-label text-white">Address</label>
@@ -106,8 +143,10 @@ function RegisterModal() {
                     id="address" 
                     value={formik.values.address}
                     onChange={formik.handleChange}
-                    required/>
-            
+                    />
+                        {
+                          formik.errors.address && <span className="text-danger">{formik.errors.address}</span>
+                        }
                 </div>
                 <div className="col-12">
                   <div className="form-check">
@@ -139,6 +178,7 @@ function RegisterModal() {
                     >Back to Login</button>
                 </div>
               </form>
+
             </div>
           </div>
         </div>
