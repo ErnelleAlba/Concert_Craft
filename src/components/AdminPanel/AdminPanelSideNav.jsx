@@ -17,7 +17,7 @@ function AdminPanelSideNav() {
                   <NavLink className="nav-link"  id="admin-nav" to="/admin/dashboard/concerts"><i className="fa-solid fa-music me-0 me-md-3 me-lg-3"></i><span className="d-md-inline d-none">Concerts List</span></NavLink>
                 </li>
                 <li className="nav-item py-1 py-sm-0">
-                  <NavLink className="nav-link px-0"  id="admin-nav" to="/admin/dashboard/users"><i className="fa-solid fa-user ms-1 me-0 me-md-3 me-lg-3"></i><span className="d-md-inline d-none">Users List</span></NavLink>
+                  <NavLink className="nav-link px-0"  id="admin-nav" to="/admin/dashboard/users"><i className="fa-solid fa-user ms-1 me-0 me-md-3 me-lg-3"></i><span className="d-md-inline d-none">Customers List</span></NavLink>
                 </li>
               </ul>
           </div>
