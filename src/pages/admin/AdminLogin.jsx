@@ -1,31 +1,31 @@
+import { useFormik, validateYupSchema } from "formik"
+import * as Yup from 'yup'
 import "./AdminLogin.css"
 import logo from "/Concert-Craft-Logo-Transparent.png"
 import { useEffect } from "react"
 
 function AdminLogin() {
-  const needValidation = () => {
-    'use strict'
-  
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    const forms = document.querySelectorAll('.needs-validation')
-  
-    // Loop over them and prevent submission
-    Array.prototype.slice.call(forms)
-      .forEach(function (form) {
-        form.addEventListener('submit', function (event) {
-          if (!form.checkValidity()) {
-            event.preventDefault()
-            event.stopPropagation()
-          }
-  
-          form.classList.add('was-validated')
-        }, false)
-      })
-  }
+  const formik = useFormik({
+
+    initialValues: {
+      adminUsername: '',
+      adminPassword: ''
+    },
+
+    validationSchema: Yup.object({
+      adminUsername: Yup.string().required("Username is required").matches(/^(admin|ADMIN)$/g, "Nice Try"),
+      adminPassword: Yup.string().required("Password is required").matches(/(1234)/, "Nice Try")
+    }),
+
+    onSubmit: (value) => {
+      console.log(value)
+      window.location.href="/admin/dashboard/bookings"
+    },
+  })
 
   useEffect(() =>{
-    needValidation()
       document.title = "Admin Login | Concert Craft"
+
   }, [])
 
   return (
@@ -38,8 +38,9 @@ function AdminLogin() {
               <div className="card-body">
                 <h3 className="mb-4">Admin Login</h3>
                 <form 
+                  onSubmit={formik.handleSubmit}
                   autoComplete="off" 
-                  className="form-group needs-validation" 
+                  className="form-group" 
                   action="/admin/dashboard/bookings" 
                   noValidate>
                   <div className="row">
@@ -49,13 +50,21 @@ function AdminLogin() {
                     <div className="col-md-8">
                       <input 
                         type="text" 
-                        name="username" 
-                        className="form-control" 
-                        placeholder="Enter Username" 
-                        required/>
-                      <div className="invalid-feedback">
-                        Invalid Username
-                      </div>
+                        id="adminUsername"
+                        name="adminUsername" 
+                        className={formik.errors.adminUsername && formik.touched.adminUsername ? "is-invalid form-control" : "form-control"}
+                        placeholder="Enter Username"
+                        value={formik.values.adminUsername}
+                        onBlur={formik.handleBlur}
+                        onChange={formik.handleChange}  
+                        />
+                      {
+                        formik.errors.adminUsername && formik.touched.adminUsername
+                        ? 
+                        <span className="text-danger">{formik.errors.adminUsername}</span> 
+                        : 
+                        null
+                      }
                     </div>
                     <br/><br/>
                     <div className="col-md-4">
@@ -63,24 +72,27 @@ function AdminLogin() {
                     </div>
                     <div className="col-md-8">
                       <input 
-                        type="password" 
-                        className="form-control" 
-                        name="password" 
-                        placeholder="Enter Password" 
-                        required/>
-                      <div className="invalid-feedback">
-                        Invalid Password
-                      </div>
+                        type="password"
+                        id="adminPassword" 
+                        className={formik.errors.adminPassword && formik.touched.adminPassword ? "is-invalid form-control" : "form-control"} 
+                        name="adminPassword" 
+                        placeholder="Enter Password"
+                        value={formik.values.adminPassword}
+                        onBlur={formik.handleBlur}
+                        onChange={formik.handleChange}  
+                        />
+                      {
+                        formik.errors.adminPassword && formik.touched.adminPassword
+                        ? 
+                        <span className="text-danger">{formik.errors.adminPassword}</span> 
+                        : 
+                        null
+                      }
                     </div>
                     <br/><br/><br/>
                   </div>
                   <center>
-                    <input 
-                      type="submit" 
-                      id="inputbtn" 
-                      name="login_submit" 
-                      value="Login" 
-                      className="btn btn-primary w-100"/>
+                    <button type="submit" className="btn btn-primary w-100">Login</button>
                   </center>
                 </form>
               </div>

@@ -153,9 +153,9 @@ function UsersTable() {
                     <h1 className="text-uppercase fw-bold mb-2">Customers Table</h1>
                     <div className="w-100 mt-2">
                         <table id="customers-table" 
-                        className="table table-bordered table-striped table-hover" 
+                        className="table table-bordered  border border-dark table-striped table-hover" 
                         style={{width:"100%"}}>
-                            <thead className="table-dark" >
+                            <thead className="table-dark border-light" >
                                 <tr>
                                     <th>ID</th>
                                     <th>First Name</th>
@@ -167,9 +167,9 @@ function UsersTable() {
                                     <th>Action</th>
                                 </tr>
                             </thead>
-                            <tbody className="table-light">
+                            <tbody className="table-light border-dark">
                             </tbody>
-                            <tfoot className="table-dark">
+                            <tfoot className="table-dark border-light">
                                 <tr>
                                     <th>ID</th>
                                     <th>First Name</th>

@@ -88,7 +88,7 @@ function BookingsTable() {
                     // messageTop: 'Title string',
                     text: 'Save in PDF',
                     // orientation: 'landscape',
-                    title:  'Ticket Buyers',
+                    title:  'Booking Table',
                     pageSize: 'A3',
                     download: 'open',
                     exportOptions: {
@@ -101,7 +101,7 @@ function BookingsTable() {
                 {
                     extend: 'excelHtml5',
                     text: 'Save in Excel',
-                    title:  'Ticket Buyers',
+                    title:  'Booking Table',
                     // messageTop: '',
                     // messageBottom:'',
                     autoFilter: true,
@@ -116,7 +116,7 @@ function BookingsTable() {
                 {
                     extend: 'csvHtml5',
                     text: 'Save in CSV',
-                    title:  'Ticket Buyers',
+                    title:  'Booking Table',
                     exportOptions: {
                         modifier: {
                             page: 'current'
@@ -150,9 +150,9 @@ function BookingsTable() {
           <h1 className="text-uppercase fw-bold mb-2">Bookings Table</h1>
           <div className="w-100 mt-2">
             <table id="bookings-table" 
-            className="table table-bordered table-striped table-hover" 
+            className="table table-bordered border border-dark table-striped table-hover" 
             style={{width:"100%"}}>
-              <thead className="table-dark" >
+              <thead className="table-dark border-light" >
                 <tr>
                   <th>ID</th>
                   <th>Customer ID</th>
@@ -163,9 +163,9 @@ function BookingsTable() {
                   <th>Action</th>
                 </tr>
               </thead>
-              <tbody className="table-light">
+              <tbody className="table-light border-dark">
               </tbody>
-              <tfoot className="table-dark">
+              <tfoot className="table-dark border-light">
                 <tr>
                   <th>ID</th>
                   <th>Customer ID</th>
