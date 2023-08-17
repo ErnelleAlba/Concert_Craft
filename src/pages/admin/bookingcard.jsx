@@ -52,19 +52,22 @@ function BookingCard ({cardbook:{index, id, title, imageSource, details, tourdat
         <p className="card-text"><i className="fa-solid fa-timer"></i>{time}</p>
         <div className="card-text text-danger"><i className="fa-solid fa-peso-sign"></i>{ticket}</div>
         <form onSubmit={formik.handleSubmit} />
-        <p>Number of Tickets</p>
+        
         <div className="inputticket d-flex flex-wrap">
+        <p>Number of Tickets</p>
         <div>
-      <select onChange={handleOptionChange}>
+        <select onChange={handleOptionChange}>
         {options.map ((option) => (
           <option key={option.value} value={option.value}>
             {option.label}
           </option>
         ))}
       </select>
-    </div>
+    </div>  
+          <br />
                         </div>
                         <SeatTable />
+                        <br />
                   <p className="">Total Amount: <i className="fa-solid fa-peso-sign text-danger">{calculateAmount ()}</i></p>
 
                   <div><button type="submit" className="btn btn-dark btn-lg btn-block col-md-12 text-light"><i className="fa-solid fa-ticket"></i>    Book a Concert now!</button>
