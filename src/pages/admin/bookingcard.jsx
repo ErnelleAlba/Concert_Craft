@@ -1,18 +1,18 @@
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
+import TicketTable from "./TicketTable"
+import SeatTable from "./SeatTable"
 
+const options = [
+  { value: 1, label: ' 1', price: 3000 },
+  { value: 2, label: ' 2', price: 3000 },
+  { value: 3, label: ' 3', price: 3000 },
+  { value: 4, label: ' 4', price: 3000 },
+  { value: 5, label: ' 5', price: 3000 },
+];
 function BookingCard ({cardbook:{index, id, title, imageSource, details, tourdates, time, ticket}} ) { //ConcertCard props
   
-  const [selectedValue, setSelectedValue] = useState(1);
-  
-  const handleChange = (event) => {
-    setSelectedValue(event.target.value);
-  };
 
-  const calculateAmount = () => {
-    return selectedValue * 3000;
-  };
-  
   const formik = useFormik({
     initialValues: {
       ticketitem: '',
@@ -22,6 +22,18 @@ function BookingCard ({cardbook:{index, id, title, imageSource, details, tourdat
       console.log(value)
     }
   })
+
+  const [selectedOption, setSelectedOption] = useState (options [0]);
+
+  const handleOptionChange = (e) => {
+    setSelectedOption (options.find (option => option.value === parseInt (e.target.value)));
+  };
+
+  const calculateAmount = () => {
+    return selectedOption.price * selectedOption.value;
+  }
+
+
   return (
     
     <>
@@ -40,29 +52,20 @@ function BookingCard ({cardbook:{index, id, title, imageSource, details, tourdat
         <p className="card-text"><i className="fa-solid fa-timer"></i>{time}</p>
         <div className="card-text text-danger"><i className="fa-solid fa-peso-sign"></i>{ticket}</div>
         <form onSubmit={formik.handleSubmit} />
+        <p>Number of Tickets</p>
         <div className="inputticket d-flex flex-wrap">
-                    <div className="p-2 flex-fill" id="ticketitem" value={formik.values.ticketitem} onChange={formik.handleChange}>How many Ticket? <select>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        </select></div>
-                        <div className="p-2 flex-fill"></div>
-                      <div className="p-2 flex-fill" id="seatvalue" style={{padding:"600px"}}><select ><p>            </p>
-                          <option value="" disabled selected>Choose Seat</option>
-                          <option value="">VIP Seat</option>
-                          <option value="2">Premium Seat</option>
-                          <option value="3">Regular Seat</option>
-                          </select></div>
+        <div>
+      <select onChange={handleOptionChange}>
+        {options.map ((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
+    </div>
                         </div>
-                        <br />
-                        <br />
-                        
-                  <p className="">Total Amount: <i className="fa-solid fa-peso-sign text-danger">{calculateAmount()}</i></p>
+                        <SeatTable />
+                  <p className="">Total Amount: <i className="fa-solid fa-peso-sign text-danger">{calculateAmount ()}</i></p>
 
                   <div><button type="submit" className="btn btn-dark btn-lg btn-block col-md-12 text-light"><i className="fa-solid fa-ticket"></i>    Book a Concert now!</button>
                   </div>
