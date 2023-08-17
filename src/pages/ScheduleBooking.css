@@ -37,3 +37,6 @@
     width: 100%;
   }
 }
+.concert-container {
+  display: flex;
+}

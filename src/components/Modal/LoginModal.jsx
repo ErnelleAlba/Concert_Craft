@@ -3,31 +3,14 @@ import logo from "/Concert-Craft-Logo-Transparent.png"
 import { useEffect } from "react"
 import "./LoginModal.css"
 import { useFormik } from "formik"
+import * as Yup from "yup"
 
 
 function LoginModal() {
-  const needValidation = () => {
-    'use strict'
   
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    const forms = document.querySelectorAll('.needs-validation')
-  
-    // Loop over them and prevent submission
-    Array.prototype.slice.call(forms)
-      .forEach(function (form) {
-        form.addEventListener('submit', function (event) {
-          if (!form.checkValidity()) {
-            event.preventDefault()
-            event.stopPropagation()
-          }
-  
-          form.classList.add('was-validated')
-        }, false)
-      })
-  }
 
   useEffect(() =>{
-    needValidation()
+   
   }, [])
 
   const formik = useFormik({
@@ -35,6 +18,11 @@ function LoginModal() {
       email: '',
       password: ''
     },
+    validationSchema: Yup.object({
+      email: Yup.string().required(),
+      password: Yup.string().required(),
+    }),
+
     onSubmit: (value) => {
       console.log(value)
     }
@@ -54,9 +42,9 @@ function LoginModal() {
               <div className="card-body">
                 <form 
                   autoComplete="off" 
-                  className="form-group needs-validation" 
+                  className="form-group" 
                   onSubmit={formik.handleSubmit}
-                  noValidate>
+                  >
                   <div className="row">
                     <div className="col-md-4">
                       <label style={{color:"white"}}>Email: </label>
@@ -69,10 +57,8 @@ function LoginModal() {
                         placeholder="Enter Username" 
                         value={formik.values.email}
                         onChange={formik.handleChange}
-                        required/>
-                      <div className="invalid-feedback">
-                        Invalid Email
-                      </div>
+                        />
+                        <span className="text-danger">This field is required.</span>
                     </div>
                     <br/><br/>
                     <div className="col-md-4">
@@ -87,9 +73,7 @@ function LoginModal() {
                         onChange={formik.handleChange}
                         placeholder="Enter Password" 
                         required/>
-                      <div className="invalid-feedback">
-                        Invalid Password
-                      </div>
+                      <span className="text-danger">This field is required.</span>
                     </div>
                     <br/><br/><br/>
                   </div>
@@ -118,7 +102,7 @@ function LoginModal() {
           
      
 
-      <RegisterModal/>
+      
     </>
   )
 }

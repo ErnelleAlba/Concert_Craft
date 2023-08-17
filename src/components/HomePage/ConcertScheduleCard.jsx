@@ -8,15 +8,15 @@ function ConcertScheduleCard ({concertCord:{index, id, title, imageSource, detai
     <>
 
     
-<div className="Schedcardpic card mb-3">
-  <div className="row no-gutters">
+<div className="Schedcardpic card px-4 mb-3 d-flex flex-wrap col-md-5">
+  <div className="row no-gutters gx-5">
     <div className="concert-box col-md-4">
       <img src={imageSource} class="card-img" alt="..." />
     </div>
-    <div className="col-md-8">
+    <div className="col-md-8 p-3">
       <div className="card-body">
         <h2 className="card-title col-md-12">{title}</h2>
-        <p className="card-text">{details}</p>
+        <p className="card-text col-md-12">{details}</p>
         <p className="card-text"><small class="text-muted">{tourdates}</small></p>
         <p className="card-text"><i class="fa-solid fa-timer"></i>{time}</p>
         <div className="card-text text-danger"><i class="fa-solid fa-peso-sign"></i>{ticket}

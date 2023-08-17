@@ -6,28 +6,10 @@ import { useFormik } from "formik";
 function RegisterModal() {
   const removeScroll = (e) => e.target.blur();
 
-  const needValidation = () => {
-    'use strict'
   
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    const forms = document.querySelectorAll('.needs-validation')
-  
-    // Loop over them and prevent submission
-    Array.prototype.slice.call(forms)
-      .forEach(function (form) {
-        form.addEventListener('submit', function (event) {
-          if (!form.checkValidity()) {
-            event.preventDefault()
-            event.stopPropagation()
-          }
-  
-          form.classList.add('was-validated')
-        }, false)
-      })
-  }
 
   useEffect(() =>{
-    needValidation()
+    
   }, [])
 
   const formik = useFormik({
@@ -60,7 +42,7 @@ function RegisterModal() {
             <div className="kard user-login modal-body">
               <form className="row g-3 needs-validation" 
               onSubmit={formik.handleSubmit}
-              noValidate>
+              >
                 <div className="col-md-6">
                   <label htmlFor="first-name" className="form-label text-white">First name</label>
                   <input
@@ -69,10 +51,8 @@ function RegisterModal() {
                     id="firstname" 
                     value={formik.values.firstname}
                     onChange={formik.handleChange}
-                    required/>
-                  <div className="valid-feedback">
-                    Looks good!
-                  </div>
+                    />
+                
                 </div>
                 <div className="col-md-6">
                   <label htmlFor="last-name" className="form-label text-white">Last name</label>
@@ -82,10 +62,7 @@ function RegisterModal() {
                     id="lastname" 
                     value={formik.values.lastname}
                     onChange={formik.handleChange}
-                    required/>
-                  <div className="valid-feedback">
-                    Looks good!
-                  </div>
+                    />
                 </div>
                 <div className="col-md-6">
                   <label htmlFor="email-address" className="form-label text-white">Email Address</label>
@@ -95,13 +72,9 @@ function RegisterModal() {
                     id="email" 
                     value={formik.values.email}
                     onChange={formik.handleChange}
-                    required/>
-                  <div className="invalid-feedback">
-                    Please provide your email address.
-                  </div>
-                  <div className="valid-feedback">
-                    Looks good!
-                  </div>
+                    />
+
+         
                 </div>
                 <div className="col-md-6">
                   <label htmlFor="phone-number" className="form-label text-white">Phone No.</label>
@@ -112,13 +85,8 @@ function RegisterModal() {
                       value={formik.values.phone}
                       onChange={formik.handleChange}
                       onWheel={removeScroll} 
-                      required/>
-                    <div className="invalid-feedback">
-                      Please provide your phone number.
-                    </div>
-                    <div className="valid-feedback">
-                    Looks good!
-                  </div>
+                      />
+         
                 </div>
                 <div className="col-md-12">
                   <label htmlFor="password" className="form-label text-white">Password</label>
@@ -128,13 +96,7 @@ function RegisterModal() {
                     id="password" 
                     value={formik.values.password}
                     onChange={formik.handleChange}
-                    required/>
-                  <div className="invalid-feedback">
-                  Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
-                  </div>
-                  <div className="valid-feedback">
-                    Looks good!
-                  </div>
+                    />
                 </div>
                 <div className="col-md-12">
                   <label htmlFor="address" className="form-label text-white">Address</label>
@@ -145,12 +107,7 @@ function RegisterModal() {
                     value={formik.values.address}
                     onChange={formik.handleChange}
                     required/>
-                  <div className="invalid-feedback">
-                    Please provide your address.
-                  </div>
-                  <div className="valid-feedback">
-                    Looks good!
-                  </div>
+            
                 </div>
                 <div className="col-12">
                   <div className="form-check">
@@ -159,8 +116,8 @@ function RegisterModal() {
                       className="form-check-input"  
                       value="" 
                       id="invalidCheck" 
-                      required/>
-                    <label className="form-check-label text-white" for="invalidCheck">
+                      />
+                    <label className="form-check-label text-white" htmlFor="invalidCheck">
                       Agree to terms and conditions
                     </label>
                     <div className="invalid-feedback">

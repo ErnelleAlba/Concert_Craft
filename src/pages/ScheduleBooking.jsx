@@ -13,13 +13,14 @@ function ScheduleBooking() {
       <div id="home-section-1" className="concert-show-container">
         <h1>Scheduled Concerts</h1>
         <h3>Upcoming Concerts</h3>
-        <div className="concerts-container d-flex">
-
-        </div>
+        
       </div>
-      <FilterPanel />
+      
       <br />
-      <ConcertSchedule />
+      <div className="concertskier d-flex flex-wrap">
+        <ConcertSchedule />
+        </div>
+        <FilterPanel />
     <Footer/>
     </>
   )

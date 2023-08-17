@@ -67,8 +67,8 @@ function ConcertSchedule() {
   return (
     <>
 
-      <div id="home-section-1" className="concert-show-container">
-        <div className="concerts-container flex-wrap">
+      <div id="home-section-1" className="schedule-page">
+        <div className="kier gap-5 d-flex flex-wrap">
           {concertCord}
         </div>
       

@@ -3,7 +3,7 @@ import React, { useState } from "react"
 function SeatTable() {
     const [selectedOption, setSelectedOption] = useState("");
 
-  const options = [
+  const Seatoptions = [
     { value: "VIP Seat", label: "VIP Seat" },
     { value: "Premium Seat", label: "Premium Seat" },
     { value: "Regular Seat", label: "Regular Seat" },
@@ -17,13 +17,13 @@ function SeatTable() {
     <div>
       <label htmlFor="select">Select an option:</label>
       <select
-        id="select"
+        id={selectedOption.id}
         name="select"
         value={selectedOption}
         onChange={handleSelectChange}
       >
         <option value="">--Please choose an option--</option>
-        {options.map((option) => (
+        {Seatoptions.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}
           </option>

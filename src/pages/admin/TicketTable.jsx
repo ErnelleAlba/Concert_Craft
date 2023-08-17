@@ -33,7 +33,7 @@ function TicketTable() {
           </option>
         ))}
       </select>
-      <p>Amount: {calculateAmount ()}</p>
+      <p>Amount: {calculateAmount ()}</p> 
     </div>
   </>
   )
@@ -41,3 +41,7 @@ function TicketTable() {
 
 
   export default TicketTable
+
+  export const calculateAmount = (selectedOption) => {
+    return selectedOption.price * selectedOption.value;
+  };

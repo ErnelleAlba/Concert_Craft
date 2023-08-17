@@ -2,6 +2,7 @@ import { Link, NavLink } from "react-router-dom"
 import LoginModal from "./Modal/LoginModal"
 import "./NavBar.css"
 import logo from "/Concert-Craft-Logo-Transparent.png"
+import RegisterModal from "./Modal/RegisterModal"
 
 function NavBar() {
   return (
@@ -85,6 +86,7 @@ function NavBar() {
               </div>
             </div>
             <LoginModal/>
+            <RegisterModal />
           </div>
         </nav>
       </header>
