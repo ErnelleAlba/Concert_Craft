@@ -10,14 +10,17 @@ function AdminPanelSideNav() {
           <div className="d-flex flex-column align-items-center">
               <h2 className="d-none d-md-inline text-light mt-4">MENU</h2>
               <ul className="nav nav-pills flex-column mt-4 gap-4">
-                <li className="nav-item py-1 py-sm-0">
-                  <NavLink className="nav-link"  id="admin-nav" to="/admin/dashboard/bookings"><i className="fa-solid fa-ticket me-0 me-md-3 me-lg-3"></i><span className="d-md-inline d-none">Bookings List</span></NavLink>
+              <li className="nav-item py-1 py-sm-0">
+                  <NavLink className="nav-link"  id="admin-nav" to="/admin/dashboard"><i className="bi bi-speedometer2 me-0 me-md-3 me-lg-3"></i><span className="d-md-inline d-none">Dashboard</span></NavLink>
                 </li>
                 <li className="nav-item py-1 py-sm-0">
-                  <NavLink className="nav-link"  id="admin-nav" to="/admin/dashboard/concerts"><i className="fa-solid fa-music me-0 me-md-3 me-lg-3"></i><span className="d-md-inline d-none">Concerts List</span></NavLink>
+                  <NavLink className="nav-link"  id="admin-nav" to="/admin/bookings"><i className="fa-solid fa-ticket me-0 me-md-3 me-lg-3"></i><span className="d-md-inline d-none">Bookings List</span></NavLink>
                 </li>
                 <li className="nav-item py-1 py-sm-0">
-                  <NavLink className="nav-link px-0"  id="admin-nav" to="/admin/dashboard/users"><i className="fa-solid fa-user ms-1 me-0 me-md-3 me-lg-3"></i><span className="d-md-inline d-none">Customers List</span></NavLink>
+                  <NavLink className="nav-link"  id="admin-nav" to="/admin/concerts"><i className="fa-solid fa-music me-0 me-md-3 me-lg-3"></i><span className="d-md-inline d-none">Concerts List</span></NavLink>
+                </li>
+                <li className="nav-item py-1 py-sm-0">
+                  <NavLink className="nav-link px-0"  id="admin-nav" to="/admin/users"><i className="fa-solid fa-user ms-1 me-0 me-md-3 me-lg-3"></i><span className="d-md-inline d-none">Customers List</span></NavLink>
                 </li>
               </ul>
           </div>

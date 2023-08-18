@@ -1,0 +1,27 @@
+#chart-container {
+  width: 770px;
+}
+
+@media (max-width: 1100px) {
+  #chart-container {
+    width: 650px;
+  }
+}
+
+@media (max-width: 1000px) {
+  #chart-container {
+    width: 550px;
+  }
+}
+
+@media (max-width: 650px) {
+  #chart-container {
+    width: 80vw;
+  }
+
+  #dashboard-container {
+    height: 90vh;
+    overflow: hidden;
+    overflow-y: scroll;
+  }
+}

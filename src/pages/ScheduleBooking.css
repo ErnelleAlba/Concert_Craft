@@ -1,14 +1,20 @@
-.filter-container {
-  background-color: rgba(38, 43, 52, 0.1);
-}
-
 .schedule-title-container {
   margin-top: 0;
-  padding: 0 8%;
+  padding: 0 8vw;
 }
 
 .schedule-title-container > h1 {
   color: #f2a7d1;
+  text-align: left;
+  padding: 0 0 5px 0;
+  text-shadow: 2px 1px #262b34;
+}
+
+.schedule-title-container > h3 {
+  color: #262b34;
+  text-align: left;
+  padding: 0 0 10px 0;
+  font-weight: 600;
 }
 
 .schedule-title-container > h3::after {
@@ -20,23 +26,17 @@
   position: relative;
   bottom: -10px;
 }
-#filter-month > a {
-  color: black !important;
-}
-
-#filter-month > a:hover {
-  color: white !important;
-}
 
 @media (max-width: 700px) {
-  #filter-month > a {
-    color: black !important;
+  .schedule-title-container > h1 {
+    font-size: 28px;
+  }
+
+  .schedule-title-container > h3 {
+    font-size: 22px;
   }
 
   .schedule-title-container > h3::after {
     width: 100%;
   }
-}
-.concert-container {
-  display: flex;
 }

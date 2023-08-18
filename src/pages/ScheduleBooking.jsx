@@ -1,27 +1,29 @@
-import ConcertSchedule from "../components/HomePage/ConcertSchedule"
+import { useEffect } from "react"
 import Footer from "../components/Footer"
 import NavBar from "../components/NavBar"
-import FilterPanel from "./FilterPanel"
+import ConcertSchedule from "../components/SchedulePage/ConcertSchedule"
+import FilterPanel from "../components/SchedulePage/FilterPanel"
+import "./ScheduleBooking.css"
 
 function ScheduleBooking() {
 
-
+  useEffect(() => {
+    document.title = "Schedules | Concert Craft"
+  }, [])
 
   return (
     <>
-    <NavBar />
-      <div id="home-section-1" className="concert-show-container">
-        <h1>Scheduled Concerts</h1>
-        <h3>Upcoming Concerts</h3>
-        
-      </div>
-      
-      <br />
-      <div className="concertskier d-flex flex-wrap">
-        <ConcertSchedule />
+      <NavBar />
+        <div className="container-fluid schedule-title-container" >
+          <h1>Scheduled Concerts</h1>
+          <h3>Upcoming Concerts</h3>
         </div>
-        <FilterPanel />
-    <Footer/>
+        <br />
+        <div className="d-flex row">
+          <FilterPanel/>
+          <ConcertSchedule />
+        </div>
+      <Footer/>
     </>
   )
 }

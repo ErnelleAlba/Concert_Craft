@@ -1,20 +1,4 @@
 import DataTable from "datatables.net-autofill-bs5"
-import jszip from 'jszip'
-DataTable.Buttons.jszip( jszip );
-
-import pdfMake from 'pdfmake/build/pdfmake.min.js'
-import 'pdfmake/build/vfs_fonts.js'
-
-import 'datatables.net-responsive-bs5'
-import 'datatables.net-fixedheader-bs5'
-// import 'datatables.net-scroller-bs5'
-import 'datatables.net-searchpanes-bs5'
-import 'datatables.net-searchpanes-bs5/css/searchPanes.bootstrap5.min.css'
-import 'datatables.net-buttons-bs5'
-import 'datatables.net-buttons/js/buttons.colVis.mjs'
-import 'datatables.net-buttons/js/buttons.html5.mjs'
-import 'datatables.net-buttons/js/buttons.print.mjs'
-import 'datatables.net-select-bs5'
 import { useEffect } from "react"
 import AdminPanelHeader from "../../components/AdminPanel/AdminPanelHeader"
 import AdminPanelSideNav from "../../components/AdminPanel/AdminPanelSideNav"
@@ -22,7 +6,6 @@ import CreateConcertModal from "../../components/AdminPanel/CreateConcertModal";
 import { Modal } from "bootstrap";
 
 function ConcertsTable() {
-
   
   const table = () => {
 
@@ -159,7 +142,7 @@ function ConcertsTable() {
 
   useEffect(() => {
     table()
-    document.title = "Concerts Table"
+    document.title = "Concerts Table | Admin"
 }, [])
 
   return (

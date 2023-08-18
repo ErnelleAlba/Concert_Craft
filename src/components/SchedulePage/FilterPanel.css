@@ -1,0 +1,32 @@
+.filter-container {
+  border-top: 3px solid #21c9e1;
+  border-bottom: 3px solid #21c9e1;
+  padding: 6px 0;
+}
+
+/* .nav {
+  padding: 10px;
+  align-items: stretch;
+} */
+
+.navy-item {
+  outline: 3px solid #f2a7d1;
+  border-radius: 25px;
+}
+
+.navy-item > .nav-link {
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 20px;
+  border-radius: 25px;
+  padding: 4px 20px;
+  transition: all ease-in-out 300ms;
+  color: black;
+}
+.navy-item > .nav-link:hover,
+.navy-item > .nav-link:focus {
+  color: white;
+  background-color: #f2a7d1;
+  outline: 3px solid #21c9e1;
+  outline-offset: 6px;
+}

@@ -14,7 +14,7 @@ function AdminLogin() {
 
     validationSchema: Yup.object({
       adminUsername: Yup.string().required("Username is required").matches(/^(admin|ADMIN)$/g, "Nice Try"),
-      adminPassword: Yup.string().required("Password is required").matches(/(1234)/, "Nice Try")
+      adminPassword: Yup.string().required("Password is required").matches(/^(1234)$/g, "Nice Try")
     }),
 
     onSubmit: (value) => {

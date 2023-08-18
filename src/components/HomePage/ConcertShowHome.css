@@ -7,6 +7,7 @@
   color: #f2a7d1;
   text-align: left;
   padding: 0 0 10px 0;
+  text-shadow: 2px 1px #262b34;
 }
 
 .concert-show-container > h3 {
@@ -70,9 +71,4 @@
   .concert-show-container > h3:after {
     width: 100%;
   }
-}
-.concertskier {
-  padding: 20px;
-  margin-left: 50px;
-
 }

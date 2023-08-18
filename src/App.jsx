@@ -1,6 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import Home from "./pages/Home"
-import ScheduleBooking from "./pages/ScheduleBooking"
 import { Provider } from "react-redux"
 import store from "./store/store"
 import ContactUs from "./pages/ContactUs"
@@ -9,6 +8,8 @@ import BookingsTable from "./pages/admin/BookingsTable"
 import ConcertsTable from "./pages/admin/ConcertsTable"
 import UsersTable from "./pages/admin/UsersTable"
 import PageNotFound from "./pages/PageNotFound"
+import AdminDashboard from "./pages/admin/AdminDashboard"
+import ScheduleBooking from "./pages/ScheduleBooking"
 
 function App() {
 
@@ -21,9 +22,10 @@ function App() {
               <Route path="/schedule-booking" element={<ScheduleBooking />}/>
               <Route path="/contact-us" element={<ContactUs />}/>
               <Route path="/admin" element={<AdminLogin />}/>
-              <Route path="/admin/dashboard/bookings" element={<BookingsTable />}/>
-              <Route path="/admin/dashboard/concerts" element={<ConcertsTable/>}/>
-              <Route path="/admin/dashboard/users" element={<UsersTable />}/>
+              <Route path="/admin/dashboard" element={<AdminDashboard />}/>
+              <Route path="/admin/bookings" element={<BookingsTable />}/>
+              <Route path="/admin/concerts" element={<ConcertsTable/>}/>
+              <Route path="/admin/users" element={<UsersTable />}/>
               <Route path="*" element={<PageNotFound />} />
             </Routes>
         </BrowserRouter>
