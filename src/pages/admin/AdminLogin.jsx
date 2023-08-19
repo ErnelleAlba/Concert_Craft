@@ -19,7 +19,7 @@ function AdminLogin() {
 
     onSubmit: (value) => {
       console.log(value)
-      window.location.href="/admin/dashboard/bookings"
+      window.location.href="/admin/dashboard"
     },
   })
 
