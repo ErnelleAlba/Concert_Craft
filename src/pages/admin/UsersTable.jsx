@@ -1,4 +1,6 @@
 import DataTable from "datatables.net-autofill-bs5"
+import pdfMake from 'pdfmake/build/pdfmake.min.js'
+import 'pdfmake/build/vfs_fonts.js'
 import AdminPanelHeader from "../../components/AdminPanel/AdminPanelHeader"
 import AdminPanelSideNav from "../../components/AdminPanel/AdminPanelSideNav"
 import "./UsersTable.css"
