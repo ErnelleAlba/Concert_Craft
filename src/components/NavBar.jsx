@@ -3,8 +3,40 @@ import LoginModal from "./Modal/LoginModal"
 import "./NavBar.css"
 import logo from "/Concert-Craft-Logo-Transparent.png"
 import RegisterModal from "./Modal/RegisterModal"
+import { useDispatch } from "react-redux"
+import axios from "axios"
+import { setConcerts } from "../store/concertsReducers"
+import { useEffect } from "react"
+import { markLoading, unmarkLoading } from "../store/isLoadingReducers"
 
 function NavBar() {
+  const dispatch = useDispatch();
+
+  const fetchConcert = async () => {
+
+    const res = await axios('http://localhost:8000/api/v1/concerts')
+    console.log(res)
+    dispatch(setConcerts(res.data.data.map(
+      concert => {
+        return {
+          id: concert.id,
+          title: concert.title,
+          posterImageUrl: concert.posterImageUrl,
+          description: concert.description,
+          eventPlace: concert.eventPlace,
+          eventDate: concert.eventDate,
+          ticketPrice: concert.ticketPrice,
+        }
+      }
+    )))
+    dispatch(unmarkLoading())
+  }
+
+  useEffect(() => {
+    dispatch(markLoading())
+    fetchConcert();
+  }, [])
+  
   return (
     <>
       <header>
@@ -12,7 +44,7 @@ function NavBar() {
           <div className="container-fluid p-0">
             <div className="navbar-brand me-0">
               <Link 
-                to="./" 
+                to="/" 
                 className="logo">
                   <img 
                     src={logo} 

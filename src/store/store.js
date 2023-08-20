@@ -1,9 +1,9 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { mealsSlice } from "./mealsReducers";
+import { concertsSlice } from "./concertsReducers";
 import { isLoadingSlice } from "./isLoadingReducers";
 
 const rootReducer = combineReducers({
-  meals: mealsSlice.reducer,
+  concerts: concertsSlice.reducer,
   isLoading: isLoadingSlice.reducer
 })
 

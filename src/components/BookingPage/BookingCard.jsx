@@ -1,81 +1,146 @@
+import axios from 'axios';
 import { useFormik } from 'formik';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import * as Yup from 'yup'
 
-const options = [
-  { id: "option-1", value: 1, label: ' 1', price: 3000 },
-  { id: "option-2", value: 2, label: ' 2', price: 3000 },
-  { id: "option-3", value: 3, label: ' 3', price: 3000 },
-  { id: "option-4", value: 4, label: ' 4', price: 3000 },
-  { id: "option-5", value: 5, label: ' 5', price: 3000 },
-];
 
-const seatoptions = [
+const seatOptions = [
   { value: "VIP Seat", label: "VIP Seat" },
   { value: "Premium Seat", label: "Premium Seat" },
   { value: "Regular Seat", label: "Regular Seat" },
 ];
 
-function BookingCard ({cardbook:{index, id, title, imageSource, details, tourdates, time, ticket}} ) { //ConcertCard props
+function BookingCard ({id}) { //ConcertCard props
 
   const formik = useFormik({
     initialValues: {
-      ticketitem: '',
-      seatvalue: seatoptions[0].value,
+      ticketItem: '',
+      seatValue: seatOptions[0].value,
     },
+
+    validationSchema: Yup.object({
+      ticketItem: Yup.number().integer("Must be a number").positive("Must be positive number").required("Input number of tickets"),
+      seatValue: Yup.string().required("Seat Position is required"),
+    }),
+
     onSubmit: (value) => {
       console.log(value)
     }
   })
 
+
+
+  const [concert, setConcert] = useState({
+    title: '',
+    posterImageUrl: '',
+    description: '',
+    eventDate: '',
+    eventPlace: '',
+    ticketPrice: '',
+  })
+
+  const fetchConcertInfo = async () => {
+    const res = await axios(`http://localhost:8000/api/v1/concerts/${id}`)
+    const concertInfo = res.data.data
+    // console.log(concertInfo)
+    const concertObj = {
+      title: concertInfo.title,
+      posterImageUrl: concertInfo.posterImageUrl,
+      description: concertInfo.description,
+      eventDate: concertInfo.eventDate,
+      eventPlace: concertInfo.eventPlace,
+      ticketPrice: concertInfo.ticketPrice,
+    }
+
+    setConcert(concertObj)
+  }
+
+  const totalAmount = () => {
+    return formik.values.ticketItem * concert.ticketPrice
+  }
+
+  useEffect(() => {
+    fetchConcertInfo();
+    totalAmount();
+  }, [])
+  
   return (
-    
     <>
-      <div className="card">
+      <div className="card w-100 shadow-lg">
         <div className="row no-gutters">
           <div className="col-md-4">
-            <img src={imageSource} className="img-fluid rounded border border-black h-100" alt="..." />
+            <img src={concert.posterImageUrl} className="img-fluid rounded border border-black w-100" alt={concert.title} />
           </div>
           <div className="col-md-8">
             <div className="card-body">
-              <h2 className="card-title col-md-8">{title}</h2>
-              <p className="card-text">{details}</p>
-              <p className="card-text"><small className="text-muted">{tourdates}</small></p>
-              <p className="card-text"><i className="fa-solid fa-timer"></i>{time}</p>
-              <div className="card-text text-danger"><i className="fa-solid fa-peso-sign"></i>{ticket}</div>
-              <form onSubmit={formik.handleSubmit}>
-                <div className="inputticket d-flex flex-wrap">
-                    <p>Number of Tickets</p>
-                    <div>
-                    <input 
-                      type="text" 
-                      className="" 
-                      id="ticketitem"
-                      value={formik.values.ticketitem}
-                      onChange={formik.handleChange}
-                      />
-                    </div>  
-                    <br />
+              <h2 className="card-title col-md-12">{concert.title}</h2>
+              <p className="card-text">{concert.description}</p>
+              <div className="card-text d-flex flex-column gap-1 mb-3">
+                <small className="text-muted">
+                <i className="fa-solid fa-location-dot me-1"></i>
+                  Place:<span className="ms-1">
+                    {concert.eventPlace}</span></small>
+                <small className="text-muted">
+                <i className="fa-regular fa-calendar me-1"></i>
+                  Date: <span className="ms-1">
+                    {concert.eventDate.split("-")[0]}</span></small>
+                <small className="text-muted">
+                <i className="fa-regular fa-clock me-1"></i>
+                  Time: <span className="ms-1">
+                    {concert.eventDate.split("-")[1]}</span></small>
+                <h5 className="card-text text-danger mt-2">
+                  <span className='text-dark me-2'>
+                    Ticket Price: </span><i className="fa-solid fa-peso-sign me-1"></i>
+                    {concert.ticketPrice}</h5>
+              </div>
+              <form onSubmit={formik.handleSubmit} noValidate>
+                <div className="d-flex mb-2 col-md-6 column">
+                  <label htmlFor="ticketItem" className='form-label me-3'>Number of Tickets:</label>
+                  <div className='row col'>
+                  <input 
+                    type="number"
+                    name='ticketItem' 
+                    className={
+                        formik.errors.ticketItem && formik.touched.ticketItem 
+                          ? 
+                          "is-invalid form-control" 
+                          : 
+                          "form-control"
+                      }  
+                    id="ticketItem"
+                    value={formik.values.ticketItem}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    />
+                    {
+                      formik.errors.ticketItem && formik.touched.ticketItem 
+                      ? 
+                      <span className="text-danger">{formik.errors.ticketItem}</span> 
+                      : 
+                      null
+                    }
                   </div>
-                  <div>
-                    <label htmlFor="select">Select an option:</label>
-                    <select
-                      name="select"
-                      value={formik.values.seatvalue}
-                      onChange={(e) => {
-                        formik.setFieldValue("seatvalue", e.target.value)
-                      }}
-                    >
-                      <option value="">--Please choose an option--</option>
-                      {seatoptions.map((option) => (
-                        <option key={option.value} value={option.value}>
-                          {option.label}
-                        </option>
-                      ))}
-                    </select>
-                    <p>You selected: {formik.values.seatvalue}</p>
-                  </div>
-                <p className="">Total Amount: <i className="fa-solid fa-peso-sign text-danger"></i></p>
-                <button type="submit" className="btn btn-dark btn-lg btn-block col-md-12 text-light"><i className="fa-solid fa-ticket me-2"></i> Book your tickets</button>
+                </div>
+                <div className='mb-2'>
+                  <label htmlFor="seatPosition" className='me-2'>Select an option:</label>
+                  <select
+                    name="seatPosition"
+                    value={formik.values.seatValue}
+                    onBlur={formik.handleBlur}
+                    onChange={(e) => {
+                      formik.setFieldValue("seatValue", e.target.value)
+                    }}
+                  >
+                    {seatOptions.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <p>You selected: {formik.values.seatValue}</p>
+                <h4 className="pb-1">Total Amount: <i className="fa-solid fa-peso-sign text-danger me-1"></i><span className='text-danger'>{totalAmount()}</span></h4>
+                <button type="submit" className="btn btn-dark btn-lg btn-block col-md-12 text-light mt-2"><i className="fa-solid fa-ticket me-2"></i> Book your tickets</button>
               </form>
               <br />
             </div>
