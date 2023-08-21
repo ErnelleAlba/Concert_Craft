@@ -6,144 +6,188 @@ import AdminPanelHeader from "../../components/AdminPanel/AdminPanelHeader"
 import AdminPanelSideNav from "../../components/AdminPanel/AdminPanelSideNav"
 import CreateConcertModal from "../../components/AdminPanel/CreateConcertModal";
 import { Modal } from "bootstrap";
+import { useDispatch, useSelector } from "react-redux"
+import LoadingIcon from "../../components/LoadingIcon"
+import { setConcerts } from "../../store/concertsReducers"
+import { markLoading, unmarkLoading } from "../../store/isLoadingReducers"
+import axios from "axios"
 
 function ConcertsTable() {
+  const concerts = useSelector(state => state.concerts)
+  const isLoading = useSelector(state => state.isLoading)
   
-  const table = () => {
+  // const table = () => {
 
-    new DataTable ('#concerts-table',{
-        dom: '<"d-flex justify-content-between flex-wrap-reverse gap-2 ms-1 me-1 mx-lg-1"Bl<"ms-1 me-1 me-lg-5"f>><"mx-1 px-0"rt><"d-flex justify-content-between px-2 px-lg-5"ip><"clear">',
-        destroy: true,
-        responsive: {
-          details: {
-            // display: DataTable.Responsive.display.modal({
-            //     header: function (row) {
-            //         var data = row.data();
-            //         return 'Details for ' + data[1];
-            //     }
-            // }),
-            renderer: DataTable.Responsive.renderer.tableAll({
-                tableClass: 'table'
-            })
-          }
-        },
-        paging: false,
-        scrollCollapse: true,
-        scrollY: '63vh',
-        scrollX: true,
-        // scroller: true,
-        fixedHeader: true,
-        select: true,
-        language: {
-            decimal: '.',
-            thousands: ',',
-            searchPanes: {
-                clearMessage: 'Clear All',
-                collapse: 'Filter',
-            }
-        },
-        buttons: [
-            {
-            extend: 'searchPanes',
-            config: {
-              cascadePanes: true,
-              responsive: true,
-              viewTotal: true,
-              collapse: false,
-              controls: true,
-              layout: 'columns-1',
-              initCollapsed: true,
-              orderable: true,
-              i18n: {
-                title: {
-                  _: 'Filters Selected - %d',
-                  0: 'No Filters Selected',
-                  1: 'One Filter Selected'
-                },
-                count: '{total} found',
-                countFiltered: '{shown} found',
-                emptyMessage: "</i></b>EMPTY</b></i>",
-                emptyPanes: 'There are no panes to display. :/',
-                loadMessage: 'Loading filtering options...'
-              },
-            },
-        }, 'colvis', 
-        {
-          extend: 'copy',
-          key: {
-            key: 'c',
-            altkey: true
-          }
-        },
-            {
-              extend: 'print',
-              title:  'Ticket Buyers',
-              key: {
-                  key: 'p',
-                  altkey: true
-              }
-            },
-            {
-              extend: 'pdfHtml5',
-              // messageTop: 'Title string',
-              text: 'Save in PDF',
-              // orientation: 'landscape',
-              title:  'Concerts List',
-              pageSize: 'A3',
-              download: 'open',
-              exportOptions: {
-                  modifier: {
-                      page: 'current'
-                  },
-                  footer: true,
-              }
-            }, 
-            {
-              extend: 'excelHtml5',
-              text: 'Save in Excel',
-              title:  'Concerts List',
-              // messageTop: '',
-              // messageBottom:'',
-              autoFilter: true,
-              exportOptions: {
-                  modifier: {
-                      page: 'current',
-                      header: true,
-                      footer: true,
-                  }
-              }
-            },
-            {
-              extend: 'csvHtml5',
-              text: 'Save in CSV',
-              title:  'Concerts List',
-              exportOptions: {
-                  modifier: {
-                      page: 'current'
-                  }
-              }
-            },
-            {
-              text: 'Add Concert',
-              action: function ( e, dt, node, config ) {
-                new Modal(document.getElementById('create-concert-modal')).show() ;
-              }
-            }  
-        ],
-    // columnDefs: [
-    //     {
-    //         searchPanes: {
-    //             orderable: true
-    //         },
-    //         targets: [0,1,2,]
-    //     }
-    // ]
+  //   new DataTable ('#concerts-table',{
+  //       ajaxSource: "http://localhost:8000/api/v1/concerts",
+  //       columns: [
+  //         {data: "id"},
+  //         {data: "title"},
+  //         {data: "posterImageUrl"},
+  //         {data: "description"},
+  //         {data: "eventDate"},
+  //         {data: "eventPlace"},
+  //         {data: "ticketPrice"},
+  //       ],
+  //       // processing: true,
+  //       // serverSide: true,
+  //       dom: '<"d-flex justify-content-between flex-wrap-reverse gap-2 ms-1 me-1 mx-lg-1"Bl<"ms-1 me-1 me-lg-5"f>><"mx-1 px-0"rt><"d-flex justify-content-between px-2 px-lg-5"ip><"clear">',
+  //       destroy: true,
+  //       responsive: {
+  //         details: {
+  //           display: DataTable.Responsive.display.modal({
+  //               header: function (row) {
+  //                   var data = row.data();
+  //                   return 'Details for ' + data[1];
+  //               }
+  //           }),
+  //           renderer: DataTable.Responsive.renderer.tableAll({
+  //               tableClass: 'table'
+  //           })
+  //         }
+  //       },
+  //       paging: false,
+  //       scrollCollapse: true,
+  //       scrollY: '63vh',
+  //       scrollX: true,
+  //       // scroller: true,
+  //       fixedHeader: true,
+  //       select: true,
+  //       language: {
+  //           decimal: '.',
+  //           thousands: ',',
+  //           searchPanes: {
+  //               clearMessage: 'Clear All',
+  //               collapse: 'Filter',
+  //           }
+  //       },
+  //       buttons: [
+  //           {
+  //           extend: 'searchPanes',
+  //           config: {
+  //             cascadePanes: true,
+  //             responsive: true,
+  //             viewTotal: true,
+  //             collapse: false,
+  //             controls: true,
+  //             layout: 'columns-1',
+  //             initCollapsed: true,
+  //             orderable: true,
+  //             i18n: {
+  //               title: {
+  //                 _: 'Filters Selected - %d',
+  //                 0: 'No Filters Selected',
+  //                 1: 'One Filter Selected'
+  //               },
+  //               count: '{total} found',
+  //               countFiltered: '{shown} found',
+  //               emptyMessage: "</i></b>EMPTY</b></i>",
+  //               emptyPanes: 'There are no panes to display. :/',
+  //               loadMessage: 'Loading filtering options...'
+  //             },
+  //           },
+  //       }, 'colvis', 
+  //       {
+  //         extend: 'copy',
+  //         key: {
+  //           key: 'c',
+  //           altkey: true
+  //         }
+  //       },
+  //           {
+  //             extend: 'print',
+  //             title:  'Ticket Buyers',
+  //             key: {
+  //                 key: 'p',
+  //                 altkey: true
+  //             }
+  //           },
+  //           {
+  //             extend: 'pdfHtml5',
+  //             // messageTop: 'Title string',
+  //             text: 'Save in PDF',
+  //             // orientation: 'landscape',
+  //             title:  'Concerts List',
+  //             pageSize: 'A3',
+  //             download: 'open',
+  //             exportOptions: {
+  //                 modifier: {
+  //                     page: 'current'
+  //                 },
+  //                 footer: true,
+  //             }
+  //           }, 
+  //           {
+  //             extend: 'excelHtml5',
+  //             text: 'Save in Excel',
+  //             title:  'Concerts List',
+  //             // messageTop: '',
+  //             // messageBottom:'',
+  //             autoFilter: true,
+  //             exportOptions: {
+  //                 modifier: {
+  //                     page: 'current',
+  //                     header: true,
+  //                     footer: true,
+  //                 }
+  //             }
+  //           },
+  //           {
+  //             extend: 'csvHtml5',
+  //             text: 'Save in CSV',
+  //             title:  'Concerts List',
+  //             exportOptions: {
+  //                 modifier: {
+  //                     page: 'current'
+  //                 }
+  //             }
+  //           },
+  //           {
+  //             text: 'Add Concert',
+  //             action: function ( e, dt, node, config ) {
+  //               new Modal(document.getElementById('create-concert-modal')).show() ;
+  //             }
+  //           }  
+  //       ],
+  //   // columnDefs: [
+  //   //     {
+  //   //         searchPanes: {
+  //   //             orderable: true
+  //   //         },
+  //   //         targets: [0,1,2,]
+  //   //     }
+  //   // ]
     
-  });
+  // });
+  // }
+
+  const dispatch = useDispatch();
+
+  const handleOnChange = async (e) => {
+    dispatch(markLoading())
+
+    const resTitle = await axios(`http://localhost:8000/api/v1/concerts?title=${e.target.value}`)
+    
+      dispatch(setConcerts(resTitle.data.data.map(
+      concert => {
+        return {
+          id: concert.id,
+          title: concert.title,
+          posterImageUrl: concert.posterImageUrl,
+          description: concert.description,
+          eventPlace: concert.eventPlace,
+          eventDate: concert.eventDate,
+          ticketPrice: concert.ticketPrice,
+        }
+      }
+    )))
+
+    dispatch(unmarkLoading())
+    // console.log(e.target.value)
   }
 
   useEffect(() => {
-    table()
+    // table()
     document.title = "Concerts Table | Admin"
 }, [])
 
@@ -155,53 +199,73 @@ function ConcertsTable() {
         <center className="pt-3 users-table-container">
           <h1 className="text-uppercase fw-bold mb-2">Concerts Table</h1>
           <div className="w-100 mt-2">
+            <div className="d-flex justify-content-start ms-2 mb-2">
+              <button className="btn btn-dark" data-bs-toggle="modal" data-bs-target="#create-concert-modal">Add Concert</button>
+              <CreateConcertModal />
+              <div className="d-flex align-items-center bg-dark rounded py-1 px-2 ms-2 ">
+                <label htmlFor="search-form" className="col text-light">Search:</label>
+                <input type="text" id="search-form" className="form-control" onChange={handleOnChange}/>
+              </div>
+              
+            </div>
             <table id="concerts-table" 
             className="table table-bordered border border-dark table-striped table-hover" 
             style={{width:"100%"}}>
               <thead className="table-dark border-light" >
                 <tr>
-                  <th>ID</th>
-                  <th>Title</th>
-                  <th>ImageURL</th>
-                  <th>Description</th>
-                  <th>Event Date</th>
-                  <th>Place</th>
-                  <th>Ticket Price</th>
-                  <th>Action</th>
+                  <th scope="col">ID</th>
+                  <th scope="col">Title</th>
+                  <th scope="col">ImageURL</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Event Date</th>
+                  <th scope="col">Place</th>
+                  <th scope="col">Ticket Price</th>
+                  <th scope="col">Action</th>
                 </tr>
               </thead>
               <tbody className="table-light border-dark">
-                <tr>
-                  <td>1</td>
-                  <td>Mania the ABBA Tribute</td>
-                  <td>https://images1.smtickets.com/images/portrait_07062023161535.jpg</td>
-                  <td>Mania The ABBA Tribute has continued to tour the globe, enjoying great success, with ticket sales for most venues selling out long before the show hits town. The show has toured internationally in regions as far afield as Venezuela, North America, Tahiti, Mexico, Germany, France, Switzerland, Austria, Holland, Denmark, Sweden, Luxembourg, and many more, making this the world’s most successful touring ABBA show. Join in and enjoy all of your favorites including Mamma Mia, Voulez Vous, Dancing Queen, Winner Takes It All, Super Trouper and many more at this fantastic show.</td>
-                  <td>August 25, 2023 7:00pm</td>
-                  <td>Newport Performing Arts Theater</td>
-                  <td>3,000</td>
-                  <td><button className="btn bg-success text-light px-3 my-0 my-lg-2 mx-3 mx-lg-0"><i className="fa-solid fa-pen-to-square"></i></button><button className="btn bg-danger text-light px-3"><i className="fa-solid fa-trash-can"></i></button></td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>LAUV The Between Albums Tour</td>
-                  <td>https://images1.smtickets.com/images/portrait_20072023131119.jpg</td>
-                  <td>Los Angeles-based artist Anson Seabra has generated over 1 billion streams on Spotify alone. After a successful first headline US tour in the Spring of ‘22, Anson joined Dean Lewis across a 25+ show European tour later that fall. All the while, Anson has consistently been releasing singles including “Peter Pan Was Right,” which has amassed 45M Spotify streams (1M in the first week). Each of his latest few releases have all charted in the top 3 on Asian DSP Western charts, including Kryptonite and I Can Love Anyone (As Long As It's You). Just recently, Anson wrapped up his own 15 show headline tour across Europe, the UK, and Ireland and as summer approaches, he plans to release more singles which will lead into a full-length album. Along with each single will be a visualizer that helps tell each story so beautifully</td>
-                  <td>August 31, 2023 7:00pm</td>
-                  <td>The Filinvest Tent Manila</td>
-                  <td>2,950</td>
-                  <td><button className="btn bg-success text-light px-3 my-0 my-lg-2 mx-3 mx-lg-0"><i className="fa-solid fa-pen-to-square"></i></button><button className="btn bg-danger text-light px-3"><i className="fa-solid fa-trash-can"></i></button></td>
-                </tr>
+                {
+                  isLoading 
+                  ?
+                  <tr>
+                    <td colSpan="8"><center><LoadingIcon /></center></td>
+                  </tr>
+                  : (
+                    concerts.length 
+                    ? 
+                    concerts.map((concert, index) => 
+                    <tr key={index}>
+                      <th scope="row">{concert.id}</th>
+                      <td>{concert.title}</td>
+                      <td>{concert.posterImageUrl}</td>
+                      <td>{concert.description}</td>
+                      <td>{concert.eventDate}</td>
+                      <td>{concert.eventPlace}</td>
+                      <td>{concert.ticketPrice}</td>
+                      <td>
+                        <button className="btn btn-success">
+                          <i className="fa-solid fa-pen-to-square"></i></button>
+                        <button className="btn btn-danger"><i className="fa-solid fa-trash"></i></button>
+                      </td>
+                    </tr>) 
+                    : 
+                    <tr>
+                      <td colSpan="8" className="text-center">No data found</td>
+                    </tr>
+                  )
+                }
+
               </tbody>
               <tfoot className="table-dark border-light">
                 <tr>
-                  <th>ID</th>
-                  <th>Title</th>
-                  <th>ImageURL</th>
-                  <th>Description</th>
-                  <th>Event Date</th>
-                  <th>Place</th>
-                  <th>Ticket Price</th>
-                  <th>Action</th>
+                  <th scope="col">ID</th>
+                  <th scope="col">Title</th>
+                  <th scope="col">ImageURL</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Event Date</th>
+                  <th scope="col">Event Place</th>
+                  <th scope="col">Ticket Price</th>
+                  <th scope="col">Action</th>
                 </tr>
               </tfoot>
             </table>

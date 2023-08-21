@@ -2,13 +2,14 @@ import { useFormik } from "formik"
 import * as Yup from 'yup'
 import "./CreateConcertModal.css"
 import { Toast } from "bootstrap"
+import axios from "axios"
 
 function CreateConcertModal() {
 
   const formik = useFormik({
     initialValues: {
-      concertTitle: '',
-      concertPhoto: '',
+      title: '',
+      posterImageUrl: '',
       description: '',
       eventDate: '',
       eventPlace: '',
@@ -16,24 +17,50 @@ function CreateConcertModal() {
     },
 
     validationSchema: Yup.object({
-      concertTitle: Yup.string().required("Concert title is required"),
-      concertPhoto: Yup.string().required("Concert Poster is required"),
+      title: Yup.string().required("Concert title is required"),
+      posterImageUrl: Yup.string().required("Concert Poster is required"),
       description: Yup.string().required("Concert Description is required"),
       eventDate: Yup.string().required("Event date is required"),
       eventPlace: Yup.string().required("Event place title is required"),
       ticketPrice: Yup.number().integer("Must be a number").positive("Must be positive number").required("Ticket Price is required"),
     }),
 
-    onSubmit: (value) => {
+    onSubmit: async (value) => {
       console.log(value)
-      new Toast(document.getElementById('concertToast')).show()
+
+      try {
+        const res = await axios.post('http://localhost:8000/api/v1/concerts', {
+          title: value.title,
+          posterImageUrl: value.posterImageUrl,
+          description: value.description,
+          eventDate: value.eventDate,
+          eventPlace: value.eventPlace,
+          ticketPrice: value.ticketPrice,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
+        }
+          
+        )
+
+        console.log(res)
+  
+        if (res.status === 201) {
+          new Toast(document.getElementById('concertToast')).show()
+        }
+      } catch (err) {
+        new Toast(document.getElementById('errorToast')).show()
+      }
     },
   })
 
   return (
     <>      
       <div className="modal fade" 
-        id="create-concert-modal" 
+        id="create-concert-modal"
+        data-bs-backdrop="static" 
         data-bs-keyboard="true" 
         tabIndex="-1" 
         aria-labelledby="create-concert-modal" 
@@ -51,12 +78,22 @@ function CreateConcertModal() {
                 aria-label="Close">
                   <i className="fa-solid fa-xmark fa-2xl"></i></button>
             </div>
-            <div className="modal-body">
+            <div className="modal-body text-start">
               <div className="toast-container position-fixed top-0 end-0 pe-3 pt-5 mt-3 ">
                 <div id="concertToast" className="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
                   <div className="d-flex">
                     <div className="toast-body">
                       Concert Added Successfully !
+                    </div>
+                    <button type="button" className="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                  </div>
+                </div>
+              </div>
+              <div className="toast-container position-fixed top-0 end-0 pe-3 pt-5 mt-3 ">
+                <div id="errorToast" className="toast align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                  <div className="d-flex">
+                    <div className="toast-body">
+                      Something went wrong.
                     </div>
                     <button type="button" className="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
                   </div>
@@ -68,35 +105,35 @@ function CreateConcertModal() {
                 onSubmit={formik.handleSubmit}
                 noValidate>
                 <div className="mb-1">
-                  <label htmlFor="concertTitle" className="form-label">Title:</label>
+                  <label htmlFor="title" className="form-label">Title:</label>
                   <input type="text" 
-                    id="concertTitle" 
-                    className={formik.errors.concertTitle && formik.touched.concertTitle ? "is-invalid form-control" : "form-control"} 
+                    id="title" 
+                    className={formik.errors.title && formik.touched.title ? "is-invalid form-control" : "form-control"} 
                     placeholder="Enter concert title"
-                    value={formik.values.concertTitle}
+                    value={formik.values.title}
                     onBlur={formik.handleBlur}
                     onChange={formik.handleChange} />
                   {
-                    formik.errors.concertTitle && formik.touched.concertTitle 
+                    formik.errors.title && formik.touched.title 
                     ? 
-                    <span className="text-danger">{formik.errors.concertTitle}</span> 
+                    <span className="text-danger">{formik.errors.title}</span> 
                     : 
                     null
                   }
                 </div>
                 <div className="mb-1">
-                  <label htmlFor="concertPhoto" className="form-label">Upload Photo:</label>
+                  <label htmlFor="posterImageUrl" className="form-label">Upload Photo:</label>
                   <input type="file" 
-                    id="concertPhoto"
+                    id="posterImageUrl"
                     accept="image/*"  
-                    className={formik.errors.concertPhoto && formik.touched.concertPhoto ? "is-invalid form-control" : "form-control"} 
-                    value={formik.values.concertPhoto}
+                    className={formik.errors.posterImageUrl && formik.touched.posterImageUrl ? "is-invalid form-control" : "form-control"} 
+                    value={formik.values.posterImageUrl}
                     onBlur={formik.handleBlur}
                     onChange={formik.handleChange} />
                   {
-                    formik.errors.concertPhoto && formik.touched.concertPhoto 
+                    formik.errors.posterImageUrl && formik.touched.posterImageUrl 
                     ? 
-                    <span className="text-danger">{formik.errors.concertPhoto}</span> 
+                    <span className="text-danger">{formik.errors.posterImageUrl}</span> 
                     : 
                     null
                   }

@@ -9,6 +9,17 @@ function BookingsTable() {
 
   const table = () => {
     new DataTable ('#bookings-table',{
+        ajaxSource: "http://localhost:8000/api/v1/bookings",
+        columns: [
+          {data: "id"},
+          {data: "customerId"},
+          {data: "concertId"},
+          {data: "seatPosition"},
+          {data: "noOfTickets"},
+          {data: "totalPrice"},
+        ],
+        // processing: true,
+        // serverSide: true,
         dom: '<"d-flex justify-content-between flex-wrap-reverse gap-2 ms-1 me-1 mx-lg-1"Bl<"ms-1 me-1 me-lg-5"f>><"mx-1 px-0"rt><"d-flex justify-content-between px-2 px-lg-5"ip><"clear">',
         destroy: true,
         responsive: false,
@@ -145,7 +156,7 @@ function BookingsTable() {
                   <th>Seat Position</th>
                   <th>No. of Tickets</th>
                   <th>Total Price</th>
-                  <th>Action</th>
+                  {/* <th>Action</th> */}
                 </tr>
               </thead>
               <tbody className="table-light border-dark">
@@ -158,7 +169,7 @@ function BookingsTable() {
                   <th>Seat Position</th>
                   <th>No. of Tickets</th>
                   <th>Total Price</th>
-                  <th>Action</th>
+                  {/* <th>Action</th> */}
                 </tr>
               </tfoot>
             </table>

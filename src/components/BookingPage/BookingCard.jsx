@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Modal, Toast } from 'bootstrap';
 import { useFormik } from 'formik';
 import React, { useEffect, useState } from 'react';
 import * as Yup from 'yup'
@@ -25,10 +26,9 @@ function BookingCard ({id}) { //ConcertCard props
 
     onSubmit: (value) => {
       console.log(value)
+      new Toast(document.getElementById('bookingToast')).show()
     }
   })
-
-
 
   const [concert, setConcert] = useState({
     title: '',
@@ -93,7 +93,7 @@ function BookingCard ({id}) { //ConcertCard props
                     Ticket Price: </span><i className="fa-solid fa-peso-sign me-1"></i>
                     {concert.ticketPrice}</h5>
               </div>
-              <form onSubmit={formik.handleSubmit} noValidate>
+              <form onSubmit={formik.handleSubmit} autoComplete='off' noValidate>
                 <div className="d-flex mb-2 col-md-6 column">
                   <label htmlFor="ticketItem" className='form-label me-3'>Number of Tickets:</label>
                   <div className='row col'>
@@ -147,6 +147,16 @@ function BookingCard ({id}) { //ConcertCard props
           </div>
         </div>
       </div>
+      <div className="toast-container position-fixed top-0 end-0 p-3">
+          <div id="bookingToast" className="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div className="d-flex">
+              <div className="toast-body">
+                Tickets successfully booked !
+              </div>
+              <button type="button" className="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+          </div>
+        </div>
     </>
   )
 }

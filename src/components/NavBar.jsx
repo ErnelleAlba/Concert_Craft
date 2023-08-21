@@ -15,7 +15,7 @@ function NavBar() {
   const fetchConcert = async () => {
 
     const res = await axios('http://localhost:8000/api/v1/concerts')
-    console.log(res)
+    // console.log(res)
     dispatch(setConcerts(res.data.data.map(
       concert => {
         return {

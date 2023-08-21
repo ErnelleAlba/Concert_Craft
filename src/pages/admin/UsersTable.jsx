@@ -5,11 +5,28 @@ import AdminPanelHeader from "../../components/AdminPanel/AdminPanelHeader"
 import AdminPanelSideNav from "../../components/AdminPanel/AdminPanelSideNav"
 import "./UsersTable.css"
 import { useEffect } from "react"
+import { useSelector } from "react-redux"
+import LoadingIcon from "../../components/LoadingIcon"
 
 function UsersTable() {
+    const customers = useSelector(state => state.customers)
+    const isLoading = useSelector(state => state.isLoading)
 
     const table = () => {
         new DataTable ('#customers-table',{
+            ajaxSource: 'http://localhost:8000/api/v1/customers',
+            columns: [
+                {data: "id"},
+                {data: "firstName"},
+                {data: "lastName"},
+                {data: "age"},
+                {data: "email"},
+                {data: "password"},
+                {data: "phone"},
+                {data: "address"},
+            ],
+            // processing: true,
+            // serverSide: true,
             dom: '<"d-flex justify-content-between flex-wrap-reverse gap-2 ms-1 me-1 mx-lg-1"Bl<"ms-1 me-1 me-lg-5"f>><"mx-1 px-0"rt><"d-flex justify-content-between px-2 px-lg-5"ip><"clear">',
             destroy: true,
             responsive: false,
@@ -119,8 +136,9 @@ function UsersTable() {
         //     }
         // ]
         
-    });
-  }
+        });
+    }
+
 
     useEffect(() => {
         table()
@@ -145,12 +163,32 @@ function UsersTable() {
                                     <th>Last Name</th>
                                     <th>Age</th>
                                     <th>Email</th>
+                                    <th>Password</th>
                                     <th>Phone</th>
                                     <th>Address</th>
-                                    <th>Action</th>
+                                    {/* <th>Action</th> */}
                                 </tr>
                             </thead>
                             <tbody className="table-light border-dark">
+                                {/* {
+                                    isLoading 
+                                    ? 
+                                    <LoadingIcon/> 
+                                    : 
+                                    customers.map(
+                                        (customer, index) => 
+                                            <tr key={index}>
+                                                <td>{customer.id}</td>
+                                                <td>{customer.firstName}</td>
+                                                <td>{customer.lastName}</td>
+                                                <td>{customer.age}</td>
+                                                <td>{customer.email}</td>
+                                                <td>{customer.password}</td>
+                                                <td>{customer.address}</td>
+                                                <td><button className="btn bg-success text-light px-3 my-0 my-lg-2 mx-3 mx-lg-0"><i className="fa-solid fa-pen-to-square"></i></button><button className="btn bg-danger text-light px-3"><i className="fa-solid fa-trash-can"></i></button></td>
+                                            </tr>
+                                        )
+                                } */}
                             </tbody>
                             <tfoot className="table-dark border-light">
                                 <tr>
@@ -159,9 +197,10 @@ function UsersTable() {
                                     <th>Last Name</th>
                                     <th>Age</th>
                                     <th>Email</th>
+                                    <th>Password</th>
                                     <th>Phone</th>
                                     <th>Address</th>
-                                    <th>Action</th>
+                                    {/* <th>Action</th> */}
                                 </tr>
                             </tfoot>
                         </table>

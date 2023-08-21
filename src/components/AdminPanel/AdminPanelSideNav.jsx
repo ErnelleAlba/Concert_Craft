@@ -1,8 +1,62 @@
 import { Link, NavLink } from "react-router-dom"
 import "./AdminPanelSideNav.css"
-
+import axios from "axios"
+import { useEffect } from "react"
+import { useDispatch } from "react-redux"
+import { setCustomers } from "../../store/customersReducers"
+import { markLoading, unmarkLoading } from "../../store/isLoadingReducers"
+import { setConcerts } from "../../store/concertsReducers"
 
 function AdminPanelSideNav() {
+  const dispatch = useDispatch();
+
+  const fetchCustomers = async () => {
+    const res = await axios('http://localhost:8000/api/v1/customers')
+    // console.log(res)
+    dispatch(setCustomers(res.data.data.map(
+      customer => {
+        return {
+          id: customer.id,
+          firstName: customer.firstName,
+          lastName: customer.lastName,
+          age: customer.age,
+          email: customer.email,
+          password: customer.password,
+          phone: customer.phone,
+          address: customer.address
+        }
+      }
+    )))
+    dispatch(unmarkLoading())
+  }
+
+  const fetchConcerts = async () => {
+
+    const res = await axios('http://localhost:8000/api/v1/concerts')
+    // console.log(res)
+    dispatch(setConcerts(res.data.data.map(
+      concert => {
+        return {
+          id: concert.id,
+          title: concert.title,
+          posterImageUrl: concert.posterImageUrl,
+          description: concert.description,
+          eventPlace: concert.eventPlace,
+          eventDate: concert.eventDate,
+          ticketPrice: concert.ticketPrice,
+        }
+      }
+    )))
+    dispatch(unmarkLoading())
+  }
+
+  useEffect(() => {
+    dispatch(markLoading());
+    fetchCustomers();
+    fetchConcerts()
+  }, [])
+
+
   return (
     <>
       <div className="d-flex flex-wrap ms-0 col-md-4 col-lg-4 col-xl-2 ">
