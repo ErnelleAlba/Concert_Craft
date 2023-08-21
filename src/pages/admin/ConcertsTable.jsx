@@ -1,7 +1,7 @@
 import DataTable from "datatables.net-autofill-bs5"
 import pdfMake from 'pdfmake/build/pdfmake.min.js'
 import 'pdfmake/build/vfs_fonts.js'
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import AdminPanelHeader from "../../components/AdminPanel/AdminPanelHeader"
 import AdminPanelSideNav from "../../components/AdminPanel/AdminPanelSideNav"
 import CreateConcertModal from "../../components/AdminPanel/CreateConcertModal";
@@ -11,155 +11,12 @@ import LoadingIcon from "../../components/LoadingIcon"
 import { setConcerts } from "../../store/concertsReducers"
 import { markLoading, unmarkLoading } from "../../store/isLoadingReducers"
 import axios from "axios"
+import EditConcertModal from "../../components/AdminPanel/EditConcertModal"
 
 function ConcertsTable() {
   const concerts = useSelector(state => state.concerts)
   const isLoading = useSelector(state => state.isLoading)
-  
-  // const table = () => {
-
-  //   new DataTable ('#concerts-table',{
-  //       ajaxSource: "http://localhost:8000/api/v1/concerts",
-  //       columns: [
-  //         {data: "id"},
-  //         {data: "title"},
-  //         {data: "posterImageUrl"},
-  //         {data: "description"},
-  //         {data: "eventDate"},
-  //         {data: "eventPlace"},
-  //         {data: "ticketPrice"},
-  //       ],
-  //       // processing: true,
-  //       // serverSide: true,
-  //       dom: '<"d-flex justify-content-between flex-wrap-reverse gap-2 ms-1 me-1 mx-lg-1"Bl<"ms-1 me-1 me-lg-5"f>><"mx-1 px-0"rt><"d-flex justify-content-between px-2 px-lg-5"ip><"clear">',
-  //       destroy: true,
-  //       responsive: {
-  //         details: {
-  //           display: DataTable.Responsive.display.modal({
-  //               header: function (row) {
-  //                   var data = row.data();
-  //                   return 'Details for ' + data[1];
-  //               }
-  //           }),
-  //           renderer: DataTable.Responsive.renderer.tableAll({
-  //               tableClass: 'table'
-  //           })
-  //         }
-  //       },
-  //       paging: false,
-  //       scrollCollapse: true,
-  //       scrollY: '63vh',
-  //       scrollX: true,
-  //       // scroller: true,
-  //       fixedHeader: true,
-  //       select: true,
-  //       language: {
-  //           decimal: '.',
-  //           thousands: ',',
-  //           searchPanes: {
-  //               clearMessage: 'Clear All',
-  //               collapse: 'Filter',
-  //           }
-  //       },
-  //       buttons: [
-  //           {
-  //           extend: 'searchPanes',
-  //           config: {
-  //             cascadePanes: true,
-  //             responsive: true,
-  //             viewTotal: true,
-  //             collapse: false,
-  //             controls: true,
-  //             layout: 'columns-1',
-  //             initCollapsed: true,
-  //             orderable: true,
-  //             i18n: {
-  //               title: {
-  //                 _: 'Filters Selected - %d',
-  //                 0: 'No Filters Selected',
-  //                 1: 'One Filter Selected'
-  //               },
-  //               count: '{total} found',
-  //               countFiltered: '{shown} found',
-  //               emptyMessage: "</i></b>EMPTY</b></i>",
-  //               emptyPanes: 'There are no panes to display. :/',
-  //               loadMessage: 'Loading filtering options...'
-  //             },
-  //           },
-  //       }, 'colvis', 
-  //       {
-  //         extend: 'copy',
-  //         key: {
-  //           key: 'c',
-  //           altkey: true
-  //         }
-  //       },
-  //           {
-  //             extend: 'print',
-  //             title:  'Ticket Buyers',
-  //             key: {
-  //                 key: 'p',
-  //                 altkey: true
-  //             }
-  //           },
-  //           {
-  //             extend: 'pdfHtml5',
-  //             // messageTop: 'Title string',
-  //             text: 'Save in PDF',
-  //             // orientation: 'landscape',
-  //             title:  'Concerts List',
-  //             pageSize: 'A3',
-  //             download: 'open',
-  //             exportOptions: {
-  //                 modifier: {
-  //                     page: 'current'
-  //                 },
-  //                 footer: true,
-  //             }
-  //           }, 
-  //           {
-  //             extend: 'excelHtml5',
-  //             text: 'Save in Excel',
-  //             title:  'Concerts List',
-  //             // messageTop: '',
-  //             // messageBottom:'',
-  //             autoFilter: true,
-  //             exportOptions: {
-  //                 modifier: {
-  //                     page: 'current',
-  //                     header: true,
-  //                     footer: true,
-  //                 }
-  //             }
-  //           },
-  //           {
-  //             extend: 'csvHtml5',
-  //             text: 'Save in CSV',
-  //             title:  'Concerts List',
-  //             exportOptions: {
-  //                 modifier: {
-  //                     page: 'current'
-  //                 }
-  //             }
-  //           },
-  //           {
-  //             text: 'Add Concert',
-  //             action: function ( e, dt, node, config ) {
-  //               new Modal(document.getElementById('create-concert-modal')).show() ;
-  //             }
-  //           }  
-  //       ],
-  //   // columnDefs: [
-  //   //     {
-  //   //         searchPanes: {
-  //   //             orderable: true
-  //   //         },
-  //   //         targets: [0,1,2,]
-  //   //     }
-  //   // ]
-    
-  // });
-  // }
+  const [concertId, setConcertId] = useState(null)
 
   const dispatch = useDispatch();
 
@@ -184,6 +41,16 @@ function ConcertsTable() {
 
     dispatch(unmarkLoading())
     // console.log(e.target.value)
+  }
+
+  const handleOnClickDelete = async (concertId) => {
+    await axios.delete(`http://localhost:8000/api/v1/concerts/${concertId}`)
+    // console.log(concertId)
+    window.location.reload(true)
+  }
+
+  const handleOnClickEdit = (concertId) => {
+    setConcertId(concertId)
   }
 
   useEffect(() => {
@@ -233,7 +100,7 @@ function ConcertsTable() {
                   : (
                     concerts.length 
                     ? 
-                    concerts.map((concert, index) => 
+                    concerts.map((concert, index) =>
                     <tr key={index}>
                       <th scope="row">{concert.id}</th>
                       <td>{concert.title}</td>
@@ -243,9 +110,13 @@ function ConcertsTable() {
                       <td>{concert.eventPlace}</td>
                       <td>{concert.ticketPrice}</td>
                       <td>
-                        <button className="btn btn-success">
+                        <button className="btn btn-success" data-bs-toggle="modal" data-bs-target="#edit-concerts-modal" onClick={() => handleOnClickEdit(concert.id)}>
                           <i className="fa-solid fa-pen-to-square"></i></button>
-                        <button className="btn btn-danger"><i className="fa-solid fa-trash"></i></button>
+                          
+                          <EditConcertModal id={concertId} />
+                          
+                        <button className="btn btn-danger" onClick={() => handleOnClickDelete(concert.id)}><i className="fa-solid fa-trash"></i></button>
+                        
                       </td>
                     </tr>) 
                     : 
@@ -269,6 +140,7 @@ function ConcertsTable() {
                 </tr>
               </tfoot>
             </table>
+
           </div>
         </center>
       </div>
