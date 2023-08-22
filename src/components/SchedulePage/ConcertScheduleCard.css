@@ -1,6 +1,6 @@
 .concert-details-schedule {
   display: -webkit-box;
-  -webkit-line-clamp: 6;
+  -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -31,4 +31,13 @@
   background-color: #f2a7d1;
   outline: 2px solid #21c9e1;
   outline-offset: 2px;
+}
+
+@media (max-width: 760px) {
+  .book-now-btn {
+    color: white;
+    background-color: #f2a7d1;
+    outline: 2px solid #21c9e1;
+    outline-offset: 2px;
+  }
 }

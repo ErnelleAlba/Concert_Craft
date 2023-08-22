@@ -11,7 +11,7 @@ function AdminPanelSideNav() {
   const dispatch = useDispatch();
 
   const fetchCustomers = async () => {
-    const res = await axios('http://localhost:8000/api/v1/customers')
+    const res = await axios('http://localhost:8000/api/v1/users')
     // console.log(res)
     dispatch(setCustomers(res.data.data.map(
       customer => {

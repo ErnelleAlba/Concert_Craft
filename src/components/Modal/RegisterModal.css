@@ -9,7 +9,7 @@ input[type="checkbox"] {
 }
 
 @media (max-width: 580px) {
-  #registerModal {
+  #registerModalLabel {
     width: 90vw !important;
     padding-left: 7vw;
     padding-right: 0;

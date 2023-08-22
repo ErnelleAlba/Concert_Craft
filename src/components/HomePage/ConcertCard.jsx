@@ -1,11 +1,17 @@
+import { useEffect } from "react"
 import BookingPage from "../../pages/BookingPage"
 import "./ConcertCard.css"
 
-function ConcertCard ({concert:{id, title, posterImageUrl}} ) { //ConcertCard props
+function ConcertCard ({concert: {id, title, posterImageUrl} }) { //ConcertCard props
   
+  useEffect(() => {
+    console.log(id)
+  }, [])
+  
+
   return (
     <>
-      <div key={`concert-${id}`} className="concert-box col-6 col-xxl-2 col-md-4">
+      <div className="concert-box col-6 col-xxl-2 col-md-4">
         <img 
           src={posterImageUrl} 
           alt={title} 

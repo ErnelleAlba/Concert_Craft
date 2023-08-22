@@ -19,7 +19,7 @@ function ScheduleBooking() {
   return (
     <>
       <NavBar />
-        <div className="container-fluid schedule-title-container" >
+        <div className="schedule-title-container" >
           <h1>Scheduled Concerts</h1>
           <h3>Upcoming Concerts</h3>
         </div>

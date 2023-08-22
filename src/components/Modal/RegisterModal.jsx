@@ -1,41 +1,34 @@
 import "./RegisterModal.css"
-import { useEffect } from "react"
-import "./LoginModal.css"
 import { useFormik } from "formik";
 import * as Yup from "yup"
 import { Toast } from 'bootstrap';
+import axios from 'axios';
 
 function RegisterModal() {
   const removeScroll = (e) => e.target.blur();
-
-  
-
-  useEffect(() =>{
-    
-  }, [])
 
   const formik = useFormik({
     initialValues: {
       firstName: '',
       lastName: '',
-      username: '',
+      usernameReg: '',
       email: '',
       phone: '',
       age: '',
       role: 'regular',
       confirmPass: '',
-      password: '',
+      passwordReg: '',
       address: ''
     },
 
     validationSchema: Yup.object({
       firstName: Yup.string().required("This field is required"),
       lastName: Yup.string().required("This field is required"),
-      username: Yup.string().required("This field is required"),
+      usernameReg: Yup.string().required("This field is required"),
       email: Yup.string().required("Email is required"),
       phone: Yup.number().required("This field is required"),
       age: Yup.number().required("This field is required").min(18),
-      password: Yup.string().required("This field is required").oneOf([Yup.ref('password'), null], 'Password must match!'),
+      passwordReg: Yup.string().required("This field is required").oneOf([Yup.ref('passwordRegister'), null], 'Password must match!'),
       confirmPass: Yup.string().required("This field is required"),
       address: Yup.string().required("This field is required"),
     }),
@@ -46,12 +39,12 @@ function RegisterModal() {
           const res = await axios.post('http://localhost:8000/api/v1/users', {
             firstName: value.firstName,
             lastName: value.lastName,
-            username: value.username,
+            username: value.usernameReg,
             email: value.email,
-            phone: value.email,
+            phone: value.phone,
             age: value.age,
             role: 'regular',
-            password: value.password,
+            password: value.passwordReg,
             address: value.address,
           },
           {
@@ -65,7 +58,7 @@ function RegisterModal() {
           console.log(res)
     
           if (res.status === 201) {
-            new Toast(document.getElementById('RegusterSuccesfullyToast')).show()
+            new Toast(document.getElementById('RegisterSuccesfullyToast')).show()
           }
         } catch (err) {
           new Toast(document.getElementById('RegisterErrorToast')).show()
@@ -74,17 +67,13 @@ function RegisterModal() {
   })
 
   return (
-    <> <div className="modal fade" id="registerModal" data-bs-backdrop="static" tabIndex="-1" aria-labelledby="registerModal" aria-hidden="true">
+    <>
+      <div className="modal fade" id="registerModal" aria-labelledby="registerModalLabel" aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content bg-transparent">
             <div className="modal-header">
-              <h1 className="modal-title fs-5" id="registerModal">Register Form</h1>
-              <button 
-                type="button" 
-                className="btn-close" 
-                data-bs-dismiss="modal" 
-                aria-label="Close">
-              </button>
+              <h1 className="modal-title fs-5" id="registerModalLabel">Register Form</h1>
+              <button type="button" className="btn py-2" data-bs-dismiss="modal" aria-label="Close"><i className="fa-solid fa-xmark fa-2xl " style={{color: "#ffffff"}}></i></button>
             </div>
             <div className="kard user-login modal-body">
               <form className="row g-3 needs-validation" 
@@ -94,24 +83,29 @@ function RegisterModal() {
                   <label htmlFor="firstName" className="form-label text-white">First name</label>
                   <input
                     type="text" 
-                    className={formik.errors.title && formik.touched.title 
+                    className={formik.errors.firstName && formik.touched.firstName
                       ? 
                       "is-invalid form-control" 
                       : 
                       "form-control"}
                     id="firstName" 
                     value={formik.values.firstName}
+                    onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
                     />
-                        {
-                          formik.errors.firstName && <span className="text-danger">{formik.errors.firstName}</span>
-                        }
+                    {
+                      formik.errors.firstName && formik.touched.firstName
+                      ? 
+                      <span className="text-danger">{formik.errors.firstName}</span> 
+                      : 
+                      null
+                    }
                 </div>
                 <div className="col-md-6">
                   <label htmlFor="lastName" className="form-label text-white">Last name</label>
                   <input
                     type="text" 
-                    className={formik.errors.title && formik.touched.title 
+                    className={formik.errors.lastName && formik.touched.lastName 
                       ? 
                       "is-invalid form-control" 
                       : 
@@ -119,33 +113,43 @@ function RegisterModal() {
                     id="lastName" 
                     value={formik.values.lastName}
                     onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                     />
-                        {
-                          formik.errors.lastName && <span className="text-danger">{formik.errors.lastName}</span>
-                        }
+                    {
+                      formik.errors.lastName && formik.touched.lastName
+                      ? 
+                      <span className="text-danger">{formik.errors.lastName}</span> 
+                      : 
+                      null
+                    }
                 </div>
                 <div className="col-md-6">
-                  <label htmlFor="username" className="form-label text-white">Username</label>
+                  <label htmlFor="usernameRegister" className="form-label text-white">Username</label>
                   <input
                     type="text" 
-                    className={formik.errors.title && formik.touched.title 
+                    className={formik.errors.usernameReg && formik.touched.usernameReg
                       ? 
                       "is-invalid form-control" 
                       : 
                       "form-control"}
-                    id="username" 
-                    value={formik.values.username}
+                    id="usernameRegister" 
+                    value={formik.values.usernameReg}
                     onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                     />
-                        {
-                          formik.errors.username && <span className="text-danger">{formik.errors.username}</span>
-                        }
+                    {
+                      formik.errors.usernameReg && formik.touched.usernameReg
+                      ? 
+                      <span className="text-danger">{formik.errors.usernameReg}</span> 
+                      : 
+                      null
+                    }
                 </div>
                 <div className="col-md-6">
                   <label htmlFor="email" className="form-label text-white">Email Address</label>
                   <input
                     type="email" 
-                    className={formik.errors.title && formik.touched.title 
+                    className={formik.errors.email && formik.touched.email 
                       ? 
                       "is-invalid form-control" 
                       : 
@@ -153,10 +157,15 @@ function RegisterModal() {
                     id="email" 
                     value={formik.values.email}
                     onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                     />
-                        {
-                          formik.errors.email && <span className="text-danger">{formik.errors.email}</span>
-                        }
+                    {
+                      formik.errors.email && formik.touched.email
+                      ? 
+                      <span className="text-danger">{formik.errors.email}</span> 
+                      : 
+                      null
+                    }
                 </div>
                 <div className="col-md-6">
                   <label htmlFor="phone" className="form-label text-white">Phone No.</label>
@@ -170,11 +179,16 @@ function RegisterModal() {
                       id="phone" 
                       value={formik.values.phone}
                       onChange={formik.handleChange}
-                      onWheel={removeScroll} 
+                      onWheel={removeScroll}
+                      onBlur={formik.handleBlur}
                       />
-                        {
-                          formik.errors.phone && <span className="text-danger">{formik.errors.phone}</span>
-                        }
+                    {
+                      formik.errors.phone && formik.touched.phone
+                      ? 
+                      <span className="text-danger">{formik.errors.phone}</span> 
+                      : 
+                      null
+                    }
                 </div>
                 <div className="col-md-6">
                   <label htmlFor="age" className="form-label text-white">Age</label>
@@ -189,30 +203,41 @@ function RegisterModal() {
                       value={formik.values.age}
                       onChange={formik.handleChange}
                       onWheel={removeScroll} 
+                      onBlur={formik.handleBlur}
                       />
-                        {
-                          formik.errors.age && <span className="text-danger">{formik.errors.age}</span>
-                        }
+                    {
+                      formik.errors.age && formik.touched.age
+                      ? 
+                      <span className="text-danger">{formik.errors.age}</span> 
+                      : 
+                      null
+                    }
                 </div>
                 <div className="col-md-12">
-                  <label htmlFor="password" className="form-label text-white">Password</label>
+                  <label htmlFor="passwordRegister" className="form-label text-white">Password</label>
                   <input 
                     type="password" 
-                    className={formik.errors.password && formik.touched.password 
+                    className={formik.errors.passwordReg && formik.touched.passwordReg
                       ? 
                       "is-invalid form-control" 
                       : 
                       "form-control"} 
-                    id="password" 
-                    value={formik.values.password}
+                    id="passwordRegister" 
+                    value={formik.values.passwordReg}
                     onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+
                     />
-                        {
-                          formik.errors.passwordreg && <span className="text-danger">{formik.errors.passwordreg}</span>
-                        }
+                    {
+                      formik.errors.passwordReg && formik.touched.passwordReg
+                      ? 
+                      <span className="text-danger">{formik.errors.passwordReg}</span> 
+                      : 
+                      null
+                    }
                 </div>
                 <div className="col-md-12">
-                  <label htmlFor="password" className="form-label text-white">Confirm Password</label>
+                  <label htmlFor="confirmPass" className="form-label text-white">Confirm Password</label>
                   <input 
                     type="password" 
                     className={formik.errors.confirmPass && formik.touched.confirmPass 
@@ -223,10 +248,15 @@ function RegisterModal() {
                     id="confirmPass" 
                     value={formik.values.confirmPass}
                     onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                     />
-                        {
-                          formik.errors.confirmPass && <span className="text-danger">{formik.errors.confirmPass}</span>
-                        }
+                    {
+                      formik.errors.confirmPass && formik.touched.confirmPass
+                      ? 
+                      <span className="text-danger">{formik.errors.confirmPass}</span> 
+                      : 
+                      null
+                    }
                 </div>
                 <div className="col-md-12">
                   <label htmlFor="address" className="form-label text-white">Address</label>
@@ -240,10 +270,16 @@ function RegisterModal() {
                     id="address" 
                     value={formik.values.address}
                     onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+
                     />
-                        {
-                          formik.errors.address && <span className="text-danger">{formik.errors.address}</span>
-                        }
+                    {
+                      formik.errors.address && formik.touched.address
+                      ? 
+                      <span className="text-danger">{formik.errors.address}</span> 
+                      : 
+                      null
+                    }
                 </div>
                 <div className="col-12">
                   <div className="form-check">
@@ -256,32 +292,29 @@ function RegisterModal() {
                     <label className="form-check-label text-white" htmlFor="invalidCheck">
                       Agree to terms and conditions
                     </label>
-                    <div className="invalid-feedback">
+                    {/* <div className="invalid-feedback">
                       You must agree before submitting.
-                    </div>
+                    </div> */}
                   </div>
                 </div>
                 <div className="col-12">
-                  <input 
-                    type="submit" 
-                    id="registerbtn" 
-                    name="register_submit" 
-                    value="Register Account" 
-                    className="btn btn-primary me-3"/>
-                  <button 
-                    className="btn btn-secondary" 
+                  <button type="submit"
+                  className="btn btn-primary me-3">
+                    Register Account
+                  </button>
+                  <button
+                    className="btn btn-secondary"
                     data-bs-toggle="modal" 
                     data-bs-target="#loginModal"
-                    >Back to Login</button>
+                  >Back to Login</button>
                 </div>
               </form>
-
             </div>
           </div>
         </div>
       </div>
       <div className="toast-container position-fixed bottom-0 end-0 p-3">
-        <div id="RegusterSuccesfullyToast" className="toast bg-success" role="alert" aria-live="assertive" aria-atomic="true">
+        <div id="RegisterSuccesfullyToast" className="toast bg-success" role="alert" aria-live="assertive" aria-atomic="true">
           <div className="toast-header bg-success text-light">
             <strong className="me-auto">Register Successfully!</strong>
             <small>1 seconds ago</small>

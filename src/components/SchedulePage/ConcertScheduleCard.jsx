@@ -7,13 +7,13 @@ function ConcertScheduleCard ({concertCard:{id, title, posterImageUrl, descripti
 
   return (
     <>
-      <div className="card shadow d-flex flex-column col-md-5 m-2">
+      <div className="card shadow d-flex flex-column col-xl-5 col-lg-10 col-md-10 col-sm-9 m-2 pb-2 pb-lg-0">
         <div className="row no-gutters ">
           <div className="col-md-5 ">
             <img src={posterImageUrl} className="img-fluid rounded border border-black" alt={title} />
           </div>
-          <div className="col-md-7 ps-3 ps-lg-1 pe-2 py-1 pb-3 pb-lg-0">
-            <div className="card-body text-start">
+          <div className="col-md-7 ps-3 ps-lg-1 pe-2 py-1">
+            <div className="card-body text-start pb-2 pb-xl-4">
               <h2 className="card-title col-md-12">{title}</h2>
               <p className="card-text col-md-12 concert-details-schedule">{description}</p>
               <p className="card-text">

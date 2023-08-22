@@ -15,7 +15,7 @@ function NavBar() {
   const fetchConcert = async () => {
 
     const res = await axios('http://localhost:8000/api/v1/concerts')
-    // console.log(res)
+    console.log(res)
     dispatch(setConcerts(res.data.data.map(
       concert => {
         return {
@@ -40,6 +40,8 @@ function NavBar() {
   return (
     <>
       <header>
+      <LoginModal/>
+      <RegisterModal/>
         <nav className="navbar navbar-expand-md bg-light pt-0 mb-5">
           <div className="container-fluid p-0">
             <div className="navbar-brand me-0">
@@ -106,19 +108,18 @@ function NavBar() {
                       </NavLink>
                   </li>
                   <li className="nav-item">
-                    <a 
+                    <a
                       className="nav-link" 
                       data-bs-toggle="modal" 
-                      data-bs-target="#loginModal" 
-                      id="login-btn">
-                      Login
-                    </a>
+                      data-bs-target="#loginModal"
+                      id="login-btn"
+                      role="button"
+                    >Login</a>
                   </li>
                 </ul>
               </div>
             </div>
-            <LoginModal/>
-            <RegisterModal />
+
           </div>
         </nav>
       </header>

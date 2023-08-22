@@ -3,6 +3,7 @@ import * as Yup from 'yup'
 import "./AdminLogin.css"
 import logo from "/Concert-Craft-Logo-Transparent.png"
 import { useEffect } from "react"
+import axios from "axios"
 
 function AdminLogin() {
   const formik = useFormik({
@@ -13,19 +14,31 @@ function AdminLogin() {
     },
 
     validationSchema: Yup.object({
-      adminUsername: Yup.string().required("Username is required").matches(/^(admin|ADMIN)$/g, "Nice Try"),
-      adminPassword: Yup.string().required("Password is required").matches(/^(1234)$/g, "Nice Try")
+      adminUsername: Yup.string().required("Username is required").matches(/^(admin-user)$/g, "Nice Try"),
+      adminPassword: Yup.string().required("Password is required").matches(/^(admin12345)$/g, "Nice Try")
     }),
 
-    onSubmit: (value) => {
+    onSubmit: async (value) => {
       console.log(value)
+
+      const res = await axios.post('http://localhost:8000/api/v1/login', {
+        username: value.adminUsername,
+        password: value.adminPassword,
+        role: 'admin',
+      },
+      {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      }
+      )
+      console.log(res)
       window.location.href="/admin/dashboard"
     },
   })
 
   useEffect(() =>{
       document.title = "Admin Login | Concert Craft"
-
   }, [])
 
   return (

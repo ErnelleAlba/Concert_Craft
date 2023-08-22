@@ -1,6 +1,4 @@
-import RegisterModal from "./RegisterModal"
 import logo from "/Concert-Craft-Logo-Transparent.png"
-import { useEffect } from "react"
 import "./LoginModal.css"
 import { useFormik } from "formik"
 import * as Yup from "yup"
@@ -48,13 +46,14 @@ function LoginModal() {
 
   return (
     <>
-      <div className="modal fade" id="loginModal" data-bs-keyboard="true" tabIndex="-1" aria-labelledby="loginModal" aria-hidden="true">
+      <div className="modal fade" id="loginModal" aria-labelledby="loginModalLabel" aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content bg-transparent">
             <div className="modal-header">
-              <h3 className="modal-title">Login</h3>
-              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-              <div className="kard user-login">
+              <h3 className="modal-title" id="loginModalLabel">Login</h3>
+              <button type="button" className="btn py-2" data-bs-dismiss="modal" aria-label="Close"><i className="fa-solid fa-xmark fa-2xl " style={{color: "#ffffff"}}></i></button>
+            </div>
+            <div className="kard user-login">
               <img src={logo} alt="Concert-Craft-Logo" className="card-img-top" />
 
               <div className="card-body">
@@ -65,84 +64,96 @@ function LoginModal() {
                   >
                   <div className="row">
                     <div className="col-md-4">
-                      <label style={{color:"white"}}>Email: </label>
+                      <label className="form-label text-white">Username: </label>
                     </div>
                     <div className="col-md-8">
                       <input 
                         type="text" 
                         id="username" 
-                        className="form-control" 
+                        className={formik.errors.username && formik.touched.username
+                          ? 
+                          "is-invalid form-control" 
+                          : 
+                          "form-control"} 
                         placeholder="Enter Username" 
                         value={formik.values.username}
                         onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
                         />
                         {
-                          formik.errors.username && <span className="text-danger">{formik.errors.username}</span>
+                          formik.errors.username && formik.touched.username
+                          ? 
+                          <span className="text-danger">{formik.errors.username}</span> 
+                          : 
+                          null
                         }
-                        
                     </div>
                     <br/><br/>
                     <div className="col-md-4">
-                      <label style={{color:"white"}}>Password: </label>
+                      <label className="form-label text-white">Password: </label>
                     </div>
                     <div className="col-md-8">
                       <input 
                         type="password" 
-                        className="form-control" 
+                        className={formik.errors.password && formik.touched.password
+                          ? 
+                          "is-invalid form-control" 
+                          : 
+                          "form-control"} 
                         id="password" 
                         value={formik.values.password}
                         onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
                         placeholder="Enter Password" 
                         />
                         {
-                          formik.errors.password && <span className="text-danger">{formik.errors.password}</span>
+                          formik.errors.password && formik.touched.password
+                          ? 
+                          <span className="text-danger">{formik.errors.password}</span> 
+                          : 
+                          null
                         }
                     </div>
                     <br/><br/><br/>
                   </div>
                   <div className="col-12">
-                  <center>
-                    <input 
-                      type="submit" 
-                      id="inputbtn" 
-                      name="login_submit" 
-                      value="Login" 
-                      className="btn btn-primary w-100"/>
-                      <br />
-                      <br />
-                  <button 
-                    className="btn btn-success w-100" 
-                    data-bs-toggle="modal" 
-                    data-bs-target="#registerModal"
-                    >Register</button>
-                  </center>
+                    <center>
+                      <button type="submit" className="btn btn-primary w-100 mb-2">
+                          Login
+                      </button>
+                    <button
+                      className="btn btn-success w-100" 
+                      data-bs-toggle="modal" 
+                      data-bs-target="#registerModal"
+                      >Register</button>
+                    </center>
                   </div>
                 </form>
               </div>
-                  </div>
-                </div>
-              </div>
             </div>
-            <div className="toast-container position-fixed bottom-0 end-0 p-3">
-            <div id="LoginSuccessToast" className="toast bg-success" role="alert" aria-live="assertive" aria-atomic="true">
-              <div className="toast-header bg-success text-light">
-                <strong className="me-auto">Login Successfully!</strong>
-                <small>1 seconds ago</small>
-                <button type="button" className="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-              </div>
-             </div>
-            </div> 
-        
-            <div className="toast-container position-fixed top-0 end-0 pe-3 pt-5 mt-3 ">
-                <div id="LoginErrorToast" className="toast align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
-                  <div className="d-flex">
-                    <div className="toast-body">
-                      Something went wrong.
-                    </div>
-                    <button type="button" className="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-                  </div>
-                </div>
-              </div>
+          </div>
+        </div>
+      </div>
+      <div className="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="LoginSuccessToast" className="toast bg-success" role="alert" aria-live="assertive" aria-atomic="true">
+          <div className="toast-header bg-success text-light">
+            <strong className="me-auto">Login Successfully!</strong>
+            <small>1 seconds ago</small>
+            <button type="button" className="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+        </div>
+      </div> 
+          
+      <div className="toast-container position-fixed top-0 end-0 pe-3 pt-5 mt-3 ">
+        <div id="LoginErrorToast" className="toast align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
+          <div className="d-flex">
+            <div className="toast-body">
+              Something went wrong.
+            </div>
+            <button type="button" className="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+        </div>
+      </div>
     </>
   )
 }

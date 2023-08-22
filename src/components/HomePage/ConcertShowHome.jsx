@@ -3,15 +3,16 @@ import { Link } from "react-router-dom"
 import "./ConcertShowHome.css"
 import LoadingIcon from "../LoadingIcon";
 import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 
 function ConcertShowHome() {
   const concerts = useSelector(state => state.concerts)
   const isLoading = useSelector(state => state.isLoading)
+  const [concertHome, setConcertHome] = useState([])
 
-  const concertHome = []
-  for (let i = 0; i <= 5; i++) {
-    concertHome.push(concerts[i]) 
-  }
+  useEffect(() => {
+    setConcertHome(concerts.slice(0,6))
+  }, [concerts])
   // console.log(concertHome)
 
   return (

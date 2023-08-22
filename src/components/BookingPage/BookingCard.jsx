@@ -45,7 +45,7 @@ function BookingCard ({id}) { //ConcertCard props
     // console.log(concertInfo)
     const concertObj = {
       title: concertInfo.title,
-      posterImageUrl: concertInfo.posterImageUrl,
+      posterImageUrl: concertInfo.posterImageUrl.replace('storage','http://localhost:8000/storage'),
       description: concertInfo.description,
       eventDate: concertInfo.eventDate,
       eventPlace: concertInfo.eventPlace,
