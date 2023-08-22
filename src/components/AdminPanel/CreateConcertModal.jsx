@@ -3,8 +3,10 @@ import * as Yup from 'yup'
 import "./CreateConcertModal.css"
 import { Toast } from "bootstrap"
 import axios from "axios"
+import { useSelector } from "react-redux"
 
 function CreateConcertModal() {
+  const token = useSelector(state => state.token)
 
   const formik = useFormik({
     initialValues: {
@@ -40,16 +42,17 @@ function CreateConcertModal() {
           
           {
             headers: {
-              'Content-Type': 'multipart/form-data'
+              'Content-Type': 'multipart/form-data',
+              'Authorization': `Bearer ${token}`
             }
           }
-          
         )
 
         console.log(res)
   
         if (res.status === 201) {
           new Toast(document.getElementById('concertToast')).show()
+          window.location.reload(true)
         }
       } catch (err) {
         new Toast(document.getElementById('errorToast')).show()

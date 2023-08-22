@@ -3,14 +3,17 @@ import LoginModal from "./Modal/LoginModal"
 import "./NavBar.css"
 import logo from "/Concert-Craft-Logo-Transparent.png"
 import RegisterModal from "./Modal/RegisterModal"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import axios from "axios"
 import { setConcerts } from "../store/concertsReducers"
 import { useEffect } from "react"
 import { markLoading, unmarkLoading } from "../store/isLoadingReducers"
+import { setUser } from "../store/loggedInUserReducers"
+import { setToken } from "../store/tokenReducers"
 
 function NavBar() {
   const dispatch = useDispatch();
+  const loggedInUser = useSelector(state => state.loggedInUser)
 
   const fetchConcert = async () => {
 
@@ -30,6 +33,12 @@ function NavBar() {
       }
     )))
     dispatch(unmarkLoading())
+  }
+
+  const logout = () => {
+    dispatch(setUser(null));
+    dispatch(setToken(''))
+    window.location.reload(true)
   }
 
   useEffect(() => {
@@ -106,13 +115,24 @@ function NavBar() {
                       </NavLink>
                   </li>
                   <li className="nav-item">
-                    <a
+                  {
+                    loggedInUser ?  
+                    <a href="" 
                       className="nav-link" 
-                      data-bs-toggle="modal" 
-                      data-bs-target="#loginModal"
                       role="button"
-                    >Login</a>
+                      onClick={logout}
+                    > Logout</a>
+                    :
+                    <a
+                    className="nav-link" 
+                    data-bs-toggle="modal" 
+                    data-bs-target="#loginModal"
+                    role="button"
+                  >Login</a> 
+                  }
+
                   </li>
+
                 </ul>
               </div>
             </div>

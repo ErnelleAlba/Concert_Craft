@@ -1,17 +1,25 @@
 import axios from 'axios';
-import { Modal, Toast } from 'bootstrap';
+import { Alert, Toast } from 'bootstrap';
 import { useFormik } from 'formik';
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import * as Yup from 'yup'
 
 
 const seatOptions = [
-  { value: "VIP Seat", label: "VIP Seat" },
-  { value: "Premium Seat", label: "Premium Seat" },
-  { value: "Regular Seat", label: "Regular Seat" },
+  { value: "vip_seat", name: "VIP Seat" },
+  { value: "premium_seat", name: "Premium Seat" },
+  { value: "regular_seat", name: "Regular Seat" },
 ];
 
 function BookingCard ({id}) { //ConcertCard props
+
+  const token = useSelector(state => state.token)
+
+  const totalAmount = () => {
+    return formik.values.ticketItem * concert.ticketPrice
+  }
+
 
   const formik = useFormik({
     initialValues: {
@@ -24,9 +32,34 @@ function BookingCard ({id}) { //ConcertCard props
       seatValue: Yup.string().required("Seat Position is required"),
     }),
 
-    onSubmit: (value) => {
+    onSubmit: async (value) => {
       console.log(value)
-      new Toast(document.getElementById('bookingToast')).show()
+
+      try {
+        const res = await axios.post('http://localhost:8000/api/v1/bookings',
+          {
+            concertId: id,
+            seatPosition: value.seatValue,
+            noOfTickets: value.ticketItem,
+            totalPrice: totalAmount(),
+          },
+          {
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+              'Authorization': `Bearer ${token}`
+            }
+          }
+        )
+        console.log(res)
+        // console.log(value.seatValue)
+        if (res.status === 201) {
+          new Toast(document.getElementById("bookingToast")).show
+        }
+      } catch (err) {
+        console.log(err)
+      }
+      
+
     }
   })
 
@@ -53,10 +86,6 @@ function BookingCard ({id}) { //ConcertCard props
     }
 
     setConcert(concertObj)
-  }
-
-  const totalAmount = () => {
-    return formik.values.ticketItem * concert.ticketPrice
   }
 
   useEffect(() => {
@@ -107,7 +136,7 @@ function BookingCard ({id}) { //ConcertCard props
                           : 
                           "form-control"
                       }  
-                    id="ticketItem"
+                    id={`ticketItem-${id}`}
                     value={formik.values.ticketItem}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
@@ -131,32 +160,33 @@ function BookingCard ({id}) { //ConcertCard props
                       formik.setFieldValue("seatValue", e.target.value)
                     }}
                   >
-                    {seatOptions.map((option) => (
+                    {seatOptions.map((option) => 
                       <option key={option.value} value={option.value}>
-                        {option.label}
+                        {option.name}
                       </option>
-                    ))}
+                    )}
                   </select>
                 </div>
                 <p>You selected: {formik.values.seatValue}</p>
                 <h4 className="pb-1">Total Amount: <i className="fa-solid fa-peso-sign text-danger me-1"></i><span className='text-danger'>{totalAmount()}</span></h4>
                 <button type="submit" className="btn btn-dark btn-lg btn-block col-md-12 text-light mt-2"><i className="fa-solid fa-ticket me-2"></i> Book your tickets</button>
               </form>
+              <div className="toast-container position-fixed top-0 end-0 p-3 mt-5 m">
+                <div id="bookingToast" className="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                  <div className="d-flex">
+                    <div className="toast-body">
+                      Tickets successfully booked !
+                    </div>
+                    <button type="button" className="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                  </div>
+                </div>
+              </div>
               <br />
             </div>
           </div>
         </div>
       </div>
-      <div className="toast-container position-fixed top-0 end-0 p-3">
-          <div id="bookingToast" className="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
-            <div className="d-flex">
-              <div className="toast-body">
-                Tickets successfully booked !
-              </div>
-              <button type="button" className="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-          </div>
-        </div>
+
     </>
   )
 }

@@ -2,28 +2,64 @@ import { Link, NavLink } from "react-router-dom"
 import "./AdminPanelSideNav.css"
 import axios from "axios"
 import { useEffect } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { setCustomers } from "../../store/customersReducers"
 import { markLoading, unmarkLoading } from "../../store/isLoadingReducers"
 import { setConcerts } from "../../store/concertsReducers"
+import { setToken } from "../../store/tokenReducers"
+import { setBooking } from "../../store/bookingsReducers"
 
 function AdminPanelSideNav() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
+  const token = useSelector(state => state.token)
+
+  const fetchBookings = async () => {
+    const res = await axios('http://localhost:8000/api/v1/bookings',
+      {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      }
+    )
+    // console.log(res)
+    dispatch(setBooking(res.data.data.map(
+      booking => {
+        return {
+          id: booking.id,
+          userId: booking.userId,
+          username: booking.userInfo.username,
+          concertId: booking.concertId,
+          concertTitle: booking.concertInfo.title,
+          seatPosition: booking.seatPosition,
+          noOfTickets: booking.noOfTickets,
+          totalPrice: booking.totalPrice,
+        }
+      }
+    )))
+    dispatch(unmarkLoading())
+  }
 
   const fetchCustomers = async () => {
-    const res = await axios('http://localhost:8000/api/v1/users')
+    const res = await axios('http://localhost:8000/api/v1/users',
+      {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      }
+    )
     // console.log(res)
     dispatch(setCustomers(res.data.data.map(
-      customer => {
+      user => {
         return {
-          id: customer.id,
-          firstName: customer.firstName,
-          lastName: customer.lastName,
-          age: customer.age,
-          email: customer.email,
-          password: customer.password,
-          phone: customer.phone,
-          address: customer.address
+          id: user.id,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          age: user.age,
+          username: user.username,
+          email: user.email,
+          password: user.password,
+          phone: user.phone,
+          address: user.address
         }
       }
     )))
@@ -50,10 +86,17 @@ function AdminPanelSideNav() {
     dispatch(unmarkLoading())
   }
 
+  const logout = () => {
+    dispatch(setUser(null));
+    dispatch(setToken(''));
+  }
+
   useEffect(() => {
-    dispatch(markLoading());
-    fetchCustomers();
+    dispatch(markLoading())
+    fetchCustomers()
     fetchConcerts()
+    fetchBookings()
+    console.log(token)
   }, [])
 
 
@@ -74,13 +117,13 @@ function AdminPanelSideNav() {
                   <NavLink className="nav-link"  id="admin-nav" to="/admin/concerts"><i className="fa-solid fa-music me-0 me-md-3 me-lg-3"></i><span className="d-md-inline d-none">Concerts List</span></NavLink>
                 </li>
                 <li className="nav-item py-1 py-sm-0">
-                  <NavLink className="nav-link px-0"  id="admin-nav" to="/admin/users"><i className="fa-solid fa-user ms-1 me-0 me-md-3 me-lg-3"></i><span className="d-md-inline d-none">Customers List</span></NavLink>
+                  <NavLink className="nav-link px-0"  id="admin-nav" to="/admin/users"><i className="fa-solid fa-user ms-1 me-0 me-md-3 me-lg-3"></i><span className="d-md-inline d-none">Users List</span></NavLink>
                 </li>
               </ul>
           </div>
           
             <div className="nav-item py-1 py-sm-0 mb-5 w-100 logout-btn">
-              <Link className="nav-link logout-btn"  id="admin-nav" to="/admin"><i className="fa-solid fa-right-from-bracket me-0 me-md-3 me-lg-3"></i><span className="d-md-inline d-none">Log Out</span></Link>
+              <Link className="nav-link logout-btn" onClick={logout} id="admin-nav" to="/admin"><i className="fa-solid fa-right-from-bracket me-0 me-md-3 me-lg-3"></i><span className="d-md-inline d-none">Log Out</span></Link>
             </div>
           
         </div>

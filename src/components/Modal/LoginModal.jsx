@@ -4,10 +4,15 @@ import { useFormik } from "formik"
 import * as Yup from "yup"
 import { Toast } from 'bootstrap';
 import axios from 'axios';
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "../../store/loggedInUserReducers";
+import { setToken } from "../../store/tokenReducers";
+import { setUserId } from "../../store/userIdReducers";
 
 
 function LoginModal() {
-  
+  const dispatch = useDispatch();
+  const loggedInUser = useSelector(state => state.loggedInUser);
 
   const formik = useFormik({
     initialValues: {
@@ -23,26 +28,34 @@ function LoginModal() {
       console.log(value)
 
         try {
-        const res = await axios.post('http://localhost:8000/api/v1/login', {
-          username: value.username,
-          password: value.password,
-        },
-        {
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
+          const res = await axios.post('http://localhost:8000/api/v1/login', {
+            username: value.username,
+            password: value.password,
+          },
+          {
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            }
           }
-        }
-        )
-        console.log(res)
-      
-        if (res.status === 201) {
-          new Toast(document.getElementById('LoginSuccessToast')).show()
-        }
+          )
+          console.log(res)
+          console.log(res.data.user.token)
+        
+          if (res.data.success === true) {
+            dispatch(setUser(res.data.user))
+            dispatch(setToken(res.data.user.token))
+            dispatch(setUserId(res.data.user.id))
+            new Toast(document.getElementById('LoginSuccessToast')).show()
+          } else {
+            new Toast(document.getElementById('LoginErrorToast')).show()
+          }
       } catch (err) {
-        new Toast(document.getElementById('LoginErrortoast')).show()
+        console.log(err)
+        new Toast(document.getElementById('LoginErrorToast')).show()
       }
     },
     })
+
 
   return (
     <>
@@ -117,14 +130,19 @@ function LoginModal() {
                   </div>
                   <div className="col-12">
                     <center>
-                      <button type="submit" className="btn btn-primary w-100 mb-2">
+                      <button 
+                        type="submit" 
+                        className="btn btn-primary w-100 mb-2"
+                        data-bs-dismiss={!loggedInUser && "modal"} 
+                        aria-label={!loggedInUser && "Close"} 
+                      >
                           Login
                       </button>
-                    <button
+                    <a role="button"
                       className="btn btn-success w-100" 
                       data-bs-toggle="modal" 
                       data-bs-target="#registerModal"
-                      >Register</button>
+                      >Register</a>
                     </center>
                   </div>
                 </form>
@@ -135,21 +153,21 @@ function LoginModal() {
       </div>
 
 
-      <div className="toast-container position-fixed bottom-0 end-0 p-3">
+      <div className="toast-container position-fixed top-0 end-0 pe-3 pt-5 ">
         <div id="LoginSuccessToast" className="toast bg-success" role="alert" aria-live="assertive" aria-atomic="true">
           <div className="toast-header bg-success text-light">
             <strong className="me-auto">Login Successfully!</strong>
-            <small>1 seconds ago</small>
             <button type="button" className="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
           </div>
         </div>
       </div> 
           
-      <div className="toast-container position-fixed top-0 end-0 pe-3 pt-5 mt-3 ">
+      <div className="toast-container position-fixed top-0 end-0 pe-3 pt-5">
         <div id="LoginErrorToast" className="toast align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
           <div className="d-flex">
             <div className="toast-body">
-              Something went wrong.
+              Username and Password does not match or
+              Username doesn't exist 
             </div>
             <button type="button" className="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
           </div>

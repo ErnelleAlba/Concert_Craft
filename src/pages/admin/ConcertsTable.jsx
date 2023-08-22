@@ -12,6 +12,8 @@ import EditConcertModal from "../../components/AdminPanel/EditConcertModal"
 function ConcertsTable() {
   const concerts = useSelector(state => state.concerts)
   const isLoading = useSelector(state => state.isLoading)
+  const token = useSelector(state => state.token)
+
   const [concertId, setConcertId] = useState(null)
 
   const dispatch = useDispatch();
@@ -40,7 +42,13 @@ function ConcertsTable() {
   }
 
   const handleOnClickDelete = async (concertId) => {
-    await axios.delete(`http://localhost:8000/api/v1/concerts/${concertId}`)
+    await axios.delete(`http://localhost:8000/api/v1/concerts/${concertId}`,
+      {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      }
+    )
     // console.log(concertId)
     window.location.reload(true)
   }
@@ -61,16 +69,15 @@ function ConcertsTable() {
         <AdminPanelSideNav />
         <center className="pt-3 users-table-container">
           <h1 className="text-uppercase fw-bold mb-2">Concerts Table</h1>
-          <div className="w-100 mt-2">
-            <div className="d-flex justify-content-start ms-2 mb-2">
+             <div className="d-flex justify-content-start ms-2 mb-2">
               <button className="btn btn-dark" data-bs-toggle="modal" data-bs-target="#create-concert-modal">Add Concert</button>
               <CreateConcertModal />
               <div className="d-flex align-items-center bg-dark rounded py-1 px-2 ms-2 ">
-                <label htmlFor="search-form" className="col text-light">Search:</label>
-                <input type="text" id="search-form" className="form-control" onChange={handleOnChange}/>
+                <label htmlFor="search-form" className="col text-light me-3">Search:</label>
+                <input type="text" id="search-form" className="form-control search-concert" onChange={handleOnChange}/>
               </div>
-              
-            </div>
+            </div>         
+          <div className="w-100 mt-2 admin-table">
             <table id="concerts-table" 
             className="table table-bordered border border-dark table-striped table-hover" 
             style={{width:"100%"}}>

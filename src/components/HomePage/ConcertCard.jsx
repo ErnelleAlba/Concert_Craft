@@ -1,13 +1,9 @@
-import { useEffect } from "react"
+import { useSelector } from "react-redux"
 import BookingPage from "../../pages/BookingPage"
 import "./ConcertCard.css"
 
 function ConcertCard ({concert: {id, title, posterImageUrl} }) { //ConcertCard props
-  
-  useEffect(() => {
-    console.log(id)
-  }, [])
-  
+  const loggedInUser = useSelector(state => state.loggedInUser)
 
   return (
     <>
@@ -26,10 +22,25 @@ function ConcertCard ({concert: {id, title, posterImageUrl} }) { //ConcertCard p
         </a>
         <div className="concert-info d-none d-lg-block">
           <h3>{title}</h3>
-          <a href="#" data-bs-toggle="modal" data-bs-target={`#bookingModal-${id}`} id="booking-btn">
-            <i className="fa-solid fa-ticket me-2"></i> 
-            Book a seat
-          </a>
+          {
+            loggedInUser 
+            ?           
+            <a id="booking-btn"
+            data-bs-toggle="modal" 
+            data-bs-target={`#bookingModal-${id}`}
+            role="button">
+              <i className="fa-solid fa-ticket me-2"></i> 
+              Book a seat
+            </a>
+            :
+            <a id="booking-btn" 
+            data-bs-toggle="modal" 
+            data-bs-target="#loginModal" 
+            role="button">
+              <i className="fa-solid fa-ticket me-2"></i> 
+              Book a seat
+            </a> 
+          }
         </div>
         <BookingPage key={id} id={id} />
       </div>

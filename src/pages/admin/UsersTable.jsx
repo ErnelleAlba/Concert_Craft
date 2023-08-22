@@ -2,16 +2,69 @@ import AdminPanelHeader from "../../components/AdminPanel/AdminPanelHeader"
 import AdminPanelSideNav from "../../components/AdminPanel/AdminPanelSideNav"
 import "./UsersTable.css"
 import { useEffect } from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import LoadingIcon from "../../components/LoadingIcon"
+import axios from "axios"
+import { setCustomers } from "../../store/customersReducers"
+import { markLoading, unmarkLoading } from "../../store/isLoadingReducers"
 
 function UsersTable() {
     const customers = useSelector(state => state.customers)
     const isLoading = useSelector(state => state.isLoading)
+    const token = useSelector(state => state.token)
+    const dispatch = useDispatch();
+
+
+    const handleOnChange = async (e) => {
+        dispatch(markLoading())
+    
+        const resUsername = await axios(`http://localhost:8000/api/v1/users?username=${e.target.value}`,
+        {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        
+        dispatch(setCustomers(resUsername.data.data.map(
+            user => {
+                return {
+                    id: user.id,
+                    firstName: user.firstName,
+                    lastName: user.lastName,
+                    age: user.age,
+                    username: user.username,
+                    email: user.email,
+                    password: user.password,
+                    phone: user.phone,
+                    address: user.address
+            }
+            }
+        )))
+    
+        dispatch(unmarkLoading())
+        // console.log(e.target.value)
+    }
+
+    const handleUserDelete = async (userId) => {
+        // console.log(userId)
+        try {
+                    await axios.delete(`http://localhost:8000/api/v1/users/${userId}`,
+            {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            }
+        )
+        window.location.reload(true)
+        }   catch (err) {
+            console.log(err)
+        }
+
+    }
 
 
     useEffect(() => {
-        document.title = "Customers table | Admin"
+        document.title = "Users table | Admin"
     }, [])
 
     return (
@@ -20,8 +73,14 @@ function UsersTable() {
             <div className="container-fluid d-flex flex-nowrap users-table-wrapper">
                 <AdminPanelSideNav />
                 <center className="pt-3 users-table-container">
-                    <h1 className="text-uppercase fw-bold mb-2">Customers Table</h1>
-                    <div className="w-100 mt-2">
+                    <h1 className="text-uppercase fw-bold mb-2">Users Table</h1>
+                    <div className="d-flex justify-content-start ms-2 mb-2 search-bar">
+                        <div className="d-flex align-items-center bg-dark rounded py-1 px-2 ms-2 ">
+                            <label htmlFor="search-form" className="col text-light me-2">Search by username:</label>
+                            <input type="text" id="search-form" className="form-control" onChange={handleOnChange}/>
+                        </div>
+                    </div>
+                    <div className="w-100 mt-2 admin-table">
                         <table id="customers-table" 
                         className="table table-bordered  border border-dark table-striped table-hover" 
                         style={{width:"100%"}}>
@@ -31,6 +90,7 @@ function UsersTable() {
                                     <th>First Name</th>
                                     <th>Last Name</th>
                                     <th>Age</th>
+                                    <th>Username</th>
                                     <th>Email</th>
                                     <th>Password</th>
                                     <th>Phone</th>
@@ -43,24 +103,25 @@ function UsersTable() {
                                     isLoading 
                                     ? 
                                     <tr>
-                                        <td colSpan="8"><center><LoadingIcon /></center></td>
+                                        <td colSpan="10"><center><LoadingIcon /></center></td>
                                     </tr>
                                     : 
                                     (
                                         customers.length 
                                         ? 
                                         customers.map(
-                                            (customer, index) => 
+                                            (user, index) => 
                                                 <tr key={index}>
-                                                    <td>{customer.id}</td>
-                                                    <td>{customer.firstName}</td>
-                                                    <td>{customer.lastName}</td>
-                                                    <td>{customer.age}</td>
-                                                    <td>{customer.email}</td>
-                                                    <td>{customer.password}</td>
-                                                    <td>{customer.phone}</td>
-                                                    <td>{customer.address}</td>
-                                                    <td><button className="btn bg-success text-light px-3 my-0 my-lg-2 mx-3 mx-lg-0"><i className="fa-solid fa-pen-to-square"></i></button><button className="btn bg-danger text-light px-3"><i className="fa-solid fa-trash-can"></i></button></td>
+                                                    <th scope="row" >{user.id}</th>
+                                                    <td>{user.firstName}</td>
+                                                    <td>{user.lastName}</td>
+                                                    <td>{user.age}</td>
+                                                    <td>{user.username}</td>
+                                                    <td>{user.email}</td>
+                                                    <td>{user.password}</td>
+                                                    <td>{user.phone}</td>
+                                                    <td>{user.address}</td>
+                                                    <td><button className="btn bg-danger text-light px-3" onClick={() => {handleUserDelete(user.id)}}><i className="fa-solid fa-trash-can"></i></button></td>
                                                 </tr>
                                             )
                                         : 
@@ -76,6 +137,7 @@ function UsersTable() {
                                     <th>First Name</th>
                                     <th>Last Name</th>
                                     <th>Age</th>
+                                    <th>Username</th>
                                     <th>Email</th>
                                     <th>Password</th>
                                     <th>Phone</th>

@@ -1,9 +1,11 @@
+import { useSelector } from "react-redux"
 import BookingPage from "../../pages/BookingPage"
 import "./ConcertScheduleCard.css"
 
 
 
 function ConcertScheduleCard ({concertCard:{id, title, posterImageUrl, description, eventDate, eventPlace, ticketPrice}} ) { //ConcertCard props
+  const loggedInUser = useSelector(state => state.loggedInUser)
 
   return (
     <>
@@ -32,7 +34,28 @@ function ConcertScheduleCard ({concertCard:{id, title, posterImageUrl, descripti
                   Time: <span className="ms-1">
                     {eventDate.split("-")[1]}</span></small></p>
               <div className="card-text text-danger"><i className="fa-solid fa-peso-sign me-1"></i>{ticketPrice}
-              <a className="book-now-btn align-content-end" data-bs-toggle="modal" data-bs-target={`#bookingModal-${id}`} id="booking-btn"><i className="fa-solid fa-ticket me-2"></i>Book Now!</a></div>
+                {
+                  loggedInUser 
+                  ?           
+                  <a className="book-now-btn align-content-end" 
+                  data-bs-toggle="modal" 
+                  data-bs-target={`#bookingModal-${id}`} 
+                  id="booking-btn"
+                  role="button">
+                    <i className="fa-solid fa-ticket me-2"></i>
+                    Book Now!
+                  </a>
+                  :
+                  <a className="book-now-btn align-content-end" 
+                  data-bs-toggle="modal" 
+                  data-bs-target="#loginModal" 
+                  id="booking-btn"
+                  role="button">
+                    <i className="fa-solid fa-ticket me-2"></i>
+                    Book Now!
+                  </a>
+                }
+              </div>
               <BookingPage key={id} id={id} />
             </div>
           </div>

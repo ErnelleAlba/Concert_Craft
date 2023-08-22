@@ -1,3 +1,21 @@
+.admin-table {
+  overflow-y: scroll;
+  height: 77vh;
+  width: 100%;
+}
+
+table {
+  border-collapse: collapse;
+}
+thead > tr > th {
+  position: sticky;
+  top: 0;
+}
+
+tfoot > tr > th {
+  position: sticky;
+  bottom: 0;
+}
 .users-table-wrapper {
   padding: 0 !important;
 }
@@ -7,77 +25,23 @@
   width: 83.3vw;
 }
 
-.table-body {
-  max-height: calc(100vh - 20%);
-}
-
 /* ===== Scrollbar CSS ===== */
 /* Firefox */
-.dataTables_scrollBody {
+.admin-table {
   scrollbar-width: auto;
   scrollbar-color: #212529 rgba(255, 255, 255, 0.18);
 }
 
 /* Chrome, Edge, and Safari */
-.dataTables_scrollBody::-webkit-scrollbar {
+.admin-table::-webkit-scrollbar {
   width: 16px;
 }
 
-.dataTables_scrollBody::-webkit-scrollbar-track {
+.admin-table::-webkit-scrollbar-track {
   background: rgba(255, 255, 255, 0.18);
 }
 
-.dataTables_scrollBody::-webkit-scrollbar-thumb {
-  background-color: #212529;
-  border-radius: 10px;
-  border: 3px double #ffffff;
-}
-
-.dropdown-menu {
-  width: 16.7vw !important;
-  top: -8vh !important;
-  left: -16.7vw !important;
-  background-color: #262b34 !important;
-  color: #ffffff !important;
-  max-height: fit-content;
-}
-
-.dropdown-item {
-  color: #ffffff !important;
-}
-
-.dropdown-item:hover {
-  color: #262b34 !important;
-  background-color: #ffffff !important;
-}
-
-div.dtsp-searchPane div.dataTables_wrapper div.dataTables_scrollBody {
-  max-height: 200px !important;
-  height: 200px !important;
-  width: 100%;
-}
-
-div.dtsp-searchPanes {
-  max-height: 83vh;
-  overflow: hidden;
-  overflow-y: scroll;
-  padding-right: 10px;
-  /* Firefox */
-  scrollbar-width: auto;
-  scrollbar-color: #212529 #ffffff;
-}
-
-/* Chrome, Edge, and Safari */
-div.dtsp-searchPanes::-webkit-scrollbar {
-  width: 14px;
-}
-
-div.dtsp-searchPanes::-webkit-scrollbar-track {
-  background: #ffffff;
-  border-radius: 10px;
-}
-
-div.dtsp-searchPanes::-webkit-scrollbar-thumb {
+.admin-table::-webkit-scrollbar-thumb {
   background-color: #212529;
   border-radius: 10px;
   border: 3px double #ffffff;
@@ -88,33 +52,6 @@ div.dtsp-searchPanes::-webkit-scrollbar-thumb {
 fieldset:disabled .btn {
   color: black !important;
   background-color: gray !important;
-}
-
-/* [type="button"]:not(:disabled),
-[type="reset"]:not(:disabled),
-[type="submit"]:not(:disabled),
-button:not(:disabled) {
-  background-color: white;
-} */
-
-div.dtsp-panesContainer button.btn-subtle.disabled.clearButton {
-  background-color: gray !important;
-}
-
-div.dtsp-panesContainer button.btn-subtle.clearButton {
-  background: white !important;
-  color: #ffffff;
-}
-
-div.dtsp-panesContainer
-  div.dtsp-searchPane
-  div.dtsp-topRow
-  button.dtsp-nameButton,
-div.dtsp-panesContainer
-  div.dtsp-searchPane
-  div.dtsp-topRow
-  button.dtsp-countButton {
-  background-color: #ffffff !important;
 }
 
 .btn-group > .btn-group:not(:last-child) > .btn,
@@ -128,42 +65,12 @@ div.dtsp-panesContainer
   background-color: #262b34 !important;
 }
 
-div.dataTables_wrapper div.dataTables_filter label {
-  font-weight: bold !important;
-  background-color: #262b34;
-  color: #ffffff;
-  padding: 7px 10px;
-  border-radius: 10px;
-}
-
-div.dataTables_wrapper div.dataTables_filter label input {
-  margin-left: 10px;
-}
-
-@media (max-width: 1199px) {
-  .dropdown-menu {
-    width: 33vw !important;
-    left: -33vw !important;
-  }
-}
-
-@media (max-width: 767px) {
-  .users-table-container {
-    max-width: 90vw;
+@media (max-width: 560px) {
+  #search-form {
+    width: 60vw;
   }
 
-  .dataTables_scrollBody {
-    max-height: 49vh !important;
-  }
-
-  .dropdown-menu {
-    top: -7vh !important;
-    width: 65vw !important;
-    left: -12vw !important;
-  }
-
-  div.dataTables_wrapper div.dataTables_filter label input {
-    width: 63vw;
-    margin-left: 10px;
+  .search-concert {
+    width: 40vw !important;
   }
 }

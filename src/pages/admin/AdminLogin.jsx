@@ -4,8 +4,14 @@ import "./AdminLogin.css"
 import logo from "/Concert-Craft-Logo-Transparent.png"
 import { useEffect } from "react"
 import axios from "axios"
+import { Toast } from "bootstrap"
+import { useDispatch } from "react-redux"
+import { setUser } from "../../store/loggedInUserReducers"
+import { setToken } from "../../store/tokenReducers"
 
 function AdminLogin() {
+  const dispatch = useDispatch();
+
   const formik = useFormik({
 
     initialValues: {
@@ -14,26 +20,40 @@ function AdminLogin() {
     },
 
     validationSchema: Yup.object({
-      adminUsername: Yup.string().required("Username is required").matches(/^(admin-user)$/g, "Nice Try"),
-      adminPassword: Yup.string().required("Password is required").matches(/^(admin12345)$/g, "Nice Try")
+      adminUsername: Yup.string().required("Username is required"),
+      adminPassword: Yup.string().required("Password is required")
     }),
 
     onSubmit: async (value) => {
       console.log(value)
 
-      const res = await axios.post('http://localhost:8000/api/v1/login', {
-        username: value.adminUsername,
-        password: value.adminPassword,
-        role: 'admin',
-      },
-      {
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
+      try {
+        const res = await axios.post('http://localhost:8000/api/v1/login', {
+            username: value.adminUsername,
+            password: value.adminPassword,
+          },
+          {
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            }
+          }
+        )
+
+        console.log(res)
+
+        if (res.data.user.role === "admin") {
+          dispatch(setToken(res.data.user.token))
+          window.location.href="/admin/dashboard"
+        } else {
+          dispatch(setUser(null));
+          new Toast(document.getElementById('adminLoginErrorToast')).show()
         }
+
+      } catch (err) {
+        console.log(err)
+        new Toast(document.getElementById('adminLoginErrorToast')).show()
+
       }
-      )
-      console.log(res)
-      window.location.href="/admin/dashboard"
     },
   })
 
@@ -112,6 +132,16 @@ function AdminLogin() {
             </div>
           </div>
         </center>
+      </div>
+      <div className="toast-container position-fixed top-0 end-0 pe-3 pt-5">
+        <div id="adminLoginErrorToast" className="toast align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
+          <div className="d-flex">
+            <div className="toast-body">
+              Wrong Username and Password
+            </div>
+            <button type="button" className="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+        </div>
       </div>
     </>
   )

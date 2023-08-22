@@ -27,9 +27,9 @@ function RegisterModal() {
       usernameReg: Yup.string().required("This field is required"),
       email: Yup.string().required("Email is required"),
       phone: Yup.number().required("This field is required"),
-      age: Yup.number().required("This field is required").min(18),
-      passwordReg: Yup.string().required("This field is required").oneOf([Yup.ref('passwordRegister'), null], 'Password must match!'),
-      confirmPass: Yup.string().required("This field is required"),
+      age: Yup.number().required("This field is required").min(18, "Age must be 18 or above"),
+      passwordReg: Yup.string().required("This field is required").min(8, "Password must be at least 8 characters"),
+      confirmPass: Yup.string().required("This field is required").oneOf([Yup.ref('passwordReg'), null], 'Password must match!'),
       address: Yup.string().required("This field is required"),
     }),
 
@@ -37,28 +37,29 @@ function RegisterModal() {
       console.log(value)
         try {
           const res = await axios.post('http://localhost:8000/api/v1/users', {
-            firstName: value.firstName,
-            lastName: value.lastName,
-            username: value.usernameReg,
-            email: value.email,
-            phone: value.phone,
-            age: value.age,
-            role: 'regular',
-            password: value.passwordReg,
-            address: value.address,
-          },
-          {
-            headers: {
-              'Content-Type': 'application/x-www-form-urlencoded'
+              firstName: value.firstName,
+              lastName: value.lastName,
+              username: value.usernameReg,
+              email: value.email,
+              phone: value.phone,
+              age: value.age,
+              role: 'regular',
+              password: value.passwordReg,
+              address: value.address,
+            },
+            {
+              headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+              }
             }
-          }
-            
           )
 
           console.log(res)
     
           if (res.status === 201) {
-            new Toast(document.getElementById('RegisterSuccesfullyToast')).show()
+            new Toast(document.getElementById('RegisterSuccessfullyToast')).show()
+          } else {
+            new Toast(document.getElementById('RegisterErrorToast')).show()
           }
         } catch (err) {
           new Toast(document.getElementById('RegisterErrorToast')).show()
@@ -78,6 +79,7 @@ function RegisterModal() {
             <div className="user-login-modal modal-body">
               <form className="row g-3" 
               onSubmit={formik.handleSubmit}
+              autoComplete="off"
               >
                 <div className="col-md-6">
                   <label htmlFor="firstName" className="form-label text-white">First name</label>
@@ -124,7 +126,7 @@ function RegisterModal() {
                     }
                 </div>
                 <div className="col-md-6">
-                  <label htmlFor="usernameRegister" className="form-label text-white">Username</label>
+                  <label htmlFor="usernameReg" className="form-label text-white">Username</label>
                   <input
                     type="text" 
                     className={formik.errors.usernameReg && formik.touched.usernameReg
@@ -132,7 +134,7 @@ function RegisterModal() {
                       "is-invalid form-control" 
                       : 
                       "form-control"}
-                    id="usernameRegister" 
+                    id="usernameReg" 
                     value={formik.values.usernameReg}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
@@ -214,15 +216,15 @@ function RegisterModal() {
                     }
                 </div>
                 <div className="col-md-12">
-                  <label htmlFor="passwordRegister" className="form-label text-white">Password</label>
+                  <label htmlFor="passwordReg" className="form-label text-white">Password <small className="text-danger ms-1">*Min. of 8 characters</small></label>
                   <input 
                     type="password" 
                     className={formik.errors.passwordReg && formik.touched.passwordReg
                       ? 
                       "is-invalid form-control" 
                       : 
-                      "form-control"} 
-                    id="passwordRegister" 
+                      "form-control"}
+                    id="passwordReg" 
                     value={formik.values.passwordReg}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
@@ -302,11 +304,11 @@ function RegisterModal() {
                   className="btn btn-primary me-3">
                     Register Account
                   </button>
-                  <button
+                  <a role="button"
                     className="btn btn-secondary"
                     data-bs-toggle="modal" 
                     data-bs-target="#loginModal"
-                  >Back to Login</button>
+                  >Back to Login</a>
                 </div>
               </form>
             </div>
@@ -314,20 +316,18 @@ function RegisterModal() {
         </div>
       </div>
       <div className="toast-container position-fixed bottom-0 end-0 p-3">
-        <div id="RegisterSuccesfullyToast" className="toast bg-success" role="alert" aria-live="assertive" aria-atomic="true">
+        <div id="RegisterSuccessfullyToast" className="toast bg-success" role="alert" aria-live="assertive" aria-atomic="true">
           <div className="toast-header bg-success text-light">
             <strong className="me-auto">Register Successfully!</strong>
-            <small>1 seconds ago</small>
-            <button type="button" className="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            <button type="button" className="btn" data-bs-dismiss="toast" aria-label="Close"><i className="fa-solid fa-xmark fa-2xl " style={{color: "#ffffff"}}></i></button>
           </div>
         </div>
       </div>
       <div className="toast-container position-fixed bottom-0 end-0 p-3">
-        <div id="RegisterErrorToast" className="toast bg-success" role="alert" aria-live="assertive" aria-atomic="true">
-          <div className="toast-header bg-success text-light">
+        <div id="RegisterErrorToast" className="toast bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
+          <div className="toast-header bg-danger text-light">
             <strong className="me-auto">Register Error!</strong>
-            <small>1 seconds ago</small>
-            <button type="button" className="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            <button type="button" className="btn" data-bs-dismiss="toast" aria-label="Close"><i className="fa-solid fa-xmark fa-2xl " style={{color: "#ffffff"}}></i></button>
           </div>
         </div>
       </div>

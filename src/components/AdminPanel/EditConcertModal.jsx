@@ -3,8 +3,10 @@ import * as Yup from 'yup'
 import "./EditConcertModal.css"
 import { Toast } from "bootstrap"
 import axios from "axios"
+import { useSelector } from "react-redux"
 
 function EditConcertModal(props) {
+  const token = useSelector(state => state.token)
 
   const { id } = props
 
@@ -33,7 +35,7 @@ function EditConcertModal(props) {
       try {
         const res = await axios.patch(`http://localhost:8000/api/v1/concerts/${id}`, {
             title: value.title,
-            posterImageUrl: value.posterImageUrl,
+            posterImageUrl: document.getElementById('posterImageUrl').files[0],
             description: value.description,
             eventDate: value.eventDate,
             eventPlace: value.eventPlace,
@@ -41,7 +43,8 @@ function EditConcertModal(props) {
           },
           {
             headers: {
-              'Content-Type': 'application/x-www-form-urlencoded'
+              'Content-Type': 'application/x-www-form-urlencoded',
+              'Authorization': `Bearer ${token}`
             }
           }
         )
