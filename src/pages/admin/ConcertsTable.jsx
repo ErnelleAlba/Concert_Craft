@@ -1,11 +1,7 @@
-import DataTable from "datatables.net-autofill-bs5"
-import pdfMake from 'pdfmake/build/pdfmake.min.js'
-import 'pdfmake/build/vfs_fonts.js'
 import { useEffect, useState } from "react"
 import AdminPanelHeader from "../../components/AdminPanel/AdminPanelHeader"
 import AdminPanelSideNav from "../../components/AdminPanel/AdminPanelSideNav"
 import CreateConcertModal from "../../components/AdminPanel/CreateConcertModal";
-import { Modal } from "bootstrap";
 import { useDispatch, useSelector } from "react-redux"
 import LoadingIcon from "../../components/LoadingIcon"
 import { setConcerts } from "../../store/concertsReducers"

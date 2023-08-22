@@ -75,8 +75,8 @@ function RegisterModal() {
               <h1 className="modal-title fs-5" id="registerModalLabel">Register Form</h1>
               <button type="button" className="btn py-2" data-bs-dismiss="modal" aria-label="Close"><i className="fa-solid fa-xmark fa-2xl " style={{color: "#ffffff"}}></i></button>
             </div>
-            <div className="kard user-login modal-body">
-              <form className="row g-3 needs-validation" 
+            <div className="user-login-modal modal-body">
+              <form className="row g-3" 
               onSubmit={formik.handleSubmit}
               >
                 <div className="col-md-6">

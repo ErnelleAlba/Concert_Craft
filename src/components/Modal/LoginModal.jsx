@@ -53,10 +53,9 @@ function LoginModal() {
               <h3 className="modal-title" id="loginModalLabel">Login</h3>
               <button type="button" className="btn py-2" data-bs-dismiss="modal" aria-label="Close"><i className="fa-solid fa-xmark fa-2xl " style={{color: "#ffffff"}}></i></button>
             </div>
-            <div className="kard user-login">
-              <img src={logo} alt="Concert-Craft-Logo" className="card-img-top" />
-
-              <div className="card-body">
+            <div className="modal-body user-login-modal">
+              <img src={logo} alt="Concert-Craft-Logo" className="w-100" />
+              <div className="mt-2">
                 <form 
                   autoComplete="off" 
                   className="form-group" 
@@ -134,6 +133,8 @@ function LoginModal() {
           </div>
         </div>
       </div>
+
+
       <div className="toast-container position-fixed bottom-0 end-0 p-3">
         <div id="LoginSuccessToast" className="toast bg-success" role="alert" aria-live="assertive" aria-atomic="true">
           <div className="toast-header bg-success text-light">

@@ -40,8 +40,6 @@ function NavBar() {
   return (
     <>
       <header>
-      <LoginModal/>
-      <RegisterModal/>
         <nav className="navbar navbar-expand-md bg-light pt-0 mb-5">
           <div className="container-fluid p-0">
             <div className="navbar-brand me-0">
@@ -112,17 +110,17 @@ function NavBar() {
                       className="nav-link" 
                       data-bs-toggle="modal" 
                       data-bs-target="#loginModal"
-                      id="login-btn"
                       role="button"
                     >Login</a>
                   </li>
                 </ul>
               </div>
             </div>
-
           </div>
         </nav>
       </header>
+    <LoginModal/>
+    <RegisterModal/>
     </>
   )
 }

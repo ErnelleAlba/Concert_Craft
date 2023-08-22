@@ -1,26 +1,20 @@
-
 @media (max-width: 580px) {
   #loginModal {
     width: 90vw;
     padding-left: 7vw;
     padding-right: 0;
   }
-
 }
-.kard.user-login {
-  padding: 25px;
-  width: 100%;
-
+.user-login-modal {
   background: linear-gradient(
     135deg,
-    rgba(38, 43, 52, 0.5),
-    rgba(38, 43, 52, 0.8)
-  ) !important;
+    rgba(38, 43, 52, 0.9),
+    rgba(38, 43, 52, 1)
+  );
   backdrop-filter: blur(10px) !important;
   -webkit-backdrop-filter: blur(10px);
-
-  border: 1px solid rgba(255, 255, 255, 0.18) !important;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37) !important;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
 }
 
 .modal-header {
@@ -29,8 +23,8 @@
   font-weight: 700;
   background: linear-gradient(
     135deg,
-    rgba(38, 43, 52, 0.5),
-    rgba(38, 43, 52, 0.8)
+    rgba(38, 43, 52, 0.9),
+    rgba(38, 43, 52, 1)
   ) !important;
 }
 
