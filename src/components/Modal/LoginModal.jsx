@@ -4,6 +4,7 @@ import { useEffect } from "react"
 import "./LoginModal.css"
 import { useFormik } from "formik"
 import * as Yup from "yup"
+import { Toast } from 'bootstrap';
 
 
 function LoginModal() {
@@ -25,6 +26,7 @@ function LoginModal() {
 
     onSubmit: (value) => {
       console.log(value)
+      new Toast(document.getElementById('logintoast')).show()
     }
   })
 
@@ -105,11 +107,16 @@ function LoginModal() {
                 </div>
               </div>
             </div>
-     
-          
-     
-
-      
+            <div className="toast-container position-fixed bottom-0 end-0 p-3">
+            <div id="logintoast" className="toast bg-success" role="alert" aria-live="assertive" aria-atomic="true">
+              <div className="toast-header bg-success text-light">
+                <strong className="me-auto">Login Successfully!</strong>
+                <small>1 seconds ago</small>
+                <button type="button" className="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+              </div>
+             </div>
+            </div> 
+        
     </>
   )
 }
