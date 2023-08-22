@@ -21,7 +21,7 @@ function NavBar() {
         return {
           id: concert.id,
           title: concert.title,
-          posterImageUrl: concert.posterImageUrl,
+          posterImageUrl: concert.posterImageUrl.replace('storage','http://localhost:8000/storage'),
           description: concert.description,
           eventPlace: concert.eventPlace,
           eventDate: concert.eventDate,

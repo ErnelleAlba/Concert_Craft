@@ -31,17 +31,18 @@ function CreateConcertModal() {
       try {
         const res = await axios.post('http://localhost:8000/api/v1/concerts', {
           title: value.title,
-          posterImageUrl: value.posterImageUrl,
+          posterImageUrl: document.getElementById('posterImageUrl').files[0],
           description: value.description,
           eventDate: value.eventDate,
           eventPlace: value.eventPlace,
           ticketPrice: value.ticketPrice,
-        },
-        {
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          
+          {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
           }
-        }
           
         )
 
@@ -108,7 +109,15 @@ function CreateConcertModal() {
                   <label htmlFor="title" className="form-label">Title:</label>
                   <input type="text" 
                     id="title" 
-                    className={formik.errors.title && formik.touched.title ? "is-invalid form-control" : "form-control"} 
+                    className={
+                      formik.errors.title 
+                      && 
+                      formik.touched.title 
+                      ? 
+                      "is-invalid form-control" 
+                      : 
+                      "form-control"
+                    } 
                     placeholder="Enter concert title"
                     value={formik.values.title}
                     onBlur={formik.handleBlur}
@@ -126,7 +135,15 @@ function CreateConcertModal() {
                   <input type="file" 
                     id="posterImageUrl"
                     accept="image/*"  
-                    className={formik.errors.posterImageUrl && formik.touched.posterImageUrl ? "is-invalid form-control" : "form-control"} 
+                    className={
+                      formik.errors.posterImageUrl 
+                      && 
+                      formik.touched.posterImageUrl 
+                      ? 
+                      "is-invalid form-control" 
+                      : 
+                      "form-control"
+                    } 
                     value={formik.values.posterImageUrl}
                     onBlur={formik.handleBlur}
                     onChange={formik.handleChange} />
@@ -141,7 +158,15 @@ function CreateConcertModal() {
                 <div className="mb-1">
                   <label htmlFor="description" className="form-label">Description:</label>
                   <textarea id="description" 
-                    className={formik.errors.description && formik.touched.description ? "is-invalid form-control" : "form-control"} 
+                    className={
+                      formik.errors.description 
+                      && 
+                      formik.touched.description 
+                      ? 
+                      "is-invalid form-control" 
+                      : 
+                      "form-control"
+                    } 
                     cols="30" 
                     rows="3" 
                     placeholder="Enter concert description"
@@ -160,7 +185,15 @@ function CreateConcertModal() {
                   <label htmlFor="eventDate" className="form-label">Event Date:</label>
                   <input type="datetime-local" 
                     id="eventDate" 
-                    className={formik.errors.eventDate && formik.touched.eventDate ? "is-invalid form-control" : "form-control"}
+                    className={
+                      formik.errors.eventDate 
+                      && 
+                      formik.touched.eventDate 
+                      ? 
+                      "is-invalid form-control" 
+                      : 
+                      "form-control"
+                    }
                     value={formik.values.eventDate}
                     onBlur={formik.handleBlur}
                     onChange={formik.handleChange}  />
@@ -176,7 +209,15 @@ function CreateConcertModal() {
                   <label htmlFor="eventPlace" className="form-label">Place:</label>
                   <input type="text" 
                     id="eventPlace" 
-                    className={formik.errors.eventPlace && formik.touched.eventPlace ? "is-invalid form-control" : "form-control"} 
+                    className={
+                      formik.errors.eventPlace 
+                      && 
+                      formik.touched.eventPlace 
+                      ? 
+                      "is-invalid form-control" 
+                      : 
+                      "form-control"
+                    } 
                     placeholder="Enter concert location"
                     value={formik.values.eventPlace}
                     onBlur={formik.handleBlur}
@@ -195,7 +236,15 @@ function CreateConcertModal() {
                     <span className="input-group-text"><i className="fa-solid fa-peso-sign"></i></span>
                     <input type="number" 
                       id="ticketPrice" 
-                      className={formik.errors.ticketPrice && formik.touched.ticketPrice ? "is-invalid form-control" : "form-control"} 
+                      className={
+                        formik.errors.ticketPrice 
+                        && 
+                        formik.touched.ticketPrice 
+                        ? 
+                        "is-invalid form-control" 
+                        : 
+                        "form-control"
+                      } 
                       placeholder="Enter ticket price"
                       value={formik.values.ticketPrice}
                       onBlur={formik.handleBlur}
