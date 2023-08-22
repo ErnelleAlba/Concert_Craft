@@ -5,30 +5,46 @@ import "./LoginModal.css"
 import { useFormik } from "formik"
 import * as Yup from "yup"
 import { Toast } from 'bootstrap';
+import axios from 'axios';
 
 
 function LoginModal() {
   
 
-  useEffect(() =>{
-   
-  }, [])
-
   const formik = useFormik({
     initialValues: {
-      email: '',
+      username: '',
       password: ''
     },
     validationSchema: Yup.object({
-      email: Yup.string().required("Email is required"),
+      username: Yup.string().required("Username is required"),
       password: Yup.string().required("Password is required"),
     }),
 
-    onSubmit: (value) => {
+    onSubmit: async (value) => {
       console.log(value)
-      new Toast(document.getElementById('logintoast')).show()
-    }
-  })
+
+        try {
+        const res = await axios.post('http://localhost:8000/api/v1/login', {
+          username: value.username,
+          password: value.password,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
+        }
+        )
+        console.log(res)
+      
+        if (res.status === 201) {
+          new Toast(document.getElementById('LoginSuccessToast')).show()
+        }
+      } catch (err) {
+        new Toast(document.getElementById('LoginErrortoast')).show()
+      }
+    },
+    })
 
   return (
     <>
@@ -54,14 +70,14 @@ function LoginModal() {
                     <div className="col-md-8">
                       <input 
                         type="text" 
-                        id="email" 
+                        id="username" 
                         className="form-control" 
                         placeholder="Enter Username" 
-                        value={formik.values.email}
+                        value={formik.values.username}
                         onChange={formik.handleChange}
                         />
                         {
-                          formik.errors.email && <span className="text-danger">{formik.errors.email}</span>
+                          formik.errors.username && <span className="text-danger">{formik.errors.username}</span>
                         }
                         
                     </div>
@@ -108,7 +124,7 @@ function LoginModal() {
               </div>
             </div>
             <div className="toast-container position-fixed bottom-0 end-0 p-3">
-            <div id="logintoast" className="toast bg-success" role="alert" aria-live="assertive" aria-atomic="true">
+            <div id="LoginSuccessToast" className="toast bg-success" role="alert" aria-live="assertive" aria-atomic="true">
               <div className="toast-header bg-success text-light">
                 <strong className="me-auto">Login Successfully!</strong>
                 <small>1 seconds ago</small>
@@ -117,6 +133,16 @@ function LoginModal() {
              </div>
             </div> 
         
+            <div className="toast-container position-fixed top-0 end-0 pe-3 pt-5 mt-3 ">
+                <div id="LoginErrorToast" className="toast align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                  <div className="d-flex">
+                    <div className="toast-body">
+                      Something went wrong.
+                    </div>
+                    <button type="button" className="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                  </div>
+                </div>
+              </div>
     </>
   )
 }

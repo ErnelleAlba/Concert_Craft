@@ -16,31 +16,61 @@ function RegisterModal() {
 
   const formik = useFormik({
     initialValues: {
-      firstname: '',
-      lastname: '',
+      firstName: '',
+      lastName: '',
+      username: '',
       email: '',
       phone: '',
       age: '',
+      role: 'regular',
       confirmPass: '',
-      passwordreg: '',
+      password: '',
       address: ''
     },
 
     validationSchema: Yup.object({
-      firstname: Yup.string().required("This field is required"),
-      lastname: Yup.string().required("This field is required"),
+      firstName: Yup.string().required("This field is required"),
+      lastName: Yup.string().required("This field is required"),
+      username: Yup.string().required("This field is required"),
       email: Yup.string().required("Email is required"),
-      phone: Yup.string().required("This field is required"),
-      age: Yup.string().required("This field is required"),
+      phone: Yup.number().required("This field is required"),
+      age: Yup.number().required("This field is required").min(18),
+      password: Yup.string().required("This field is required").oneOf([Yup.ref('password'), null], 'Password must match!'),
       confirmPass: Yup.string().required("This field is required"),
-      passwordreg: Yup.string().required("This field is required"),
       address: Yup.string().required("This field is required"),
     }),
 
-    onSubmit: (value) => {
+    onSubmit: async (value) => {
       console.log(value)
-      new Toast(document.getElementById('liveToast')).show()
-    }
+        try {
+          const res = await axios.post('http://localhost:8000/api/v1/users', {
+            firstName: value.firstName,
+            lastName: value.lastName,
+            username: value.username,
+            email: value.email,
+            phone: value.email,
+            age: value.age,
+            role: 'regular',
+            password: value.password,
+            address: value.address,
+          },
+          {
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            }
+          }
+            
+          )
+
+          console.log(res)
+    
+          if (res.status === 201) {
+            new Toast(document.getElementById('RegusterSuccesfullyToast')).show()
+          }
+        } catch (err) {
+          new Toast(document.getElementById('RegisterErrorToast')).show()
+        }
+    },
   })
 
   return (
@@ -61,36 +91,65 @@ function RegisterModal() {
               onSubmit={formik.handleSubmit}
               >
                 <div className="col-md-6">
-                  <label htmlFor="first-name" className="form-label text-white">First name</label>
+                  <label htmlFor="firstName" className="form-label text-white">First name</label>
                   <input
                     type="text" 
-                    className="form-control" 
-                    id="firstname" 
-                    value={formik.values.firstname}
+                    className={formik.errors.title && formik.touched.title 
+                      ? 
+                      "is-invalid form-control" 
+                      : 
+                      "form-control"}
+                    id="firstName" 
+                    value={formik.values.firstName}
                     onChange={formik.handleChange}
                     />
                         {
-                          formik.errors.firstname && <span className="text-danger">{formik.errors.firstname}</span>
+                          formik.errors.firstName && <span className="text-danger">{formik.errors.firstName}</span>
                         }
                 </div>
                 <div className="col-md-6">
-                  <label htmlFor="last-name" className="form-label text-white">Last name</label>
+                  <label htmlFor="lastName" className="form-label text-white">Last name</label>
                   <input
                     type="text" 
-                    className="form-control" 
-                    id="lastname" 
-                    value={formik.values.lastname}
+                    className={formik.errors.title && formik.touched.title 
+                      ? 
+                      "is-invalid form-control" 
+                      : 
+                      "form-control"}
+                    id="lastName" 
+                    value={formik.values.lastName}
                     onChange={formik.handleChange}
                     />
                         {
-                          formik.errors.lastname && <span className="text-danger">{formik.errors.lastname}</span>
+                          formik.errors.lastName && <span className="text-danger">{formik.errors.lastName}</span>
                         }
                 </div>
                 <div className="col-md-6">
-                  <label htmlFor="email-address" className="form-label text-white">Email Address</label>
+                  <label htmlFor="username" className="form-label text-white">Username</label>
+                  <input
+                    type="text" 
+                    className={formik.errors.title && formik.touched.title 
+                      ? 
+                      "is-invalid form-control" 
+                      : 
+                      "form-control"}
+                    id="username" 
+                    value={formik.values.username}
+                    onChange={formik.handleChange}
+                    />
+                        {
+                          formik.errors.username && <span className="text-danger">{formik.errors.username}</span>
+                        }
+                </div>
+                <div className="col-md-6">
+                  <label htmlFor="email" className="form-label text-white">Email Address</label>
                   <input
                     type="email" 
-                    className="form-control" 
+                    className={formik.errors.title && formik.touched.title 
+                      ? 
+                      "is-invalid form-control" 
+                      : 
+                      "form-control"}
                     id="email" 
                     value={formik.values.email}
                     onChange={formik.handleChange}
@@ -100,10 +159,14 @@ function RegisterModal() {
                         }
                 </div>
                 <div className="col-md-6">
-                  <label htmlFor="phone-number" className="form-label text-white">Phone No.</label>
+                  <label htmlFor="phone" className="form-label text-white">Phone No.</label>
                     <input 
                       type="number" 
-                      className="form-control" 
+                      className={formik.errors.phone && formik.touched.phone 
+                        ? 
+                        "is-invalid form-control" 
+                        : 
+                        "form-control"}
                       id="phone" 
                       value={formik.values.phone}
                       onChange={formik.handleChange}
@@ -117,7 +180,11 @@ function RegisterModal() {
                   <label htmlFor="age" className="form-label text-white">Age</label>
                     <input 
                       type="number" 
-                      className="form-control" 
+                      className={formik.errors.age && formik.touched.age 
+                        ? 
+                        "is-invalid form-control" 
+                        : 
+                        "form-control"}
                       id="age" 
                       value={formik.values.age}
                       onChange={formik.handleChange}
@@ -130,10 +197,14 @@ function RegisterModal() {
                 <div className="col-md-12">
                   <label htmlFor="password" className="form-label text-white">Password</label>
                   <input 
-                    type="passwordreg" 
-                    className="form-control" 
-                    id="passwordreg" 
-                    value={formik.values.passwordreg}
+                    type="password" 
+                    className={formik.errors.password && formik.touched.password 
+                      ? 
+                      "is-invalid form-control" 
+                      : 
+                      "form-control"} 
+                    id="password" 
+                    value={formik.values.password}
                     onChange={formik.handleChange}
                     />
                         {
@@ -144,7 +215,11 @@ function RegisterModal() {
                   <label htmlFor="password" className="form-label text-white">Confirm Password</label>
                   <input 
                     type="password" 
-                    className="form-control" 
+                    className={formik.errors.confirmPass && formik.touched.confirmPass 
+                      ? 
+                      "is-invalid form-control" 
+                      : 
+                      "form-control"}
                     id="confirmPass" 
                     value={formik.values.confirmPass}
                     onChange={formik.handleChange}
@@ -157,7 +232,11 @@ function RegisterModal() {
                   <label htmlFor="address" className="form-label text-white">Address</label>
                   <input 
                     type="text" 
-                    className="form-control" 
+                    className={formik.errors.address && formik.touched.address 
+                      ? 
+                      "is-invalid form-control" 
+                      : 
+                      "form-control"}
                     id="address" 
                     value={formik.values.address}
                     onChange={formik.handleChange}
@@ -202,9 +281,18 @@ function RegisterModal() {
         </div>
       </div>
       <div className="toast-container position-fixed bottom-0 end-0 p-3">
-        <div id="liveToast" className="toast bg-success" role="alert" aria-live="assertive" aria-atomic="true">
+        <div id="RegusterSuccesfullyToast" className="toast bg-success" role="alert" aria-live="assertive" aria-atomic="true">
           <div className="toast-header bg-success text-light">
-            <strong className="me-auto">Login Successfully!</strong>
+            <strong className="me-auto">Register Successfully!</strong>
+            <small>1 seconds ago</small>
+            <button type="button" className="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+        </div>
+      </div>
+      <div className="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="RegisterErrorToast" className="toast bg-success" role="alert" aria-live="assertive" aria-atomic="true">
+          <div className="toast-header bg-success text-light">
+            <strong className="me-auto">Register Error!</strong>
             <small>1 seconds ago</small>
             <button type="button" className="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
           </div>
