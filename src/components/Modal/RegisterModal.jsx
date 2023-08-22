@@ -3,6 +3,7 @@ import { useEffect } from "react"
 import "./LoginModal.css"
 import { useFormik } from "formik";
 import * as Yup from "yup"
+import { Toast } from 'bootstrap';
 
 function RegisterModal() {
   const removeScroll = (e) => e.target.blur();
@@ -19,6 +20,7 @@ function RegisterModal() {
       lastname: '',
       email: '',
       phone: '',
+      age: '',
       confirmPass: '',
       passwordreg: '',
       address: ''
@@ -29,6 +31,7 @@ function RegisterModal() {
       lastname: Yup.string().required("This field is required"),
       email: Yup.string().required("Email is required"),
       phone: Yup.string().required("This field is required"),
+      age: Yup.string().required("This field is required"),
       confirmPass: Yup.string().required("This field is required"),
       passwordreg: Yup.string().required("This field is required"),
       address: Yup.string().required("This field is required"),
@@ -36,6 +39,7 @@ function RegisterModal() {
 
     onSubmit: (value) => {
       console.log(value)
+      new Toast(document.getElementById('liveToast')).show()
     }
   })
 
@@ -109,6 +113,20 @@ function RegisterModal() {
                           formik.errors.phone && <span className="text-danger">{formik.errors.phone}</span>
                         }
                 </div>
+                <div className="col-md-6">
+                  <label htmlFor="age" className="form-label text-white">Age</label>
+                    <input 
+                      type="number" 
+                      className="form-control" 
+                      id="age" 
+                      value={formik.values.age}
+                      onChange={formik.handleChange}
+                      onWheel={removeScroll} 
+                      />
+                        {
+                          formik.errors.age && <span className="text-danger">{formik.errors.age}</span>
+                        }
+                </div>
                 <div className="col-md-12">
                   <label htmlFor="password" className="form-label text-white">Password</label>
                   <input 
@@ -180,6 +198,15 @@ function RegisterModal() {
               </form>
 
             </div>
+          </div>
+        </div>
+      </div>
+      <div className="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="liveToast" className="toast bg-success" role="alert" aria-live="assertive" aria-atomic="true">
+          <div className="toast-header bg-success text-light">
+            <strong className="me-auto">Login Successfully!</strong>
+            <small>1 seconds ago</small>
+            <button type="button" className="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
           </div>
         </div>
       </div>
