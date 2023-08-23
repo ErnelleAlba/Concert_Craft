@@ -56,7 +56,7 @@ function BookingCard ({id}) { //ConcertCard props
           alert('Your booking is successful check the email we send to you for details. Thank you for booking!!')
         }
       } catch (err) {
-        console.log(err)
+        alert('Your booking failed. Try again.')
       }
       
 
