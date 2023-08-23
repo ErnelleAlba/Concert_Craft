@@ -318,7 +318,7 @@ function RegisterModal() {
       <div className="toast-container position-fixed bottom-0 end-0 p-3">
         <div id="RegisterSuccessfullyToast" className="toast bg-success" role="alert" aria-live="assertive" aria-atomic="true">
           <div className="toast-header bg-success text-light">
-            <strong className="me-auto">Register Successfully!</strong>
+            <strong className="me-auto">Register Successfully! Go back to login.</strong>
             <button type="button" className="btn" data-bs-dismiss="toast" aria-label="Close"><i className="fa-solid fa-xmark fa-2xl " style={{color: "#ffffff"}}></i></button>
           </div>
         </div>

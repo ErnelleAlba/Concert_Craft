@@ -53,7 +53,7 @@ function BookingCard ({id}) { //ConcertCard props
         console.log(res)
         // console.log(value.seatValue)
         if (res.status === 201) {
-          new Toast(document.getElementById("bookingToast")).show
+          alert('Your booking is successful check the email we send to you for details. Thank you for booking!!')
         }
       } catch (err) {
         console.log(err)

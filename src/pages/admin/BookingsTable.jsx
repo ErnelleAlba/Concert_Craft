@@ -1,5 +1,5 @@
 
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import AdminPanelHeader from "../../components/AdminPanel/AdminPanelHeader"
 import AdminPanelSideNav from "../../components/AdminPanel/AdminPanelSideNav"
 import { useDispatch, useSelector } from "react-redux"
@@ -13,10 +13,16 @@ function BookingsTable() {
   const bookings = useSelector(state => state.bookings)
   const isLoading = useSelector(state => state.isLoading)
   const dispatch = useDispatch();
+  const [userId, setUserId] = useState({})
+
+  const handleOnChangeUserId = (e) => {
+    setUserId(e.target.value)
+    handleOnChange()
+  }
 
   const handleOnChange = async (e) => {
     dispatch(markLoading())
-    const res = await axios(`http://localhost:8000/api/v1/bookings?concertId=${e.target.value}`,
+    const res = await axios(`http://localhost:8000/api/v1/bookings?concertId=${e.target.value}&userId=${userId}`,
       {
         headers: {
           'Authorization': `Bearer ${token}`
@@ -66,10 +72,14 @@ function BookingsTable() {
         <AdminPanelSideNav />
         <center className="pt-3 users-table-container">
           <h1 className="text-uppercase fw-bold mb-2">Bookings Table</h1>
-          <div className="d-flex justify-content-start ms-2 mb-2 search-bar">
+          <div className="d-flex flex-wrap justify-content-start ms-2 mb-2 search-bar gap-1">
               <div className="d-flex align-items-center bg-dark rounded py-1 px-2 ms-2 ">
-                  <label htmlFor="search-form" className="col text-light me-3">Search by ConcertId:</label>
-                  <input type="text" id="search-form" className="form-control" onChange={handleOnChange}/>
+                  <label htmlFor="search-form" className="text-light me-1">Search by ConcertId:</label>
+                  <input type="text" id="search-form" className="form-control " onChange={handleOnChange}/>
+              </div>
+              <div className="d-flex align-items-center bg-dark rounded py-1 px-2 ms-2 ">
+                  <label htmlFor="search-form-user" className=" text-light me-3">Search by UserId:</label>
+                  <input type="text" id="search-form-user" className="form-control " onChange={handleOnChangeUserId}/>
               </div>
           </div>
           <div className="w-100 mt-2 admin-table">
@@ -83,8 +93,8 @@ function BookingsTable() {
                   <th>Username</th>
                   <th>Concert ID</th>
                   <th>Concert Title</th>
-                  <th>Seat Position</th>
                   <th>No. of Tickets</th>
+                  <th>Seat Position</th>
                   <th>Total Price</th>
                   <th>Action</th>
                 </tr>
@@ -126,8 +136,8 @@ function BookingsTable() {
                   <th>Username</th>
                   <th>Concert ID</th>
                   <th>Concert Title</th>
-                  <th>Seat Position</th>
                   <th>No. of Tickets</th>
+                  <th>Seat Position</th>
                   <th>Total Price</th>
                   <th>Action</th>
                 </tr>

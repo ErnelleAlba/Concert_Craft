@@ -156,7 +156,7 @@ function LoginModal() {
       <div className="toast-container position-fixed top-0 end-0 pe-3 pt-5 ">
         <div id="LoginSuccessToast" className="toast bg-success" role="alert" aria-live="assertive" aria-atomic="true">
           <div className="toast-header bg-success text-light">
-            <strong className="me-auto">Login Successfully!</strong>
+            <strong className="me-auto">Welcome {formik.values.username}!</strong>
             <button type="button" className="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
           </div>
         </div>
