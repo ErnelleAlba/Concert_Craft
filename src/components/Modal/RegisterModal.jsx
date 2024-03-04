@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup"
 import { Toast } from 'bootstrap';
 import axios from 'axios';
+import { error } from "jquery";
 
 function RegisterModal() {
   const removeScroll = (e) => e.target.blur();
@@ -11,25 +12,25 @@ function RegisterModal() {
     initialValues: {
       firstName: '',
       lastName: '',
-      usernameReg: '',
+      username: '',
       email: '',
       phone: '',
       age: '',
       role: 'regular',
       confirmPass: '',
-      passwordReg: '',
+      password: '',
       address: ''
     },
 
     validationSchema: Yup.object({
       firstName: Yup.string().required("This field is required"),
       lastName: Yup.string().required("This field is required"),
-      usernameReg: Yup.string().required("This field is required"),
+      username: Yup.string().required("This field is required"),
       email: Yup.string().required("Email is required"),
-      phone: Yup.number().required("This field is required"),
+      phone: Yup.number().required("This field is required").min(10, "Must be exactly 10 digits").max(10, "Must be exactly 10 digits"),
       age: Yup.number().required("This field is required").min(18, "Age must be 18 or above"),
-      passwordReg: Yup.string().required("This field is required").min(8, "Password must be at least 8 characters"),
-      confirmPass: Yup.string().required("This field is required").oneOf([Yup.ref('passwordReg'), null], 'Password must match!'),
+      password: Yup.string().required("This field is required").min(8, "Password must be at least 8 characters"),
+      confirmPass: Yup.string().required("This field is required").oneOf([Yup.ref('password'), null], 'Password must match!'),
       address: Yup.string().required("This field is required"),
     }),
 
@@ -39,12 +40,12 @@ function RegisterModal() {
           const res = await axios.post('http://localhost:8000/api/v1/users', {
               firstName: value.firstName,
               lastName: value.lastName,
-              username: value.usernameReg,
+              username: value.username,
               email: value.email,
               phone: value.phone,
               age: value.age,
               role: 'regular',
-              password: value.passwordReg,
+              password: value.password,
               address: value.address,
             },
             {
@@ -62,6 +63,7 @@ function RegisterModal() {
             new Toast(document.getElementById('RegisterErrorToast')).show()
           }
         } catch (err) {
+          console.log(err)
           new Toast(document.getElementById('RegisterErrorToast')).show()
         }
     },
@@ -126,23 +128,23 @@ function RegisterModal() {
                     }
                 </div>
                 <div className="col-md-6">
-                  <label htmlFor="usernameReg" className="form-label text-white">Username</label>
+                  <label htmlFor="username" className="form-label text-white">Username</label>
                   <input
                     type="text" 
-                    className={formik.errors.usernameReg && formik.touched.usernameReg
+                    className={formik.errors.username && formik.touched.username
                       ? 
                       "is-invalid form-control" 
                       : 
                       "form-control"}
-                    id="usernameReg" 
-                    value={formik.values.usernameReg}
+                    id="username" 
+                    value={formik.values.username}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     />
                     {
-                      formik.errors.usernameReg && formik.touched.usernameReg
+                      formik.errors.username && formik.touched.username
                       ? 
-                      <span className="text-danger">{formik.errors.usernameReg}</span> 
+                      <span className="text-danger">{formik.errors.username}</span> 
                       : 
                       null
                     }
@@ -170,7 +172,7 @@ function RegisterModal() {
                     }
                 </div>
                 <div className="col-md-6">
-                  <label htmlFor="phone" className="form-label text-white">Phone No.</label>
+                  <label htmlFor="phone" className="form-label text-white">Phone No.<small className="text-danger ms-1">*Must be 10 digits</small></label>
                     <input 
                       type="number" 
                       className={formik.errors.phone && formik.touched.phone 
@@ -216,24 +218,24 @@ function RegisterModal() {
                     }
                 </div>
                 <div className="col-md-12">
-                  <label htmlFor="passwordReg" className="form-label text-white">Password <small className="text-danger ms-1">*Min. of 8 characters</small></label>
+                  <label htmlFor="password" className="form-label text-white">Password <small className="text-danger ms-1">*Min. of 8 characters</small></label>
                   <input 
                     type="password" 
-                    className={formik.errors.passwordReg && formik.touched.passwordReg
+                    className={formik.errors.password && formik.touched.password
                       ? 
                       "is-invalid form-control" 
                       : 
                       "form-control"}
-                    id="passwordReg" 
-                    value={formik.values.passwordReg}
+                    id="password" 
+                    value={formik.values.password}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
 
                     />
                     {
-                      formik.errors.passwordReg && formik.touched.passwordReg
+                      formik.errors.password && formik.touched.password
                       ? 
-                      <span className="text-danger">{formik.errors.passwordReg}</span> 
+                      <span className="text-danger">{formik.errors.password}</span> 
                       : 
                       null
                     }
