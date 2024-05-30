@@ -34,6 +34,10 @@ Screenshots of the Website
 * Users Table (Admin)
 ![Users Table](https://github.com/ErnelleAlba/Concert_Craft/assets/137160750/6175749d-310e-4340-accf-f6787641f8db)
 
+* 404 Page
+![404-page](https://github.com/ErnelleAlba/Concert_Craft/assets/137160750/d143f144-4f80-4d4f-91af-2d539c6887e6)
+
+
 
 
 
