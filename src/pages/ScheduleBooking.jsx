@@ -42,7 +42,7 @@ function ScheduleBooking() {
     );
 
     dispatch(unmarkLoading());
-    console.log(resTitle.data.data);
+    // console.log(resTitle.data.data);
   };
 
   useEffect(() => {

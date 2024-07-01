@@ -35,7 +35,7 @@ function BookingCard({ id }) {
     }),
 
     onSubmit: async (value) => {
-      console.log(value);
+      // console.log(value);
 
       try {
         const res = await axios.post(
@@ -53,7 +53,7 @@ function BookingCard({ id }) {
             },
           }
         );
-        console.log(res);
+        // console.log(res);
         // console.log(value.seatValue)
         if (res.status === 201) {
           alert(
